@@ -42,7 +42,7 @@ void Region::draw(const Mat4x4& mat)
 	//for (auto& c : m_connecteds) Line(center, (TranslateWorldToScreen(mat, c.lock()->m_position) + center) / 2.0).stretched(-2).drawArrow(2.0, Vec2(10.0, 10.0), Palette::White);
 }
 
-void Region::connect(const std::shared_ptr<Region>& to)
+void Region::connect(const shared_ptr<Region>& to)
 {
 	for (const auto& c : m_connecteds)
 		if (c.lock() == to) return;

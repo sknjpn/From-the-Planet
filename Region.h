@@ -8,10 +8,10 @@ public:
 	Color		m_color;
 	double		m_height;
 	bool		m_isMouseover;
-	Array<std::weak_ptr<Region>>	m_connecteds;
+	Array<weak_ptr<Region>>	m_connecteds;
 
 	void	draw(const Mat4x4& mat);
-	void	connect(const std::shared_ptr<Region>& to);
+	void	connect(const shared_ptr<Region>& to);
 
 	Vec3	getCenter() { return m_position + m_position * m_height * 0.1; }
 };

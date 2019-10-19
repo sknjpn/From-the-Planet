@@ -2,7 +2,7 @@
 #include "Region.h"
 
 
-Chip::Chip(const std::shared_ptr<Region>& r0, const std::shared_ptr<Region>& r1, const std::shared_ptr<Region>& r2)
+Chip::Chip(const shared_ptr<Region>& r0, const shared_ptr<Region>& r1, const shared_ptr<Region>& r2)
 	: m_r0(r0)
 	, m_r1(r1)
 	, m_r2(r2)

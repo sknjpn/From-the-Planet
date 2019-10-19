@@ -112,7 +112,7 @@ void Planet::connectRegions()
 }
 
 // Using for KDTree
-struct RegionAdpater : KDTreeAdapter<Array<std::shared_ptr<Region>>, Vec3, double, 3>
+struct RegionAdpater : KDTreeAdapter<Array<shared_ptr<Region>>, Vec3, double, 3>
 {
 	static const element_type* GetPointer(const point_type& point)
 	{
@@ -245,14 +245,14 @@ void Planet::drawRegions(const BasicCamera3D& camera)
 {
 	auto mat = camera.getMat4x4();
 
-	std::shared_ptr<Region> preMouseover;
+	shared_ptr<Region> preMouseover;
 	for (auto& r : m_regions) if (r->m_isMouseover) { preMouseover = r; break; }
 	for (const auto& r : m_regions)
 	{
 		if (canSee(camera, r->m_position))
 			r->draw(mat);
 	}
-	std::shared_ptr<Region> nowMouseover;
+	shared_ptr<Region> nowMouseover;
 	for (auto& r : m_regions) if (r->m_isMouseover) { preMouseover = r; break; }
 }
 

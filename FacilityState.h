@@ -7,7 +7,7 @@ class Region;
 class FacilityState
 {
 public:
-	std::weak_ptr<Region>	m_region;
+	weak_ptr<Region>	m_region;
 	Array<Mesh>		m_meshes;
 
 	FacilityState();
