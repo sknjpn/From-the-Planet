@@ -249,9 +249,8 @@ void Planet::drawRegions(const BasicCamera3D& camera)
 	for (auto& r : m_regions) if (r->m_isMouseover) { preMouseover = r; break; }
 	for (const auto& r : m_regions)
 	{
-		if (camera.getEyePosition().distanceFrom(r->m_position) > Sqrt(camera.getEyePosition().lengthSq() - Square(m_radius))) continue;
-
-		r->draw(mat);
+		if (canSee(camera, r->m_position))
+			r->draw(mat);
 	}
 	std::shared_ptr<Region> nowMouseover;
 	for (auto& r : m_regions) if (r->m_isMouseover) { preMouseover = r; break; }
@@ -263,13 +262,17 @@ void Planet::drawChips(const BasicCamera3D& camera)
 
 	for (const auto& c : m_chips)
 	{
-		if (camera.getEyePosition().distanceFrom(c->m_center) > Sqrt(camera.getEyePosition().lengthSq() - Square(m_radius))) continue;
-
-		c->draw(mat, HSV(&*c - &*m_chips.front()));
+		if (canSee(camera, c->m_center))
+			c->draw(mat, HSV(&*c - &*m_chips.front()));
 	}
 }
 
 void Planet::drawRoads(const BasicCamera3D& camera)
 {
 	for (const auto& r : m_roads) r->draw(camera);
+}
+
+bool Planet::canSee(const BasicCamera3D& camera, const Vec3& position) const
+{
+	return camera.getEyePosition().distanceFrom(position) < Sqrt(camera.getEyePosition().lengthSq() - Square(m_radius));
 }
