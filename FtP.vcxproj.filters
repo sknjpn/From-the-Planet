@@ -360,9 +360,6 @@
     <ClCompile Include="Region.cpp">
       <Filter>Program Files</Filter>
     </ClCompile>
-    <ClCompile Include="Road.cpp">
-      <Filter>Program Files</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Program Files</Filter>
     </ClCompile>
@@ -390,13 +387,16 @@
     <ClCompile Include="Triangle3D.cpp">
       <Filter>Program Files\3D Object</Filter>
     </ClCompile>
-    <ClCompile Include="Factory.cpp">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClCompile>
     <ClCompile Include="Inventory.cpp">
       <Filter>Program Files\Planet\Facility</Filter>
     </ClCompile>
-    <ClCompile Include="Quarry.cpp">
+    <ClCompile Include="Road.cpp">
+      <Filter>Program Files\Planet\Road</Filter>
+    </ClCompile>
+    <ClCompile Include="FactoryState.cpp">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClCompile>
+    <ClCompile Include="QuarryState.cpp">
       <Filter>Program Files\Planet\Facility</Filter>
     </ClCompile>
   </ItemGroup>
@@ -405,9 +405,6 @@
       <Filter>Program Files</Filter>
     </ClInclude>
     <ClInclude Include="Region.h">
-      <Filter>Program Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Road.h">
       <Filter>Program Files</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
@@ -434,13 +431,16 @@
     <ClInclude Include="Triangle3D.h">
       <Filter>Program Files\3D Object</Filter>
     </ClInclude>
-    <ClInclude Include="Factory.h">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClInclude>
     <ClInclude Include="Inventory.h">
       <Filter>Program Files\Planet\Facility</Filter>
     </ClInclude>
-    <ClInclude Include="Quarry.h">
+    <ClInclude Include="Road.h">
+      <Filter>Program Files\Planet\Road</Filter>
+    </ClInclude>
+    <ClInclude Include="FactoryState.h">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClInclude>
+    <ClInclude Include="QuarryState.h">
       <Filter>Program Files\Planet\Facility</Filter>
     </ClInclude>
   </ItemGroup>

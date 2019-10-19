@@ -1,5 +1,5 @@
 ﻿#include "Planet.h"
-#include "Facility.h"
+#include "FacilityState.h"
 #include "Road.h"
 #include "Region.h"
 
@@ -21,7 +21,7 @@ void Main()
 	planet.connectRegions();
 	planet.makeChips();
 	*/
-	Array<Facility> facility(50);
+	Array<FacilityState> facility(50);
 
 	for (auto& f : facility)
 		f.m_region = planet.m_regions.choice();

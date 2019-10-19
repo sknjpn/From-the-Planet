@@ -1,7 +1,7 @@
-﻿#include "Facility.h"
+﻿#include "FacilityState.h"
 #include "Region.h"
 
-Facility::Facility()
+FacilityState::FacilityState()
 {
 	JSONReader json(U"quarry.json");
 
@@ -16,7 +16,7 @@ Facility::Facility()
 	}
 }
 
-void Facility::draw(const BasicCamera3D& camera)
+void FacilityState::draw(const BasicCamera3D& camera)
 {
 	if (camera.getEyePosition().distanceFrom(m_region.lock()->getCenter()) > Sqrt(camera.getEyePosition().lengthSq() - Square(100))) return;
 

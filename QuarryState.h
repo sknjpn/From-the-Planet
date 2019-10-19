@@ -1,5 +1,5 @@
 ﻿#pragma once
 
-class Factory
+class QuarryState
 {
 };

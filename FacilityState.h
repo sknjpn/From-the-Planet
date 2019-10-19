@@ -4,13 +4,13 @@
 
 class Region;
 
-class Facility
+class FacilityState
 {
 public:
 	std::weak_ptr<Region>	m_region;
 	Array<Mesh>		m_meshes;
 
-	Facility();
+	FacilityState();
 
 	void draw(const BasicCamera3D& camera);
 };

@@ -228,14 +228,14 @@
   <ItemGroup>
     <ClCompile Include="Chip.cpp" />
     <ClCompile Include="Facility.cpp" />
-    <ClCompile Include="Factory.cpp" />
+    <ClCompile Include="FactoryState.cpp" />
     <ClCompile Include="GetCircumcenter.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Planet.cpp" />
-    <ClCompile Include="Quarry.cpp" />
+    <ClCompile Include="QuarryState.cpp" />
     <ClCompile Include="Region.cpp" />
     <ClCompile Include="Road.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -248,13 +248,13 @@
   <ItemGroup>
     <ClInclude Include="Chip.h" />
     <ClInclude Include="Facility.h" />
-    <ClInclude Include="Factory.h" />
+    <ClInclude Include="FactoryState.h" />
     <ClInclude Include="GetCircumcenter.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Planet.h" />
-    <ClInclude Include="Quarry.h" />
+    <ClInclude Include="QuarryState.h" />
     <ClInclude Include="Region.h" />
     <ClInclude Include="Road.h" />
     <ClInclude Include="stdafx.h" />
