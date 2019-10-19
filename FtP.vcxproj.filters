@@ -89,6 +89,15 @@
     <Filter Include="Program Files\3D Object">
       <UniqueIdentifier>{394490cf-08fb-48a1-87bf-481efa9b7df4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Program Files\Planet">
+      <UniqueIdentifier>{b7af6493-6832-43d7-affe-e04808ac7888}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Program Files\Planet\Facility">
+      <UniqueIdentifier>{1b4eb5e8-bf9f-46b0-aee4-058165b38c68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Program Files\Planet\Road">
+      <UniqueIdentifier>{0e189936-2965-488d-8da2-ce4bdf322242}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -381,6 +390,15 @@
     <ClCompile Include="Triangle3D.cpp">
       <Filter>Program Files\3D Object</Filter>
     </ClCompile>
+    <ClCompile Include="Factory.cpp">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClCompile>
+    <ClCompile Include="Quarry.cpp">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Planet.h">
@@ -415,6 +433,15 @@
     </ClInclude>
     <ClInclude Include="Triangle3D.h">
       <Filter>Program Files\3D Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory.h">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClInclude>
+    <ClInclude Include="Quarry.h">
+      <Filter>Program Files\Planet\Facility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
