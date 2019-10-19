@@ -3,10 +3,15 @@
 #include "Chip.h"
 #include "Road.h"
 #include "FacilityAsset.h"
+#include "FacilityState.h"
 
 const shared_ptr<FacilityState>& Planet::makeFacility(const shared_ptr<FacilityAsset> facilityAsset, const shared_ptr<Region> region)
 {
-	facilityAsset->makeState();
+	auto& state = m_facilityStates.emplace_back(facilityAsset->makeState());
+
+	state->m_region = region;
+
+	return state;
 }
 
 void Planet::generateRegions(size_t n)
