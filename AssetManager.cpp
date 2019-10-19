@@ -18,9 +18,10 @@ void AssetManager::init()
 
 		read_json(filepath, pt);
 
-		auto a = makeAsset(pt.get<string>("type"));
-
-		a->setName(pt.get<string>("name"));
+		if (auto type = pt.get_optional<string>("type"))
+		{
+			makeAsset(*type)->setName(pt.get<string>("name"));
+		}
 	}
 
 	for (const auto& m : m_assets)
