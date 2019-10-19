@@ -1,0 +1,35 @@
+﻿#pragma once
+
+class Region;
+class Chip;
+class Road;
+
+class Planet
+{
+public:
+	Array<std::shared_ptr<Region>>	m_regions;
+	Array<std::shared_ptr<Chip>>	m_chips;
+	Array<std::shared_ptr<Road>>	m_roads;
+	double	m_radius = 100.0;
+
+	std::shared_ptr<Region>	m_selectedRegion;
+
+public:
+	Planet()
+		: m_radius(100.0)
+	{}
+
+	void	generateRegions(size_t n);
+	void	connectRegions();
+	void	makeChips();
+
+	void	generateTerrain();
+
+	void	saveRegions(const FilePath& path);
+	void	loadRegions(const FilePath& path);
+
+	void	drawRegions(const BasicCamera3D& camera);
+	void	drawChips(const BasicCamera3D& camera);
+	void	drawRoads(const BasicCamera3D& camera);
+};
+
