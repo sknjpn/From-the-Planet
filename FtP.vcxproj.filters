@@ -387,9 +387,6 @@
     <ClCompile Include="Triangle3D.cpp">
       <Filter>Program Files\3D Object</Filter>
     </ClCompile>
-    <ClCompile Include="Inventory.cpp">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClCompile>
     <ClCompile Include="Road.cpp">
       <Filter>Program Files\Planet\Road</Filter>
     </ClCompile>
@@ -432,6 +429,9 @@
     <ClCompile Include="ItemAsset.cpp">
       <Filter>Program Files\Planet\Item</Filter>
     </ClCompile>
+    <ClCompile Include="Storage.cpp">
+      <Filter>Program Files\Planet\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Planet.h">
@@ -460,9 +460,6 @@
     </ClInclude>
     <ClInclude Include="Triangle3D.h">
       <Filter>Program Files\3D Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Inventory.h">
-      <Filter>Program Files\Planet\Facility</Filter>
     </ClInclude>
     <ClInclude Include="Road.h">
       <Filter>Program Files\Planet\Road</Filter>
@@ -504,6 +501,9 @@
       <Filter>Program Files\Planet\Facility</Filter>
     </ClInclude>
     <ClInclude Include="ItemAsset.h">
+      <Filter>Program Files\Planet\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Storage.h">
       <Filter>Program Files\Planet\Item</Filter>
     </ClInclude>
   </ItemGroup>

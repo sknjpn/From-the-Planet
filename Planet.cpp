@@ -114,17 +114,17 @@ void Planet::connectRegions()
 // Using for KDTree
 struct RegionAdpater : KDTreeAdapter<Array<shared_ptr<Region>>, Vec3, double, 3>
 {
-	static const element_type* GetPointer(const point_type& point)
+	static const item_type* GetPointer(const point_type& point)
 	{
 		return &point.x;
 	}
 
-	static element_type GetElement(const dataset_type& dataset, size_t index, size_t dim)
+	static item_type GetItem(const dataset_type& dataset, size_t index, size_t dim)
 	{
 		return dataset[index]->m_position.elem(dim);
 	}
 
-	static element_type DistanceSq(const dataset_type& dataset, size_t index, const element_type* other)
+	static item_type DistanceSq(const dataset_type& dataset, size_t index, const item_type* other)
 	{
 		return dataset[index]->m_position.distanceFromSq(Vec3(other[0], other[1], other[2]));
 	}

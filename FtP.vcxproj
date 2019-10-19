@@ -239,7 +239,6 @@
     <ClCompile Include="FactoryAsset.cpp" />
     <ClCompile Include="FactoryState.cpp" />
     <ClCompile Include="GetCircumcenter.cpp" />
-    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="ItemAsset.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -254,6 +253,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Storage.cpp" />
     <ClCompile Include="SystemManager.cpp" />
     <ClCompile Include="Translate.cpp" />
     <ClCompile Include="Triangle3D.cpp" />
@@ -268,7 +268,6 @@
     <ClInclude Include="FactoryAsset.h" />
     <ClInclude Include="FactoryState.h" />
     <ClInclude Include="GetCircumcenter.h" />
-    <ClInclude Include="Inventory.h" />
     <ClInclude Include="ItemAsset.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
@@ -279,6 +278,7 @@
     <ClInclude Include="Region.h" />
     <ClInclude Include="Road.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Storage.h" />
     <ClInclude Include="SystemManager.h" />
     <ClInclude Include="Translate.h" />
     <ClInclude Include="Triangle3D.h" />
