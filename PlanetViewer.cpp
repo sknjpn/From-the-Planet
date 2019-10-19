@@ -6,8 +6,8 @@
 
 void PlanetViewer::init()
 {
-
-	m_planet->loadRegions(U"regions.json");
+	m_planet = MakeShared<Planet>();
+	m_planet->loadRegions(U"asset/regions.json");
 	/*m_planet->generateRegions(2048);
 	m_planet->connectRegions();
 	m_planet->makeChips();
