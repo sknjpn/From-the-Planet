@@ -345,9 +345,6 @@
     </Xml>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Program Files</Filter>
-    </ClCompile>
     <ClCompile Include="Planet.cpp">
       <Filter>Program Files</Filter>
     </ClCompile>
@@ -378,11 +375,14 @@
     <ClCompile Include="Model.cpp">
       <Filter>Program Files\3D Object</Filter>
     </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Program Files\3D Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle3D.cpp">
+      <Filter>Program Files\3D Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Mesh.h">
-      <Filter>Program Files</Filter>
-    </ClInclude>
     <ClInclude Include="Planet.h">
       <Filter>Program Files</Filter>
     </ClInclude>
@@ -408,6 +408,12 @@
       <Filter>Program Files</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
+      <Filter>Program Files\3D Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Program Files\3D Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle3D.h">
       <Filter>Program Files\3D Object</Filter>
     </ClInclude>
   </ItemGroup>

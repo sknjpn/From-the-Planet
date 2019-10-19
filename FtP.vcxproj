@@ -240,6 +240,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Translate.cpp" />
+    <ClCompile Include="Triangle3D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Chip.h" />
@@ -252,6 +253,7 @@
     <ClInclude Include="Road.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Translate.h" />
+    <ClInclude Include="Triangle3D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
