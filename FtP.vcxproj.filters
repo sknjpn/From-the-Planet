@@ -83,6 +83,9 @@
     <Filter Include="Program Files">
       <UniqueIdentifier>{533b12cd-12ab-472d-a76d-ad077c565e30}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Program Files\Function">
+      <UniqueIdentifier>{be033ec2-75b7-490e-99f5-1673b0b8432f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">

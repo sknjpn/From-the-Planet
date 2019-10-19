@@ -111,8 +111,28 @@ void Planet::connectRegions()
 	}
 }
 
+// Using for KDTree
+struct RegionAdpater : KDTreeAdapter<Array<std::shared_ptr<Region>>, Vec3, double, 3>
+{
+	static const element_type* GetPointer(const point_type& point)
+	{
+		return &point.x;
+	}
+
+	static element_type GetElement(const dataset_type& dataset, size_t index, size_t dim)
+	{
+		return dataset[index]->m_position.elem(dim);
+	}
+
+	static element_type DistanceSq(const dataset_type& dataset, size_t index, const element_type* other)
+	{
+		return dataset[index]->m_position.distanceFromSq(Vec3(other[0], other[1], other[2]));
+	}
+};
+
 void Planet::makeChips()
 {
+	KDTree<RegionAdpater> kdtree(m_regions);
 	for (auto& r1 : m_regions)
 	{
 		for (auto& r2 : r1->m_connecteds)
@@ -128,23 +148,15 @@ void Planet::makeChips()
 				{
 					if (r1 == r4.lock())
 					{
-						// 外心に最も近い点が頂点でないことの証明
+						// 外心に最も近い３点が三角形の頂点であることの確認
+						const Array<Vec3> positions = { r1->m_position, r2.lock()->m_position, r3.lock()->m_position };
+						if (kdtree.knnSearch(3, GetCircumcenter(positions)).all([this, r1, r2, r3](auto index) { return m_regions[index] == r1 || m_regions[index] == r2.lock() || m_regions[index] == r3.lock(); }))
 						{
-							const Array<Vec3> positions = { r1->m_position, r2.lock()->m_position, r3.lock()->m_position };
-							const Vec3 c = GetCircumcenter(positions);
-							double min = positions.front().distanceFrom(c);
-							bool flag = false;
-							for (auto& ro : m_regions)
-								if (ro->m_position.distanceFrom(c) < min && ro != r2.lock() && ro != r3.lock()) { flag = true; break; }
-
-							if (flag) continue;
+							auto& t = m_chips.emplace_back(MakeShared<Chip>(r1, r2.lock(), r3.lock()));
+							r1->m_polygon.emplace_back(t->m_center);
+							r2.lock()->m_polygon.emplace_back(t->m_center);
+							r3.lock()->m_polygon.emplace_back(t->m_center);
 						}
-
-						// 生成
-						auto& t = m_chips.emplace_back(MakeShared<Chip>(r1, r2.lock(), r3.lock()));
-						r1->m_polygon.emplace_back(t->m_center);
-						r2.lock()->m_polygon.emplace_back(t->m_center);
-						r3.lock()->m_polygon.emplace_back(t->m_center);
 					}
 				}
 			}
