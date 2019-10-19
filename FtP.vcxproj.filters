@@ -98,6 +98,9 @@
     <Filter Include="Program Files\Planet\Road">
       <UniqueIdentifier>{0e189936-2965-488d-8da2-ce4bdf322242}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Program Files\Planet\Item">
+      <UniqueIdentifier>{a351f60b-86c8-42a1-9d70-72024bacaa4a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -408,6 +411,7 @@
     <ClCompile Include="QuarryModel.cpp">
       <Filter>Program Files\Planet\Facility</Filter>
     </ClCompile>
+    <ClCompile Include="ItemModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Planet.h">
@@ -461,5 +465,6 @@
     <ClInclude Include="QuarryModel.h">
       <Filter>Program Files\Planet\Facility</Filter>
     </ClInclude>
+    <ClInclude Include="ItemModel.h" />
   </ItemGroup>
 </Project>

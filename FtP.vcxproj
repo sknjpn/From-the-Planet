@@ -233,6 +233,7 @@
     <ClCompile Include="FactoryState.cpp" />
     <ClCompile Include="GetCircumcenter.cpp" />
     <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="ItemModel.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -256,6 +257,7 @@
     <ClInclude Include="FactoryState.h" />
     <ClInclude Include="GetCircumcenter.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="ItemModel.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Planet.h" />
