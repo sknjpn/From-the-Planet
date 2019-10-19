@@ -79,12 +79,9 @@ void Planet::generateRegions(size_t n)
 		Logger << U"---";
 	}
 
+	// Regionの登録と、半径の分だけ拡大
 	for (const auto& p : positions)
-	{
-		auto& r = m_regions.emplace_back(MakeShared<Region>());
-
-		r->m_position = p * m_radius;
-	}
+		m_regions.emplace_back(MakeShared<Region>())->m_position = p * m_radius;
 }
 
 void Planet::connectRegions()
@@ -114,17 +111,17 @@ void Planet::connectRegions()
 // Using for KDTree
 struct RegionAdpater : KDTreeAdapter<Array<shared_ptr<Region>>, Vec3, double, 3>
 {
-	static const item_type* GetPointer(const point_type& point)
+	static const element_type* GetPointer(const point_type& point)
 	{
 		return &point.x;
 	}
 
-	static item_type GetItem(const dataset_type& dataset, size_t index, size_t dim)
+	static element_type GetElement(const dataset_type& dataset, size_t index, size_t dim)
 	{
 		return dataset[index]->m_position.elem(dim);
 	}
 
-	static item_type DistanceSq(const dataset_type& dataset, size_t index, const item_type* other)
+	static element_type DistanceSq(const dataset_type& dataset, size_t index, const element_type* other)
 	{
 		return dataset[index]->m_position.distanceFromSq(Vec3(other[0], other[1], other[2]));
 	}
@@ -263,7 +260,7 @@ void Planet::drawChips(const BasicCamera3D& camera)
 	for (const auto& c : m_chips)
 	{
 		if (canSee(camera, c->m_center))
-			c->draw(mat, HSV(&*c - &*m_chips.front()));
+			c->draw(mat, HSV(double(&*c - &*m_chips.front())));
 	}
 }
 

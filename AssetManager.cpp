@@ -1,8 +1,6 @@
 ﻿#include "Asset.h"
 #include "AssetManager.h"
 
-#include "CellAsset.h"
-
 unique_ptr<AssetManager>	g_assetManagerPtr;
 
 void AssetManager::init()

@@ -23,8 +23,8 @@ void FacilityState::draw(const BasicCamera3D& camera)
 	float scale = 4.0;
 
 	auto p = m_region.lock()->m_position / 100.0;
-	double t = -atan2(p.z, p.x);
-	double f = Math::HalfPi - asin(p.y);
+	auto t = float(-atan2(p.z, p.x));
+	auto f = float(Math::HalfPi - asin(p.y));
 
 	Mat4x4 mat = Mat4x4::Scaling(scale, scale, scale)
 		* Mat4x4::Translation(0, m_region.lock()->getCenter().length(), 0.0)

@@ -1,6 +1,7 @@
 ﻿#include "Storage.h"
 
 #include "AssetManager.h"
+#include "ItemAsset.h"
 
 bool Storage::operator>=(const Storage& s) const
 {

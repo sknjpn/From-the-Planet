@@ -1,5 +1,5 @@
 {
     "name": "Coal",
     "type": "ItemAsset",
-    "image": "image/coal.png"
+    "texture": "texture/coal.png"
 }
