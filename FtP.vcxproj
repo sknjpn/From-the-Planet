@@ -73,10 +73,12 @@
       <MinimalRebuild>false</MinimalRebuild>
       <ConformanceMode>true</ConformanceMode>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
+      <AdditionalIncludeDirectories>C:\boost_1_70_0\include\boost-1_70</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\boost_1_70_0\stage\lib\x64</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /I /D /Y "$(OutDir)$(TargetFileName)" "$(ProjectDir)App"</Command>
@@ -96,12 +98,14 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <ConformanceMode>true</ConformanceMode>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
+      <AdditionalIncludeDirectories>C:\boost_1_70_0\include\boost-1_70</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\boost_1_70_0\stage\lib\x64</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /I /D /Y "$(OutDir)$(TargetFileName)" "$(ProjectDir)App"</Command>
@@ -228,20 +232,21 @@
   <ItemGroup>
     <ClCompile Include="Asset.cpp" />
     <ClCompile Include="AssetManager.cpp" />
+    <ClCompile Include="AssetManager_MakeModel.cpp" />
     <ClCompile Include="Chip.cpp" />
-    <ClCompile Include="FacilityModel.cpp" />
+    <ClCompile Include="FacilityAsset.cpp" />
     <ClCompile Include="FacilityState.cpp" />
-    <ClCompile Include="FactoryModel.cpp" />
+    <ClCompile Include="FactoryAsset.cpp" />
     <ClCompile Include="FactoryState.cpp" />
     <ClCompile Include="GetCircumcenter.cpp" />
     <ClCompile Include="Inventory.cpp" />
-    <ClCompile Include="ItemModel.cpp" />
+    <ClCompile Include="ItemAsset.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Planet.cpp" />
     <ClCompile Include="PlanetViewer.cpp" />
-    <ClCompile Include="QuarryModel.cpp" />
+    <ClCompile Include="QuarryAsset.cpp" />
     <ClCompile Include="QuarryState.cpp" />
     <ClCompile Include="Region.cpp" />
     <ClCompile Include="Road.cpp" />
@@ -258,18 +263,18 @@
     <ClInclude Include="Asset.h" />
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Chip.h" />
-    <ClInclude Include="FacilityModel.h" />
+    <ClInclude Include="FacilityAsset.h" />
     <ClInclude Include="FacilityState.h" />
-    <ClInclude Include="FactoryModel.h" />
+    <ClInclude Include="FactoryAsset.h" />
     <ClInclude Include="FactoryState.h" />
     <ClInclude Include="GetCircumcenter.h" />
     <ClInclude Include="Inventory.h" />
-    <ClInclude Include="ItemModel.h" />
+    <ClInclude Include="ItemAsset.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Planet.h" />
     <ClInclude Include="PlanetViewer.h" />
-    <ClInclude Include="QuarryModel.h" />
+    <ClInclude Include="QuarryAsset.h" />
     <ClInclude Include="QuarryState.h" />
     <ClInclude Include="Region.h" />
     <ClInclude Include="Road.h" />

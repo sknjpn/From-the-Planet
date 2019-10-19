@@ -1,5 +1,6 @@
 {
     "name": "quarry",
+    "type": "QuarryAsset",
     "meshes": [
         {
             "vertices": [

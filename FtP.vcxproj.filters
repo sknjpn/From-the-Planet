@@ -402,18 +402,6 @@
     <ClCompile Include="FacilityState.cpp">
       <Filter>Program Files\Planet\Facility</Filter>
     </ClCompile>
-    <ClCompile Include="FacilityModel.cpp">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClCompile>
-    <ClCompile Include="FactoryModel.cpp">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClCompile>
-    <ClCompile Include="QuarryModel.cpp">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemModel.cpp">
-      <Filter>Program Files\Planet\Item</Filter>
-    </ClCompile>
     <ClCompile Include="AssetManager.cpp">
       <Filter>Program Files</Filter>
     </ClCompile>
@@ -428,6 +416,21 @@
     </ClCompile>
     <ClCompile Include="PlanetViewer.cpp">
       <Filter>Program Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetManager_MakeModel.cpp">
+      <Filter>Program Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FacilityAsset.cpp">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClCompile>
+    <ClCompile Include="FactoryAsset.cpp">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClCompile>
+    <ClCompile Include="QuarryAsset.cpp">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemAsset.cpp">
+      <Filter>Program Files\Planet\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -473,18 +476,6 @@
     <ClInclude Include="FacilityState.h">
       <Filter>Program Files\Planet\Facility</Filter>
     </ClInclude>
-    <ClInclude Include="FacilityModel.h">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClInclude>
-    <ClInclude Include="FactoryModel.h">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClInclude>
-    <ClInclude Include="QuarryModel.h">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemModel.h">
-      <Filter>Program Files\Planet\Item</Filter>
-    </ClInclude>
     <ClInclude Include="Asset.h">
       <Filter>Program Files</Filter>
     </ClInclude>
@@ -502,6 +493,18 @@
     </ClInclude>
     <ClInclude Include="PlanetViewer.h">
       <Filter>Program Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FacilityAsset.h">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClInclude>
+    <ClInclude Include="FactoryAsset.h">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClInclude>
+    <ClInclude Include="QuarryAsset.h">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemAsset.h">
+      <Filter>Program Files\Planet\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

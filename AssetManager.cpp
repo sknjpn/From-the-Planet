@@ -11,7 +11,7 @@ void AssetManager::init()
 	Array<string> filepaths;
 
 	recursive_directory_iterator end;
-	for (recursive_directory_iterator it(boost::filesystem::path("assets/models")); it != end; ++it)
+	for (recursive_directory_iterator it(boost::filesystem::path("asset")); it != end; ++it)
 		if (!is_directory(*it)) filepaths.emplace_back((*it).path().string());
 
 	for (const auto& filepath : filepaths)
@@ -23,7 +23,6 @@ void AssetManager::init()
 		auto a = makeAsset(pt.get<string>("type"));
 
 		a->setName(pt.get<string>("name"));
-		a->setFilepath(filepath);
 	}
 
 	for (const auto& m : m_assets)
@@ -54,10 +53,6 @@ void AssetManager::init()
 			System::Exit();
 		}
 	}
-
-	// CellAssetの初期化
-	auto cellAssets = getAssets<CellAsset>();
-	for (const auto& ca : cellAssets) ca->updateProperties();
 }
 
 shared_ptr<Asset> AssetManager::getAsset(const string& name) const
