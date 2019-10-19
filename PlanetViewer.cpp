@@ -19,7 +19,13 @@ void PlanetViewer::init()
 	m_planet->m_roads.resize(64);
 	for (auto& r : m_planet->m_roads) { r = MakeShared<Road>(); r->m_fr = m_planet->m_regions.choice(); r->m_to = r->m_fr.lock()->m_connecteds.choice().lock(); }
 
-	// Facility
+	// Factory
+	for (int i = 0; i < 50; ++i)
+		m_planet->makeFacility(g_assetManagerPtr->getAsset<FactoryAsset>("Factory"), m_planet->m_regions.choice());
+
+	// Quarry
+	for (int i = 0; i < 50; ++i)
+		m_planet->makeFacility(g_assetManagerPtr->getAsset<QuarryAsset>("Quarry"), m_planet->m_regions.choice());
 }
 
 void PlanetViewer::update()

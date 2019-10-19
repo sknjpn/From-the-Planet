@@ -1,7 +1,10 @@
 ﻿#pragma once
-#include "Asset.h"
+
+#include "FacilityAsset.h"
+
 class FactoryAsset :
-	public Asset
+	public FacilityAsset
 {
+	shared_ptr<FacilityState>	makeState() override;
 };
 

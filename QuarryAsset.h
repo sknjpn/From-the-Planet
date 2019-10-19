@@ -1,7 +1,9 @@
 ﻿#pragma once
-#include "Asset.h"
-class QuarryAsset :
-	public Asset
-{
-};
 
+#include "FacilityAsset.h"
+
+class QuarryAsset :
+	public FacilityAsset
+{
+	shared_ptr<FacilityState>	makeState() override;
+};
