@@ -226,6 +226,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Asset.cpp" />
+    <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Chip.cpp" />
     <ClCompile Include="FacilityModel.cpp" />
     <ClCompile Include="FacilityState.cpp" />
@@ -238,6 +240,7 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Planet.cpp" />
+    <ClCompile Include="PlanetViewer.cpp" />
     <ClCompile Include="QuarryModel.cpp" />
     <ClCompile Include="QuarryState.cpp" />
     <ClCompile Include="Region.cpp" />
@@ -246,10 +249,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="SystemManager.cpp" />
     <ClCompile Include="Translate.cpp" />
     <ClCompile Include="Triangle3D.cpp" />
+    <ClCompile Include="ViewerManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Asset.h" />
+    <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Chip.h" />
     <ClInclude Include="FacilityModel.h" />
     <ClInclude Include="FacilityState.h" />
@@ -261,13 +268,17 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Planet.h" />
+    <ClInclude Include="PlanetViewer.h" />
     <ClInclude Include="QuarryModel.h" />
     <ClInclude Include="QuarryState.h" />
     <ClInclude Include="Region.h" />
     <ClInclude Include="Road.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SystemManager.h" />
     <ClInclude Include="Translate.h" />
     <ClInclude Include="Triangle3D.h" />
+    <ClInclude Include="Viewer.h" />
+    <ClInclude Include="ViewerManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

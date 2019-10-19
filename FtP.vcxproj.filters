@@ -411,7 +411,24 @@
     <ClCompile Include="QuarryModel.cpp">
       <Filter>Program Files\Planet\Facility</Filter>
     </ClCompile>
-    <ClCompile Include="ItemModel.cpp" />
+    <ClCompile Include="ItemModel.cpp">
+      <Filter>Program Files\Planet\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetManager.cpp">
+      <Filter>Program Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Asset.cpp">
+      <Filter>Program Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemManager.cpp">
+      <Filter>Program Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewerManager.cpp">
+      <Filter>Program Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlanetViewer.cpp">
+      <Filter>Program Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Planet.h">
@@ -465,6 +482,26 @@
     <ClInclude Include="QuarryModel.h">
       <Filter>Program Files\Planet\Facility</Filter>
     </ClInclude>
-    <ClInclude Include="ItemModel.h" />
+    <ClInclude Include="ItemModel.h">
+      <Filter>Program Files\Planet\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset.h">
+      <Filter>Program Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetManager.h">
+      <Filter>Program Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManager.h">
+      <Filter>Program Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewerManager.h">
+      <Filter>Program Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewer.h">
+      <Filter>Program Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlanetViewer.h">
+      <Filter>Program Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
