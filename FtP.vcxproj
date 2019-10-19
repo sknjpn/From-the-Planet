@@ -227,7 +227,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Chip.cpp" />
-    <ClCompile Include="Facility.cpp" />
+    <ClCompile Include="FacilityModel.cpp" />
+    <ClCompile Include="FacilityState.cpp" />
+    <ClCompile Include="FactoryModel.cpp" />
     <ClCompile Include="FactoryState.cpp" />
     <ClCompile Include="GetCircumcenter.cpp" />
     <ClCompile Include="Inventory.cpp" />
@@ -235,6 +237,7 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Planet.cpp" />
+    <ClCompile Include="QuarryModel.cpp" />
     <ClCompile Include="QuarryState.cpp" />
     <ClCompile Include="Region.cpp" />
     <ClCompile Include="Road.cpp" />
@@ -247,13 +250,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Chip.h" />
-    <ClInclude Include="Facility.h" />
+    <ClInclude Include="FacilityModel.h" />
+    <ClInclude Include="FacilityState.h" />
+    <ClInclude Include="FactoryModel.h" />
     <ClInclude Include="FactoryState.h" />
     <ClInclude Include="GetCircumcenter.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Planet.h" />
+    <ClInclude Include="QuarryModel.h" />
     <ClInclude Include="QuarryState.h" />
     <ClInclude Include="Region.h" />
     <ClInclude Include="Road.h" />
