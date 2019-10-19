@@ -8,6 +8,6 @@ class FacilityAsset :
 	public Asset
 {
 public:
-	virtual shared_ptr<FacilityState>	makeState();
+	virtual shared_ptr<FacilityState>	makeState() = 0;
 };
 
