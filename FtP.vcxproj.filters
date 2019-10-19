@@ -86,6 +86,9 @@
     <Filter Include="Program Files\Function">
       <UniqueIdentifier>{be033ec2-75b7-490e-99f5-1673b0b8432f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Program Files\3D Object">
+      <UniqueIdentifier>{394490cf-08fb-48a1-87bf-481efa9b7df4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -372,6 +375,9 @@
     <ClCompile Include="Main.cpp">
       <Filter>Program Files</Filter>
     </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Program Files\3D Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mesh.h">
@@ -400,6 +406,9 @@
     </ClInclude>
     <ClInclude Include="GetCircumcenter.h">
       <Filter>Program Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Program Files\3D Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
