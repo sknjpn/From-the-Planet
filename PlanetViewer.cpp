@@ -3,6 +3,9 @@
 #include "FacilityState.h"
 #include "Road.h"
 #include "Region.h"
+#include "AssetManager.h"
+#include "FactoryAsset.h"
+#include "QuarryAsset.h"
 
 void PlanetViewer::init()
 {
@@ -15,6 +18,8 @@ void PlanetViewer::init()
 
 	m_planet->m_roads.resize(64);
 	for (auto& r : m_planet->m_roads) { r = MakeShared<Road>(); r->m_fr = m_planet->m_regions.choice(); r->m_to = r->m_fr.lock()->m_connecteds.choice().lock(); }
+
+	// Facility
 }
 
 void PlanetViewer::update()

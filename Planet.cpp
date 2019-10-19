@@ -3,6 +3,11 @@
 #include "Chip.h"
 #include "Road.h"
 
+const shared_ptr<FacilityState>& Planet::makeFacility(const shared_ptr<FacilityAsset> facilityAsset, const shared_ptr<Region> region)
+{
+	// TODO: return ステートメントをここに挿入します
+}
+
 void Planet::generateRegions(size_t n)
 {
 	Array<Vec3> positions;

@@ -4,6 +4,7 @@ class Region;
 class Chip;
 class Road;
 class FacilityState;
+class FacilityAsset;
 
 class Planet
 {
@@ -20,6 +21,8 @@ public:
 	Planet()
 		: m_radius(100.0)
 	{}
+
+	const shared_ptr<FacilityState>& makeFacility(const shared_ptr<FacilityAsset> facilityAsset, const shared_ptr<Region> region);
 
 	void	generateRegions(size_t n);
 	void	connectRegions();
