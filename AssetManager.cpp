@@ -9,7 +9,7 @@ void AssetManager::init()
 	Array<string> filepaths;
 
 	recursive_directory_iterator end;
-	for (recursive_directory_iterator it(boost::filesystem::path("asset")); it != end; ++it)
+	for (recursive_directory_iterator it(boost::filesystem::path("asset/models")); it != end; ++it)
 		if (!is_directory(*it)) filepaths.emplace_back((*it).path().string());
 
 	for (const auto& filepath : filepaths)
