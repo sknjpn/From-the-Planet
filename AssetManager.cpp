@@ -10,7 +10,7 @@ void AssetManager::init()
 
 	recursive_directory_iterator end;
 	for (recursive_directory_iterator it(boost::filesystem::path("asset/models")); it != end; ++it)
-		if (!is_directory(*it)) filepaths.emplace_back((*it).path().string());
+		if (!is_directory(*it) && it->path().extension() == "json") filepaths.emplace_back((*it).path().string());
 
 	for (const auto& filepath : filepaths)
 	{
