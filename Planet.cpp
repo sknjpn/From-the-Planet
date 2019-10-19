@@ -2,10 +2,11 @@
 #include "Region.h"
 #include "Chip.h"
 #include "Road.h"
+#include "FacilityAsset.h"
 
 const shared_ptr<FacilityState>& Planet::makeFacility(const shared_ptr<FacilityAsset> facilityAsset, const shared_ptr<Region> region)
 {
-	// TODO: return ステートメントをここに挿入します
+	facilityAsset->makeState();
 }
 
 void Planet::generateRegions(size_t n)
