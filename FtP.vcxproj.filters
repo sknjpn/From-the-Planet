@@ -432,6 +432,7 @@
     <ClCompile Include="Storage.cpp">
       <Filter>Program Files\Planet\Item</Filter>
     </ClCompile>
+    <ClCompile Include="FacilitiesListViewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Planet.h">
@@ -506,5 +507,6 @@
     <ClInclude Include="Storage.h">
       <Filter>Program Files\Planet\Item</Filter>
     </ClInclude>
+    <ClInclude Include="FacilitiesListViewer.h" />
   </ItemGroup>
 </Project>

@@ -10,7 +10,7 @@ void AssetManager::init()
 
 	recursive_directory_iterator end;
 	for (recursive_directory_iterator it(boost::filesystem::path("asset/models")); it != end; ++it)
-		if (!is_directory(*it) && it->path().extension() == "json") filepaths.emplace_back((*it).path().string());
+		if (!is_directory(*it) && it->path().extension() == ".json") filepaths.emplace_back((*it).path().string());
 
 	for (const auto& filepath : filepaths)
 	{
@@ -19,11 +19,16 @@ void AssetManager::init()
 		read_json(filepath, pt);
 
 		if (auto type = pt.get_optional<string>("type"))
-			makeAsset(*type)->setName(pt.get<string>("name"));
+		{
+			auto a = makeAsset(*type);
+			a->setName(pt.get<string>("name"));
+			a->setFilepath(filepath);
+		}
 	}
 
 	for (const auto& m : m_assets)
 	{
+		Logger << Unicode::Widen(m->getName());
 		ptree pt;
 
 		read_json(m->getFilepath(), pt);

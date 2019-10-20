@@ -6,9 +6,13 @@
 #include "AssetManager.h"
 #include "FactoryAsset.h"
 #include "QuarryAsset.h"
+#include "ViewerManager.h"
+#include "FacilitiesListViewer.h"
 
 void PlanetViewer::init()
 {
+	g_viewerManagerPtr->makeViewer<FacilitiesListViewer>();
+
 	m_planet = MakeShared<Planet>();
 	m_planet->loadRegions(U"asset/regions.json");
 	/*m_planet->generateRegions(2048);
@@ -30,10 +34,26 @@ void PlanetViewer::init()
 
 void PlanetViewer::update()
 {
-	m_eyePosition = Cylindrical(Arg::r = 300, Arg::phi = Scene::Time() * 10_deg, Arg::y = 0);
-
-	m_camera.setView(m_eyePosition, Vec3::Zero());
+	if (KeyRight.pressed()) m_azimuth += 0.02;
+	if (KeyLeft.pressed()) m_azimuth -= 0.02;
+	if (KeyUp.pressed()) m_inclination = Min(m_inclination + 0.02, 60_deg); ;
+	if (KeyDown.pressed()) m_inclination = Max(m_inclination - 0.02, -60_deg);
+	m_camera.setView(getEyePosition(), Vec3::Zero());
 
 	m_planet->drawRegions(m_camera);
 	m_planet->drawRoads(m_camera);
+	m_planet->drawFacilities(m_camera);
+
+
+	if (g_viewerManagerPtr->getViewer<FacilitiesListViewer>()->getSelectedIndex() != -1)
+	{
+		for (auto& r : m_planet->m_regions)
+		{
+			if (r->m_isMouseover && MouseL.down())
+			{
+				size_t index = g_viewerManagerPtr->getViewer<FacilitiesListViewer>()->getSelectedIndex();
+				g_viewerManagerPtr->getViewer<PlanetViewer>()->getPlanet()->makeFacility(g_assetManagerPtr->getAssets<FacilityAsset>()[index], r);
+			}
+		}
+	}
 }

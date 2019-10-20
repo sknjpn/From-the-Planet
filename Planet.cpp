@@ -10,6 +10,7 @@ const shared_ptr<FacilityState>& Planet::makeFacility(const shared_ptr<FacilityA
 	auto& state = m_facilityStates.emplace_back(facilityAsset->makeState());
 
 	state->m_region = region;
+	state->m_facilityAsset = facilityAsset;
 
 	return state;
 }
@@ -277,7 +278,14 @@ void Planet::drawChips(const BasicCamera3D& camera)
 
 void Planet::drawRoads(const BasicCamera3D& camera)
 {
-	for (const auto& r : m_roads) r->draw(camera);
+	for (const auto& r : m_roads)
+		if (canSee(camera, (r->m_to.lock()->m_position + r->m_fr.lock()->m_position) / 2.0)) r->draw(camera);
+}
+
+void Planet::drawFacilities(const BasicCamera3D& camera)
+{
+	for (const auto& fs : m_facilityStates)
+		if (canSee(camera, fs->m_region.lock()->m_position)) fs->draw(camera);
 }
 
 bool Planet::canSee(const BasicCamera3D& camera, const Vec3& position) const

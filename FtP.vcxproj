@@ -234,6 +234,7 @@
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="AssetManager_MakeModel.cpp" />
     <ClCompile Include="Chip.cpp" />
+    <ClCompile Include="FacilitiesListViewer.cpp" />
     <ClCompile Include="FacilityAsset.cpp" />
     <ClCompile Include="FacilityState.cpp" />
     <ClCompile Include="FactoryAsset.cpp" />
@@ -263,6 +264,7 @@
     <ClInclude Include="Asset.h" />
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Chip.h" />
+    <ClInclude Include="FacilitiesListViewer.h" />
     <ClInclude Include="FacilityAsset.h" />
     <ClInclude Include="FacilityState.h" />
     <ClInclude Include="FactoryAsset.h" />

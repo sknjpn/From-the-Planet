@@ -3,14 +3,13 @@
 #include "Mesh.h"
 
 class Region;
+class FacilityAsset;
 
 class FacilityState
 {
 public:
 	weak_ptr<Region>	m_region;
-	Array<Mesh>		m_meshes;
-
-	FacilityState();
+	shared_ptr<FacilityAsset>	m_facilityAsset;
 
 	void draw(const BasicCamera3D& camera);
 };

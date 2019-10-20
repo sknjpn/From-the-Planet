@@ -1,18 +1,22 @@
 ﻿#pragma once
 
 #include "Asset.h"
+#include "Mesh.h"
 
 class FacilityState;
 
 class FacilityAsset :
 	public Asset
 {
-	shared_ptr<FacilityState>	m_facilityState;
+	Array<Mesh>		m_meshes;
 
 public:
 	virtual shared_ptr<FacilityState>	makeState() = 0;
 
-	template<typename T>
-	shared_ptr<T>	getFacilityState() const { return dynamic_pointer_cast<T>(m_facilityState); }
+	const Array<Mesh>& getMeshes() const { return m_meshes; }
+
+	// JSON
+	void	load_this(const ptree& pt);
+	void	load(const ptree& pt) override { load_this(pt); }
 };
 

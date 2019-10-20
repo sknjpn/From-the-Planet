@@ -36,6 +36,7 @@ public:
 	void	drawRegions(const BasicCamera3D& camera);
 	void	drawChips(const BasicCamera3D& camera);
 	void	drawRoads(const BasicCamera3D& camera);
+	void	drawFacilities(const BasicCamera3D& camera);
 	
 	bool	canSee(const BasicCamera3D& camera, const Vec3& position) const;
 };

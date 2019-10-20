@@ -3,5 +3,5 @@
 
 void ItemAsset::load_this(const ptree& pt)
 {
-	m_texture = Texture(U"asset/items/" +  Unicode::Widen(pt.get<string>("texture")));
+	m_texture = Texture(U"asset/models/items/" +  Unicode::Widen(pt.get<string>("texture")));
 }

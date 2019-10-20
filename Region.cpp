@@ -1,4 +1,10 @@
 ﻿#include "Region.h"
+#include "ViewerManager.h"
+#include "FacilitiesListViewer.h"
+#include "AssetManager.h"
+#include "FacilityAsset.h"
+#include "PlanetViewer.h"
+#include "Planet.h"
 
 void Region::draw(const Mat4x4& mat)
 {
@@ -33,7 +39,7 @@ void Region::draw(const Mat4x4& mat)
 
 	m_isMouseover = mouseover;
 
-	auto t = area / 400.0;
+	auto t =Sqrt( area) / 10.0;
 	for (auto& p : ls)
 		p += (center - p).normalized() * Min(t / 2.0, (center - p).length());
 
