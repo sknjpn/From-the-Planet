@@ -15,6 +15,7 @@ public:
 	Array<shared_ptr<FacilityState>>	m_facilityStates;
 	double	m_radius = 100.0;
 
+	shared_ptr<Region>	m_mouseOverRegion;
 	shared_ptr<Region>	m_selectedRegion;
 
 public:

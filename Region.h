@@ -1,5 +1,8 @@
 ﻿#pragma once
 
+class Planet;
+class FacilityState;
+
 class Region
 {
 public:
@@ -7,12 +10,14 @@ public:
 	Array<Vec3>	m_polygon;
 	Color		m_color;
 	double		m_height;
-	bool		m_isMouseover;
-	Array<weak_ptr<Region>>	m_connecteds;
+	weak_ptr<Planet>	m_planet;
+	Array<weak_ptr<Region>>		m_connecteds;
+	shared_ptr<FacilityState>	m_facilityState;
 
-	void	draw(const Mat4x4& mat);
+	// returns isMouseover
+	bool	draw(const Mat4x4& mat);
 	void	connect(const shared_ptr<Region>& to);
+	void	setFacilityState(const shared_ptr<FacilityState> facilityState) { m_facilityState = facilityState; }
 
 	Vec3	getCenter() { return m_position + m_position * m_height * 0.1; }
 };
-

@@ -6,7 +6,7 @@
 #include "PlanetViewer.h"
 #include "Planet.h"
 
-void Region::draw(const Mat4x4& mat)
+bool Region::draw(const Mat4x4& mat)
 {
 	m_color = m_height > 0.0 ? Palette::Green : Palette::Royalblue;
 	if (m_height > 0.3) m_color = Palette::Gray;
