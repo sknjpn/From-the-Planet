@@ -6,7 +6,7 @@ class Road;
 class FacilityState;
 class FacilityAsset;
 
-class Planet
+class PlanetManager
 {
 public:
 	Array<shared_ptr<Region>>	m_regions;
@@ -19,7 +19,7 @@ public:
 	shared_ptr<Region>	m_selectedRegion;
 
 public:
-	Planet()
+	PlanetManager()
 		: m_radius(100.0)
 	{}
 
@@ -42,3 +42,4 @@ public:
 	bool	canSee(const BasicCamera3D& camera, const Vec3& position) const;
 };
 
+extern unique_ptr<PlanetManager> g_planetManagerPtr;

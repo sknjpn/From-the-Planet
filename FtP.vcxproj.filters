@@ -357,9 +357,6 @@
     </Xml>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Planet.cpp">
-      <Filter>Program Files</Filter>
-    </ClCompile>
     <ClCompile Include="Region.cpp">
       <Filter>Program Files</Filter>
     </ClCompile>
@@ -433,11 +430,11 @@
       <Filter>Program Files\Planet\Item</Filter>
     </ClCompile>
     <ClCompile Include="FacilitiesListViewer.cpp" />
+    <ClCompile Include="PlanetManager.cpp">
+      <Filter>Program Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Planet.h">
-      <Filter>Program Files</Filter>
-    </ClInclude>
     <ClInclude Include="Region.h">
       <Filter>Program Files</Filter>
     </ClInclude>
@@ -508,5 +505,8 @@
       <Filter>Program Files\Planet\Item</Filter>
     </ClInclude>
     <ClInclude Include="FacilitiesListViewer.h" />
+    <ClInclude Include="PlanetManager.h">
+      <Filter>Program Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

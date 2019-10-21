@@ -2,12 +2,11 @@
 
 # include "Viewer.h"
 
-class Planet;
+class PlanetManager;
 
 class PlanetViewer
 	: public Viewer
 {
-	shared_ptr<Planet> m_planet;
 	double m_fov = 45_deg;
 	double m_inclination = 0.0;
 	double m_azimuth = 0.0;
@@ -22,5 +21,5 @@ public:
 	void	init() override;
 	void	update() override;
 	Vec3	getEyePosition() const { return Vec3(Cos(m_azimuth) * Cos(m_inclination), Sin(m_inclination), Sin(m_azimuth) * Cos(m_inclination)) * m_radius; }
-	shared_ptr<Planet>&	getPlanet() { return m_planet; }
+	shared_ptr<PlanetManager>&	getPlanet() { return m_planet; }
 };

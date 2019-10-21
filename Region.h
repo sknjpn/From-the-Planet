@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-class Planet;
+class PlanetManager;
 class FacilityState;
 
 class Region
@@ -10,7 +10,7 @@ public:
 	Array<Vec3>	m_polygon;
 	Color		m_color;
 	double		m_height;
-	weak_ptr<Planet>	m_planet;
+	weak_ptr<PlanetManager>	m_planet;
 	Array<weak_ptr<Region>>		m_connecteds;
 	shared_ptr<FacilityState>	m_facilityState;
 

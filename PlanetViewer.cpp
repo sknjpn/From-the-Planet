@@ -1,5 +1,5 @@
 ﻿#include "PlanetViewer.h"
-#include "Planet.h"
+#include "PlanetManager.h"
 #include "FacilityState.h"
 #include "Road.h"
 #include "Region.h"
@@ -13,7 +13,7 @@ void PlanetViewer::init()
 {
 	g_viewerManagerPtr->makeViewer<FacilitiesListViewer>();
 
-	m_planet = MakeShared<Planet>();
+	m_planet = MakeShared<PlanetManager>();
 	m_planet->loadRegions(U"asset/regions.json");
 	//m_planet->generateRegions(2048);
 	//m_planet->connectRegions();

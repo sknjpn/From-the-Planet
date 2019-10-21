@@ -1,11 +1,13 @@
-﻿#include "Planet.h"
+﻿#include "PlanetManager.h"
 #include "Region.h"
 #include "Chip.h"
 #include "Road.h"
 #include "FacilityAsset.h"
 #include "FacilityState.h"
 
-const shared_ptr<FacilityState>& Planet::makeFacility(const shared_ptr<FacilityAsset> facilityAsset, const shared_ptr<Region> region)
+unique_ptr<PlanetManager> g_planetManagerPtr;
+
+const shared_ptr<FacilityState>& PlanetManager::makeFacility(const shared_ptr<FacilityAsset> facilityAsset, const shared_ptr<Region> region)
 {
 	auto& state = m_facilityStates.emplace_back(facilityAsset->makeState());
 
@@ -15,7 +17,7 @@ const shared_ptr<FacilityState>& Planet::makeFacility(const shared_ptr<FacilityA
 	return state;
 }
 
-void Planet::generateRegions(size_t n)
+void PlanetManager::generateRegions(size_t n)
 {
 	Array<Vec3> positions;
 
@@ -96,7 +98,7 @@ void Planet::generateRegions(size_t n)
 		m_regions.emplace_back(MakeShared<Region>())->m_position = p * m_radius;
 }
 
-void Planet::connectRegions()
+void PlanetManager::connectRegions()
 {
 	double f_max = 0;
 	for (const auto& r1 : m_regions)
@@ -139,7 +141,7 @@ struct RegionAdpater : KDTreeAdapter<Array<shared_ptr<Region>>, Vec3, double, 3>
 	}
 };
 
-void Planet::makeChips()
+void PlanetManager::makeChips()
 {
 	KDTree<RegionAdpater> kdtree(m_regions);
 	for (auto& r1 : m_regions)
@@ -204,7 +206,7 @@ void Planet::makeChips()
 	}
 }
 
-void Planet::generateTerrain()
+void PlanetManager::generateTerrain()
 {
 	PerlinNoise noise(Random(INT_MAX));
 
@@ -218,7 +220,7 @@ void Planet::generateTerrain()
 	}
 }
 
-void Planet::saveRegions(const FilePath& path)
+void PlanetManager::saveRegions(const FilePath& path)
 {
 	Array<Vec3> positions;
 
@@ -231,7 +233,7 @@ void Planet::saveRegions(const FilePath& path)
 	tw.close();
 }
 
-void Planet::loadRegions(const FilePath& path)
+void PlanetManager::loadRegions(const FilePath& path)
 {
 	// 読み込み
 	JSONReader json(path);
@@ -250,7 +252,7 @@ void Planet::loadRegions(const FilePath& path)
 	generateTerrain();
 }
 
-void Planet::drawRegions(const BasicCamera3D& camera)
+void PlanetManager::drawRegions(const BasicCamera3D& camera)
 {
 	auto mat = camera.getMat4x4();
 
@@ -261,7 +263,7 @@ void Planet::drawRegions(const BasicCamera3D& camera)
 	}
 }
 
-void Planet::drawChips(const BasicCamera3D& camera)
+void PlanetManager::drawChips(const BasicCamera3D& camera)
 {
 	auto mat = camera.getMat4x4();
 
@@ -272,19 +274,19 @@ void Planet::drawChips(const BasicCamera3D& camera)
 	}
 }
 
-void Planet::drawRoads(const BasicCamera3D& camera)
+void PlanetManager::drawRoads(const BasicCamera3D& camera)
 {
 	for (const auto& r : m_roads)
 		if (canSee(camera, (r->m_to.lock()->m_position + r->m_fr.lock()->m_position) / 2.0)) r->draw(camera);
 }
 
-void Planet::drawFacilities(const BasicCamera3D& camera)
+void PlanetManager::drawFacilities(const BasicCamera3D& camera)
 {
 	for (const auto& fs : m_facilityStates)
 		if (canSee(camera, fs->m_region.lock()->m_position)) fs->draw(camera);
 }
 
-bool Planet::canSee(const BasicCamera3D& camera, const Vec3& position) const
+bool PlanetManager::canSee(const BasicCamera3D& camera, const Vec3& position) const
 {
 	return camera.getEyePosition().distanceFrom(position) < Sqrt(camera.getEyePosition().lengthSq() - Square(m_radius));
 }

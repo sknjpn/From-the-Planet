@@ -4,7 +4,7 @@
 #include "AssetManager.h"
 #include "FacilityAsset.h"
 #include "PlanetViewer.h"
-#include "Planet.h"
+#include "PlanetManager.h"
 
 bool Region::draw(const Mat4x4& mat)
 {
@@ -30,7 +30,7 @@ bool Region::draw(const Mat4x4& mat)
 		Vec2 a2 = p2 + (p0 - p2).normalized() * Min(d, (p0 - p2).length());
 
 		auto triangle = Triangle(p0, a1, a2);
-		triangle.draw(m_isMouseover ? ColorF(Palette::Red) : ColorF(m_color, 0.5));
+		triangle.draw(m_planet ? ColorF(Palette::Red) : ColorF(m_color, 0.5));
 		if (triangle.mouseOver()) mouseover = true;
 		area += triangle.area();
 
