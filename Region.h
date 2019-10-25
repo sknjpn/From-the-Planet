@@ -21,4 +21,7 @@ public:
 	void	setFacilityState(const shared_ptr<FacilityState> facilityState) { m_facilityState = facilityState; }
 
 	Vec3	getCenter() { return m_position + m_position * m_height * 0.1; }
+
+	bool	hasConnection(const shared_ptr<Region>& region) const { return m_connecteds.any([&region](const auto& c) { return c.lock() == region; }) }
+
 };
