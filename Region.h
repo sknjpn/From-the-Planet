@@ -3,6 +3,7 @@
 class PlanetManager;
 class FacilityAsset;
 class FacilityState;
+class Road;
 
 class Region
 	: public enable_shared_from_this<Region>
@@ -14,6 +15,7 @@ public:
 	double		m_height;
 	weak_ptr<PlanetManager>	m_planet;
 	Array<weak_ptr<Region>>		m_connecteds;
+	Array<weak_ptr<Road>>		m_roads;
 	shared_ptr<FacilityState>	m_facilityState;
 
 	// returns isMouseover
