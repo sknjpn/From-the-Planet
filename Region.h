@@ -8,6 +8,8 @@ class Road;
 class Region
 	: public enable_shared_from_this<Region>
 {
+	friend class PlanetManager;
+
 	Vec3		m_position;
 	Array<Vec3>	m_polygon;
 	Color		m_color;
