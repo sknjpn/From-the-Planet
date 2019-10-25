@@ -11,7 +11,7 @@ void FacilityState::draw(const BasicCamera3D& camera)
 	auto f = float(Math::HalfPi - asin(p.y));
 
 	Mat4x4 mat = Mat4x4::Scaling(scale, scale, scale)
-		* Mat4x4::Translation(0, m_region.lock()->getCenter().length(), 0.0)
+		* Mat4x4::Translation(0, float(m_region.lock()->getCenter().length()), 0)
 		* Mat4x4::RotationZ(-f) * Mat4x4::RotationY(t)
 		* camera.getMat4x4();
 
