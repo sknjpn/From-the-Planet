@@ -4,6 +4,8 @@ class Region;
 
 class Chip
 {
+	friend class PlanetManager;
+
 public:
 	shared_ptr<Region>	m_r0;
 	shared_ptr<Region>	m_r1;
