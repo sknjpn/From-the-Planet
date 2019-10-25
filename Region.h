@@ -31,7 +31,7 @@ public:
 	// connection
 	void	connect(const shared_ptr<Region>& to);
 	void	disconnect(const shared_ptr<Region>& to);
-	bool	hasConnection(const shared_ptr<Region>& region) const { return m_connecteds.any([&region](const auto& c) { return c.lock() == region; }) }
+	bool	hasConnection(const shared_ptr<Region>& region) const { return m_connecteds.any([&region](const auto& c) { return c.lock() == region; }); }
 
 	// facility
 	void	makeFacilityState(const shared_ptr<FacilityAsset>& facilityAsset);
