@@ -7,8 +7,8 @@ Chip::Chip(const shared_ptr<Region>& r0, const shared_ptr<Region>& r1, const sha
 	, m_r1(r1)
 	, m_r2(r2)
 {
-	m_circumcenter = GetCircumcenter(m_r0->m_position, m_r1->m_position, m_r2->m_position);
-	m_center = (m_r0->m_position + m_r1->m_position + m_r2->m_position) / 3.0;
+	m_circumcenter = GetCircumcenter(m_r0->getPosition(), m_r1->getPosition(), m_r2->getPosition());
+	m_center = (m_r0->getPosition() + m_r1->getPosition() + m_r2->getPosition()) / 3.0;
 }
 
 void Chip::draw(const Mat4x4& mat, const Color& color)
@@ -25,5 +25,5 @@ void Chip::draw(const Mat4x4& mat, const Color& color)
 
 Array<Vec3> Chip::getPositions() const
 {
-	return { m_r0->m_position, m_r1->m_position, m_r2->m_position };
+	return { m_r0->getPosition(), m_r1->getPosition(), m_r2->getPosition() };
 }
