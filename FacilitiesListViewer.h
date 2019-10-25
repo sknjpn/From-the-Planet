@@ -5,7 +5,7 @@
 class FacilitiesListViewer :
 	public Viewer
 {
-	size_t	m_selectedIndex = -1;
+	int		m_selectedIndex = -1;
 
 public:
 	FacilitiesListViewer()
@@ -16,5 +16,5 @@ public:
 	void	update() override;
 	void	init() override;
 
-	size_t	getSelectedIndex() const { return m_selectedIndex; }
+	int		getSelectedIndex() const { return m_selectedIndex; }
 };
