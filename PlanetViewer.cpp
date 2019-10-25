@@ -49,7 +49,7 @@ void PlanetViewer::update()
 		auto r2 = g_planetManagerPtr->m_selectedRegion;
 		if(r1 && r2 && r1 != r2)
 		{
-			if (!g_planetManagerPtr->m_roads.any([&r1, &r2](const auto& r) { return (r->m_fr.lock() == r1 && r->m_to.lock() == r2) || (r->m_fr.lock() == r1 && r->m_to.lock() == r2); }))
+			if (!g_planetManagerPtr->m_roads.any([&r1, &r2](const auto& r) { return (r->getFr() == r1 && r->getTo() == r2) || (r->getFr() == r1 && r->getTo() == r2); }))
 			{
 				g_planetManagerPtr->m_roads.emplace_back(MakeShared<Road>(r1, r2));
 			}
