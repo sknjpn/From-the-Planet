@@ -66,4 +66,5 @@ void Region::makeFacilityState(const shared_ptr<FacilityAsset>& facilityAsset)
 
 void Region::makeRoad(const shared_ptr<Region>& to)
 {
+	m_roads.emplace_back(MakeShared<Road>(shared_from_this(), to));
 }
