@@ -1,5 +1,6 @@
 ﻿#include "Region.h"
 #include "PlanetManager.h"
+#include "FacilityAsset.h"
 
 bool Region::draw(const Mat4x4& mat)
 {
@@ -49,4 +50,9 @@ void Region::connect(const shared_ptr<Region>& to)
 		if (c.lock() == to) return;
 
 	m_connecteds.emplace_back(to);
+}
+
+void Region::makeFacilityState(const shared_ptr<FacilityAsset>& facilityAsset)
+{
+	m_facilityState = facilityAsset->makeState();
 }
