@@ -8,7 +8,6 @@ class Road;
 class Region
 	: public enable_shared_from_this<Region>
 {
-public:
 	Vec3		m_position;
 	Array<Vec3>	m_polygon;
 	Color		m_color;
@@ -18,6 +17,7 @@ public:
 	Array<weak_ptr<Road>>		m_roads;
 	shared_ptr<FacilityState>	m_facilityState;
 
+public:
 	// returns isMouseover
 	bool	draw(const Mat4x4& mat);
 	void	setFacilityState(const shared_ptr<FacilityState> facilityState) { m_facilityState = facilityState; }
