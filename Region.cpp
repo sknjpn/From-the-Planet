@@ -1,6 +1,7 @@
 ﻿#include "Region.h"
 #include "PlanetManager.h"
 #include "FacilityAsset.h"
+#include "Road.h"
 
 bool Region::draw(const Mat4x4& mat)
 {
@@ -46,13 +47,21 @@ bool Region::draw(const Mat4x4& mat)
 
 void Region::connect(const shared_ptr<Region>& to)
 {
-	for (const auto& c : m_connecteds)
-		if (c.lock() == to) return;
+	// 相互接続
+	if (!hasConnection(to)) m_connecteds.emplace_back(to);
+	if (!to->hasConnection(shared_from_this())) to->m_connecteds.emplace_back(shared_from_this());
+}
 
-	m_connecteds.emplace_back(to);
+void Region::disconnect(const shared_ptr<Region>& to)
+{
+
 }
 
 void Region::makeFacilityState(const shared_ptr<FacilityAsset>& facilityAsset)
 {
 	m_facilityState = facilityAsset->makeState();
+}
+
+void Region::makeRoad(const shared_ptr<Region>& to)
+{
 }
