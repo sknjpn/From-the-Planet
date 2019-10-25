@@ -225,7 +225,7 @@ void PlanetManager::saveRegions(const FilePath& path)
 	Array<Vec3> positions;
 
 	for (const auto& r : m_regions)
-		positions.emplace_back(r->getPosition() /= m_radius);
+		positions.emplace_back(r->getPosition() / m_radius);
 
 	TextWriter tw(path);
 	tw.write(positions);
