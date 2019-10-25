@@ -255,12 +255,18 @@ void PlanetManager::loadRegions(const FilePath& path)
 void PlanetManager::drawRegions(const BasicCamera3D& camera)
 {
 	auto mat = camera.getMat4x4();
+	shared_ptr<Region> mouseoverRegion;
+
+	if (MouseL.up()) m_selectedRegion = nullptr;
 
 	for (const auto& r : m_regions)
 	{
 		if (canSee(camera, r->m_position))
-			r->draw(mat);
+			if (r->draw(mat)) mouseoverRegion = r;
 	}
+
+	m_mouseOverRegion = mouseoverRegion;
+	if (MouseL.down()) m_selectedRegion = mouseoverRegion;
 }
 
 void PlanetManager::drawChips(const BasicCamera3D& camera)

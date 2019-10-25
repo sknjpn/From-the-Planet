@@ -21,5 +21,4 @@ public:
 	void	init() override;
 	void	update() override;
 	Vec3	getEyePosition() const { return Vec3(Cos(m_azimuth) * Cos(m_inclination), Sin(m_inclination), Sin(m_azimuth) * Cos(m_inclination)) * m_radius; }
-	shared_ptr<PlanetManager>&	getPlanet() { return m_planet; }
 };

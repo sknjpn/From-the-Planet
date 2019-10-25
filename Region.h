@@ -4,6 +4,7 @@ class PlanetManager;
 class FacilityState;
 
 class Region
+	: public enable_shared_from_this<Region>
 {
 public:
 	Vec3		m_position;

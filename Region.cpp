@@ -1,9 +1,4 @@
 ﻿#include "Region.h"
-#include "ViewerManager.h"
-#include "FacilitiesListViewer.h"
-#include "AssetManager.h"
-#include "FacilityAsset.h"
-#include "PlanetViewer.h"
 #include "PlanetManager.h"
 
 bool Region::draw(const Mat4x4& mat)
@@ -30,14 +25,12 @@ bool Region::draw(const Mat4x4& mat)
 		Vec2 a2 = p2 + (p0 - p2).normalized() * Min(d, (p0 - p2).length());
 
 		auto triangle = Triangle(p0, a1, a2);
-		triangle.draw(m_planet ? ColorF(Palette::Red) : ColorF(m_color, 0.5));
+		triangle.draw(g_planetManagerPtr->m_mouseOverRegion == shared_from_this() ? ColorF(Palette::Red) : ColorF(m_color, 0.5));
 		if (triangle.mouseOver()) mouseover = true;
 		area += triangle.area();
 
 		ls.emplace_back(a1);
 	}
-
-	m_isMouseover = mouseover;
 
 	auto t =Sqrt( area) / 10.0;
 	for (auto& p : ls)
@@ -46,6 +39,8 @@ bool Region::draw(const Mat4x4& mat)
 	ls.drawCatmullRomClosed(t, m_color);
 
 	//for (auto& c : m_connecteds) Line(center, (TranslateWorldToScreen(mat, c.lock()->m_position) + center) / 2.0).stretched(-2).drawArrow(2.0, Vec2(10.0, 10.0), Palette::White);
+
+	return mouseover;
 }
 
 void Region::connect(const shared_ptr<Region>& to)
