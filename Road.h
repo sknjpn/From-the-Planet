@@ -4,8 +4,8 @@ class Region;
 
 class Road
 {
-	weak_ptr<Region> m_fr;
-	weak_ptr<Region> m_to;
+	shared_ptr<Region> m_fr;
+	shared_ptr<Region> m_to;
 
 public:
 	Road() {}
@@ -15,5 +15,9 @@ public:
 	{}
 
 	void	draw(const BasicCamera3D& camera) const;
+
+	// get
+	const shared_ptr<Region>& getFr() const { return m_fr; }
+	const shared_ptr<Region>& getTo() const { return m_to; }
 };
 
