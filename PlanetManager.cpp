@@ -105,7 +105,7 @@ void PlanetManager::connectRegions()
 	{
 		double min = 2.0 * m_radius;
 		for (const auto& r2 : m_regions)
-			if (r1 != r2) min = Min(min, (r1->m_position - r2->m_position).length());
+			if (r1 != r2) min = Min(min, (r1->getPosition() - r2->getPosition()).length());
 
 		f_max = Max(f_max, min);
 	}
@@ -116,7 +116,7 @@ void PlanetManager::connectRegions()
 		{
 			if (r1 == r2) continue;
 
-			if (r1->m_position.distanceFrom(r2->m_position) < f_max * 2)
+			if (r1->getPosition().distanceFrom(r2->getPosition()) < f_max * 2)
 				r1->m_connecteds.emplace_back(r2);
 		}
 	}
@@ -132,12 +132,12 @@ struct RegionAdpater : KDTreeAdapter<Array<shared_ptr<Region>>, Vec3, double, 3>
 
 	static element_type GetElement(const dataset_type& dataset, size_t index, size_t dim)
 	{
-		return dataset[index]->m_position.elem(dim);
+		return dataset[index]->getPosition().elem(dim);
 	}
 
 	static element_type DistanceSq(const dataset_type& dataset, size_t index, const element_type* other)
 	{
-		return dataset[index]->m_position.distanceFromSq(Vec3(other[0], other[1], other[2]));
+		return dataset[index]->getPosition().distanceFromSq(Vec3(other[0], other[1], other[2]));
 	}
 };
 
@@ -160,7 +160,7 @@ void PlanetManager::makeChips()
 					if (r1 == r4.lock())
 					{
 						// 外心に最も近い３点が三角形の頂点であることの確認
-						const Array<Vec3> positions = { r1->m_position, r2.lock()->m_position, r3.lock()->m_position };
+						const Array<Vec3> positions = { r1->getPosition(), r2.lock()->getPosition(), r3.lock()->getPosition() };
 						if (kdtree.knnSearch(3, GetCircumcenter(positions)).all([this, r1, r2, r3](auto index) { return m_regions[index] == r1 || m_regions[index] == r2.lock() || m_regions[index] == r3.lock(); }))
 						{
 							auto& t = m_chips.emplace_back(MakeShared<Chip>(r1, r2.lock(), r3.lock()));
@@ -195,8 +195,8 @@ void PlanetManager::makeChips()
 
 			int best = i;
 			for (int j = i + 1; j < r->m_polygon.size(); ++j)
-				if ((p1 - r->m_position).cross(r->m_polygon[j] - r->m_position).dot(r->m_position) > 0 &&
-					(best == i || (r->m_polygon[best] - r->m_position).dot(p1 - r->m_position) < (r->m_polygon[j] - r->m_position).dot(p1 - r->m_position)))
+				if ((p1 - r->getPosition()).cross(r->m_polygon[j] - r->getPosition()).dot(r->getPosition()) > 0 &&
+					(best == i || (r->m_polygon[best] - r->getPosition()).dot(p1 - r->getPosition()) < (r->m_polygon[j] - r->getPosition()).dot(p1 - r->getPosition())))
 					best = j;
 
 			auto pb = r->m_polygon[best];
@@ -212,7 +212,7 @@ void PlanetManager::generateTerrain()
 
 	for (auto& r : m_regions)
 	{
-		r->m_height = Max(Abs(noise.octaveNoise(r->m_position * 0.01, 5)) - 0.2, 0.0);
+		r->m_height = Max(Abs(noise.octaveNoise(r->getPosition() * 0.01, 5)) - 0.2, 0.0);
 
 		r->m_color = r->m_height > 0.0 ? Palette::Green : Palette::Royalblue;
 		if (r->m_height > 0.3) r->m_color = Palette::Gray;
@@ -225,7 +225,7 @@ void PlanetManager::saveRegions(const FilePath& path)
 	Array<Vec3> positions;
 
 	for (const auto& r : m_regions)
-		positions.emplace_back(r->m_position /= m_radius);
+		positions.emplace_back(r->getPosition() /= m_radius);
 
 	TextWriter tw(path);
 	tw.write(positions);
