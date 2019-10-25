@@ -283,7 +283,7 @@ void PlanetManager::drawChips(const BasicCamera3D& camera)
 void PlanetManager::drawRoads(const BasicCamera3D& camera)
 {
 	for (const auto& r : m_roads)
-		if (canSee(camera, (r->m_to.lock()->m_position + r->m_fr.lock()->m_position) / 2.0)) r->draw(camera);
+		if (canSee(camera, (r->getTo()->m_position + r->getFr()->m_position) / 2.0)) r->draw(camera);
 }
 
 void PlanetManager::drawFacilities(const BasicCamera3D& camera)
