@@ -16,7 +16,7 @@ class Region
 	double		m_height;
 	weak_ptr<PlanetManager>	m_planet;
 	Array<weak_ptr<Region>>		m_connecteds;
-	Array<weak_ptr<Road>>		m_roads;
+	Array<shared_ptr<Road>>		m_roads;
 	shared_ptr<FacilityState>	m_facilityState;
 
 public:
