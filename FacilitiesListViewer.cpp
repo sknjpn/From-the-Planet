@@ -6,7 +6,6 @@ void FacilitiesListViewer::update()
 {
 	Print << m_selectedIndex;
 	setDrawPos(5, 5);
-	if (MouseL.down()) m_selectedIndex = -1;
 
 	static Font font(24, Typeface::Bold);
 

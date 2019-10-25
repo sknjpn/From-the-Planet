@@ -17,4 +17,5 @@ public:
 	void	init() override;
 
 	int		getSelectedIndex() const { return m_selectedIndex; }
+	void	resetSelectedIndex() { m_selectedIndex = 0; }
 };
