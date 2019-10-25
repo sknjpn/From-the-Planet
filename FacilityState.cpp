@@ -6,7 +6,7 @@ void FacilityState::draw(const BasicCamera3D& camera)
 {
 	float scale = 4.0;
 
-	auto p = m_region.lock()->m_position / 100.0;
+	auto p = m_region.lock()->getPosition() / 100.0;
 	auto t = float(-atan2(p.z, p.x));
 	auto f = float(Math::HalfPi - asin(p.y));
 
