@@ -35,7 +35,7 @@ void PlanetViewer::update()
 	{
 		if (auto r = g_planetManagerPtr->m_mouseOverRegion)
 		{
-			if (MouseL.down() && !r->m_facilityState)
+			if (MouseL.down() && !r->getFacilityState())
 			{
 				size_t index = g_viewerManagerPtr->getViewer<FacilitiesListViewer>()->getSelectedIndex();
 				g_planetManagerPtr->makeFacility(g_assetManagerPtr->getAssets<FacilityAsset>()[index], r);

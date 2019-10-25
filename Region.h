@@ -37,6 +37,7 @@ public:
 
 	// facility
 	void	makeFacilityState(const shared_ptr<FacilityAsset>& facilityAsset);
+	const shared_ptr<FacilityState>& getFacilityState() const { return m_facilityState; }
 
 	void	makeRoad(const shared_ptr<Region>& to);
 };
