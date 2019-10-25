@@ -71,5 +71,5 @@ void Region::makeRoad(const shared_ptr<Region>& to)
 
 bool Region::hasRoad(const shared_ptr<Region>& to) const
 {
-	return m_roads.any([&to](const auto& r) { return to == r->getTo().lock(); })
+	return m_roads.any([&to](const auto& r) { return to == r->getTo(); })
 }
