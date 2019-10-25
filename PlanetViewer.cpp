@@ -17,17 +17,6 @@ void PlanetViewer::init()
 	//g_planetManagerPtr->generateRegions(2048);
 	//g_planetManagerPtr->connectRegions();
 	//g_planetManagerPtr->makeChips();
-
-	g_planetManagerPtr->m_roads.resize(64);
-	for (auto& r : g_planetManagerPtr->m_roads) { r = MakeShared<Road>(); r->m_fr = g_planetManagerPtr->m_regions.choice(); r->m_to = r->m_fr.lock()->m_connecteds.choice().lock(); }
-
-	// Factory
-	for (int i = 0; i < 50; ++i)
-		g_planetManagerPtr->makeFacility(g_assetManagerPtr->getAsset<FactoryAsset>("Factory"), g_planetManagerPtr->m_regions.choice());
-
-	// Quarry
-	for (int i = 0; i < 50; ++i)
-		g_planetManagerPtr->makeFacility(g_assetManagerPtr->getAsset<QuarryAsset>("Quarry"), g_planetManagerPtr->m_regions.choice());
 }
 
 void PlanetViewer::update()
