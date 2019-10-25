@@ -41,4 +41,5 @@ public:
 
 	// road
 	void	makeRoad(const shared_ptr<Region>& to);
+	bool	hasRoad(const shared_ptr<Region>& to) const;
 };
