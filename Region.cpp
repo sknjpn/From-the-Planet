@@ -54,7 +54,9 @@ void Region::connect(const shared_ptr<Region>& to)
 
 void Region::disconnect(const shared_ptr<Region>& to)
 {
-
+	// 相互切断
+	m_connecteds.remove_if([&to](const auto& c) { return c.lock() == to; });
+	to->m_connecteds.remove_if([this](const auto& c) { return c.lock() == shared_from_this(); });
 }
 
 void Region::makeFacilityState(const shared_ptr<FacilityAsset>& facilityAsset)
