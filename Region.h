@@ -24,7 +24,7 @@ public:
 	bool	draw(const Mat4x4& mat);
 	void	setFacilityState(const shared_ptr<FacilityState> facilityState) { m_facilityState = facilityState; }
 
-	Vec3	getCenter() { return m_position + m_position * m_height * 0.1; }
+	Vec3	getCenter() const { return m_position + m_position * m_height * 0.1; }
 
 	// get
 	const Vec3& getPosition() const { return m_position; }
