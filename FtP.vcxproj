@@ -257,7 +257,6 @@
     <ClCompile Include="Storage.cpp" />
     <ClCompile Include="SystemManager.cpp" />
     <ClCompile Include="Translate.cpp" />
-    <ClCompile Include="Triangle3D.cpp" />
     <ClCompile Include="ViewerManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -283,7 +282,6 @@
     <ClInclude Include="Storage.h" />
     <ClInclude Include="SystemManager.h" />
     <ClInclude Include="Translate.h" />
-    <ClInclude Include="Triangle3D.h" />
     <ClInclude Include="Viewer.h" />
     <ClInclude Include="ViewerManager.h" />
   </ItemGroup>
