@@ -9,6 +9,7 @@
 #include "FacilitiesListViewer.h"
 #include "PlanetHealthViewer.h"
 #include "TerrainAsset.h"
+#include "RoadAsset.h"
 
 void PlanetViewer::init()
 {
@@ -65,10 +66,10 @@ void PlanetViewer::update()
 			auto r2 = g_planetManagerPtr->m_selectedRegion;
 			if (r1 && r2 && r1 != r2 && r1->hasConnection(r2) && r1->getTerrainAsset()->m_buildAvailable && r2->getTerrainAsset()->m_buildAvailable)
 			{
-				if (!g_planetManagerPtr->m_roads.any([&r1, &r2](const auto& r) { return (r->getFr() == r1 && r->getTo() == r2) || (r->getFr() == r1 && r->getTo() == r2); }))
+				if(!r1->getRoad(r2)->getRoadAsset())
 				{
-					r1->makeRoad(r2);
-					r2->makeRoad(r1);
+					r1->getRoad(r2)->setRoadAsset(g_assetManagerPtr->getAsset<RoadAsset>(U"砂利道"));
+					r2->getRoad(r1)->setRoadAsset(g_assetManagerPtr->getAsset<RoadAsset>(U"砂利道"));
 					g_planetManagerPtr->m_selectedRegion = g_planetManagerPtr->m_mouseOverRegion;
 					m_rCont.playOneShot(0.5);
 					g_planetManagerPtr->addDamage(0.01);

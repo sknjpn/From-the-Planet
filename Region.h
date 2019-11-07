@@ -48,7 +48,5 @@ public:
 	Array<shared_ptr<Road>>	getRouteTo(const shared_ptr<Region> to) const;
 
 	// road
-	void	makeRoad(const shared_ptr<Region>& to);
-	bool	hasRoad(const shared_ptr<Region>& to) const;
 	shared_ptr<Road>	getRoad(const shared_ptr<Region>& to) const;
 };

@@ -294,6 +294,12 @@ void PlanetManager::loadRegions(const FilePath& path)
 
 	connectRegions();
 	makeChips();
+
+	// Roadの設定
+	for (const auto& r1 : m_regions)
+		for (const auto& r2 : r1->m_connecteds)
+			r1->m_roads.emplace_back(MakeShared<Road>(r1, r2.lock()));
+
 	setTerrains();
 }
 
@@ -366,8 +372,10 @@ void PlanetManager::drawChips(const BasicCamera3D& camera)
 
 void PlanetManager::drawRoads(const BasicCamera3D& camera)
 {
-	for (const auto& r : m_roads)
-		if (canSee(camera, (r->getTo()->m_position + r->getFr()->m_position) / 2.0)) r->draw(camera);
+	for (const auto& r : m_regions)
+		for (const auto& road : r->m_roads)
+			if (road->getRoadAsset() && canSee(camera, (road->getTo()->m_position + road->getFr()->m_position) / 2.0))
+				road->draw(camera);
 
 	for (const auto& ts : m_truckStates)
 		ts->update();

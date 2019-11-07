@@ -112,7 +112,7 @@ Array<shared_ptr<Road>> Region::getRouteTo(const shared_ptr<Region> to) const
 		if (r->getTo() != to)
 		{
 			list.emplace_back(r->getTo());
-			r->getTo()->m_cost = r->getLength();
+			r->getTo()->m_cost = r->getCost();
 			r->getTo()->m_from = to;
 		}
 	}
@@ -125,11 +125,11 @@ Array<shared_ptr<Road>> Region::getRouteTo(const shared_ptr<Region> to) const
 			auto t = r->getTo();
 			if (t != l && t != to)
 			{
-				if (!t->m_from || t->m_cost > l->m_cost + r->getLength())
+				if (!t->m_from || t->m_cost > l->m_cost + r->getCost())
 				{
 					list.emplace_back(t);
 					t->m_from = l;
-					t->m_cost = l->m_cost + r->getLength();
+					t->m_cost = l->m_cost + r->getCost();
 				}
 			}
 		}
@@ -168,19 +168,6 @@ Array<shared_ptr<Road>> Region::getRouteTo(const shared_ptr<Region> to) const
 
 		return Array<shared_ptr<Road>>();
 	}
-}
-
-void Region::makeRoad(const shared_ptr<Region>& to)
-{
-	auto road = MakeShared<Road>(shared_from_this(), to);
-	g_planetManagerPtr->m_roads.emplace_back(road);
-	m_roads.emplace_back(road);
-	to->m_roads.emplace_back(road);
-}
-
-bool Region::hasRoad(const shared_ptr<Region>& to) const
-{
-	return m_roads.any([&to](const auto& r) { return to == r->getTo(); });
 }
 
 shared_ptr<Road> Region::getRoad(const shared_ptr<Region>& to) const
