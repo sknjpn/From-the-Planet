@@ -8,6 +8,11 @@ shared_ptr<FacilityState> FactoryAsset::makeState()
 	return MakeShared<FactoryState>();
 }
 
+String FactoryAsset::getBuildText() const
+{
+	return FacilityAsset::getBuildText();
+}
+
 void FactoryAsset::load(const JSONValue& json)
 {
 	FacilityAsset::load(json);

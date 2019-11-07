@@ -10,10 +10,24 @@ FacilityConstructionPopup::FacilityConstructionPopup(const shared_ptr<FacilityAs
 
 void FacilityConstructionPopup::update()
 {
+	moveDrawPos(5, 5);
+
 	// 見出し
 	{
-		static Font font(24);
+		static Font font(20, Typeface::Heavy);
 
 		font(m_facilityAsset->getName()).draw();
+		moveDrawPos(0, 20);
+	}
+
+	// テキスト
+	{
+		static Font font(18, Typeface::Bold);
+
+		moveDrawPos(5, 0);
+
+		font(m_facilityAsset->getBuildText()).draw();
+
+		moveDrawPos(-5, 0);
 	}
 }

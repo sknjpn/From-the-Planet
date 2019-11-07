@@ -8,6 +8,11 @@ shared_ptr<FacilityState> QuarryAsset::makeState()
 	return MakeShared<QuarryState>();
 }
 
+String QuarryAsset::getBuildText() const
+{
+	return FacilityAsset::getBuildText();
+}
+
 void QuarryAsset::load(const JSONValue& json)
 {
 	FacilityAsset::load(json);

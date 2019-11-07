@@ -7,5 +7,7 @@ class LaunchSiteAsset :
 {
 public:
 	shared_ptr<FacilityState>	makeState() override;
+
+	String getBuildText() const override;
 };
 

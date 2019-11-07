@@ -24,6 +24,8 @@ public:
 	const Array<Mesh>& getMeshes() const { return m_meshes; }
 	const FilePath& getAudioPath() const { return m_audio; }
 
+	virtual String getBuildText() const;
+
 	// JSON
 	void	load(const JSONValue& json) override;
 };

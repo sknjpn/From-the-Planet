@@ -11,6 +11,8 @@ public:
 public:
 	shared_ptr<FacilityState>	makeState() override;
 
+	String getBuildText() const override;
+
 	// JSON
 	void	load(const JSONValue& json) override;
 };

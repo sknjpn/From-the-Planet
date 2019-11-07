@@ -15,3 +15,8 @@ bool HarborAsset::canConstructAt(const shared_ptr<Region>& region) const
 	
 	return false;
 }
+
+String HarborAsset::getBuildText() const
+{
+	return FacilityAsset::getBuildText();
+}

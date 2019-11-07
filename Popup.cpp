@@ -4,7 +4,7 @@ Popup::Popup(const Vec2& viewerSize)
 {
 	setViewerSize(viewerSize);
 
-	setBackgroundColor(Palette::Darkgray);
+	setBackgroundColor(ColorF(0.2));
 }
 
 void Popup::init()
