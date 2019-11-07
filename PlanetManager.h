@@ -17,6 +17,7 @@ public:
 	Array<shared_ptr<TruckState>>		m_truckStates;
 	double	m_radius = 100.0;
 	double	m_destroy = -1;
+	double	m_health = 1.0;
 	Audio	m_audio;
 
 	shared_ptr<Region>	m_mouseOverRegion;
@@ -42,6 +43,7 @@ public:
 
 	void	update();
 	void	destroy();
+	void	addDamage(double value);
 
 	void	drawRegions(const BasicCamera3D& camera);
 	void	drawChips(const BasicCamera3D& camera);

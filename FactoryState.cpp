@@ -1,6 +1,6 @@
 ﻿#include "FactoryState.h"
 #include "FactoryAsset.h"
-#include "PlanetHealthViewer.h"
+#include "PlanetManager.h"
 
 void FactoryState::update()
 {
