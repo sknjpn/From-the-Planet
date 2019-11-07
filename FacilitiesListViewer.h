@@ -11,8 +11,10 @@ class FacilitiesListViewer :
 public:
 	shared_ptr<FacilityAsset>	m_selectedFacilityAsset;
 	shared_ptr<RoadAsset>		m_selectedRoadAsset;
+	Stopwatch					m_mouseOverTimer;
 
 	FacilitiesListViewer()
+		: m_mouseOverTimer(false)
 	{
 		setViewerRect(Scene::Size().x - 170, 40, 130, 600);
 	}

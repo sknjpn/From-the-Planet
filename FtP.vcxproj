@@ -236,6 +236,7 @@
     <ClCompile Include="Chip.cpp" />
     <ClCompile Include="FacilitiesListViewer.cpp" />
     <ClCompile Include="FacilityAsset.cpp" />
+    <ClCompile Include="FacilityConstructionPopup.cpp" />
     <ClCompile Include="FacilityState.cpp" />
     <ClCompile Include="FactoryAsset.cpp" />
     <ClCompile Include="FactoryState.cpp" />
@@ -252,6 +253,7 @@
     <ClCompile Include="PlanetHealthViewer.cpp" />
     <ClCompile Include="PlanetManager.cpp" />
     <ClCompile Include="PlanetViewer.cpp" />
+    <ClCompile Include="Popup.cpp" />
     <ClCompile Include="QuarryAsset.cpp" />
     <ClCompile Include="QuarryState.cpp" />
     <ClCompile Include="Region.cpp" />
@@ -273,6 +275,7 @@
     <ClInclude Include="Chip.h" />
     <ClInclude Include="FacilitiesListViewer.h" />
     <ClInclude Include="FacilityAsset.h" />
+    <ClInclude Include="FacilityConstructionPopup.h" />
     <ClInclude Include="FacilityState.h" />
     <ClInclude Include="FactoryAsset.h" />
     <ClInclude Include="FactoryState.h" />
@@ -288,6 +291,7 @@
     <ClInclude Include="PlanetHealthViewer.h" />
     <ClInclude Include="PlanetManager.h" />
     <ClInclude Include="PlanetViewer.h" />
+    <ClInclude Include="Popup.h" />
     <ClInclude Include="QuarryAsset.h" />
     <ClInclude Include="QuarryState.h" />
     <ClInclude Include="Region.h" />

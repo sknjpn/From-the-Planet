@@ -2,6 +2,7 @@
 #include "AssetManager.h"
 #include "FacilityAsset.h"
 #include "RoadAsset.h"
+#include "FacilityConstructionPopup.h"
 
 void FacilitiesListViewer::update()
 {
@@ -43,6 +44,23 @@ void FacilitiesListViewer::update()
 		{
 			m_selectedRoadAsset = nullptr;
 			m_selectedFacilityAsset = fa;
+		}
+
+		if (r.contains(Cursor::PreviousPosF()))
+		{
+			if (r.mouseOver())
+			{
+				if (!m_mouseOverTimer.isRunning()) m_mouseOverTimer.start();
+				if (m_mouseOverTimer.sF() > 0.5 && !hasChildViewer<FacilityConstructionPopup>())
+					addChildViewer<FacilityConstructionPopup>(fa);
+			}
+			else
+			{
+				m_mouseOverTimer.reset();
+
+				if (auto fcp = getChildViewer<FacilityConstructionPopup>())
+					fcp->destroy();
+			}
 		}
 
 		auto color = fa->getMeshes().front().m_color;
