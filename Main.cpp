@@ -1,5 +1,4 @@
 ﻿#include "SystemManager.h"
-#include "ViewerManager.h"
 #include "PlanetViewer.h"
 
 void Main()

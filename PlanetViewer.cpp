@@ -6,7 +6,6 @@
 #include "AssetManager.h"
 #include "FactoryAsset.h"
 #include "QuarryAsset.h"
-#include "ViewerManager.h"
 #include "FacilitiesListViewer.h"
 #include "PlanetHealthViewer.h"
 

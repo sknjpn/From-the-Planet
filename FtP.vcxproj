@@ -262,7 +262,7 @@
     <ClCompile Include="SystemManager.cpp" />
     <ClCompile Include="Translate.cpp" />
     <ClCompile Include="TruckState.cpp" />
-    <ClCompile Include="ViewerManager.cpp" />
+    <ClCompile Include="Viewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asset.h" />
@@ -293,7 +293,6 @@
     <ClInclude Include="Translate.h" />
     <ClInclude Include="TruckState.h" />
     <ClInclude Include="Viewer.h" />
-    <ClInclude Include="ViewerManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

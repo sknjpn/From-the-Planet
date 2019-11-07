@@ -1,7 +1,6 @@
 ﻿#include "QuarryState.h"
 #include "QuarryAsset.h"
 #include "PlanetHealthViewer.h"
-#include "ViewerManager.h"
 
 void QuarryState::update()
 {

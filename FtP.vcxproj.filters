@@ -402,9 +402,6 @@
     <ClCompile Include="SystemManager.cpp">
       <Filter>Program Files</Filter>
     </ClCompile>
-    <ClCompile Include="ViewerManager.cpp">
-      <Filter>Program Files</Filter>
-    </ClCompile>
     <ClCompile Include="PlanetViewer.cpp">
       <Filter>Program Files</Filter>
     </ClCompile>
@@ -443,6 +440,9 @@
     </ClCompile>
     <ClCompile Include="TruckState.cpp" />
     <ClCompile Include="PlanetHealthViewer.cpp" />
+    <ClCompile Include="Viewer.cpp">
+      <Filter>Program Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Region.h">
@@ -485,9 +485,6 @@
       <Filter>Program Files</Filter>
     </ClInclude>
     <ClInclude Include="SystemManager.h">
-      <Filter>Program Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ViewerManager.h">
       <Filter>Program Files</Filter>
     </ClInclude>
     <ClInclude Include="Viewer.h">

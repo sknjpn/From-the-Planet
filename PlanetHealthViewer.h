@@ -11,7 +11,7 @@ public:
 
 	PlanetHealthViewer()
 	{
-		setDrawRect(Rect(1400, 100).setCenter(Scene::Center().x, 60));
+		setViewerRect(Rect(1400, 100).setCenter(Scene::Center().x, 60));
 	}
 
 	void update() override;

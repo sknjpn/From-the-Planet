@@ -1,7 +1,6 @@
 ﻿#include "SystemManager.h"
 
 #include "AssetManager.h"
-#include "ViewerManager.h"
 #include "PlanetManager.h"
 
 unique_ptr<SystemManager>	g_systemManagerPtr;

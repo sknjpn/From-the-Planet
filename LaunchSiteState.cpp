@@ -1,6 +1,5 @@
 ﻿#include "LaunchSiteState.h"
 #include "PlanetHealthViewer.h"
-#include "ViewerManager.h"
 #include "PlanetManager.h"
 
 void LaunchSiteState::onConstructed()

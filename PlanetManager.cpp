@@ -7,7 +7,6 @@
 #include "TruckState.h"
 #include "AssetManager.h"
 #include "ItemAsset.h"
-#include "ViewerManager.h"
 #include "FacilitiesListViewer.h"
 
 unique_ptr<PlanetManager> g_planetManagerPtr;
