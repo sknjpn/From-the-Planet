@@ -2,5 +2,5 @@
     "name": "氷河",
     "type": "TerrainAsset",
     "color": "(255, 255, 255)",
-    "buildAvailable": false
+    "buildAvailable": true
 }
