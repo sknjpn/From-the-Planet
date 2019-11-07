@@ -240,6 +240,8 @@
     <ClCompile Include="FactoryAsset.cpp" />
     <ClCompile Include="FactoryState.cpp" />
     <ClCompile Include="GetCircumcenter.cpp" />
+    <ClCompile Include="HarborAsset.cpp" />
+    <ClCompile Include="HarborState.cpp" />
     <ClCompile Include="ItemAsset.cpp" />
     <ClCompile Include="LaunchSiteAsset.cpp" />
     <ClCompile Include="LaunchSiteState.cpp" />
@@ -275,6 +277,8 @@
     <ClInclude Include="FactoryAsset.h" />
     <ClInclude Include="FactoryState.h" />
     <ClInclude Include="GetCircumcenter.h" />
+    <ClInclude Include="HarborAsset.h" />
+    <ClInclude Include="HarborState.h" />
     <ClInclude Include="ItemAsset.h" />
     <ClInclude Include="LaunchSiteAsset.h" />
     <ClInclude Include="LaunchSiteState.h" />
