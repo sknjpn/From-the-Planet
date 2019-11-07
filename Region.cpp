@@ -1,6 +1,7 @@
 ﻿#include "Region.h"
 #include "PlanetManager.h"
 #include "FacilityAsset.h"
+#include "TerrainAsset.h"
 #include "Road.h"
 
 void Region::draw(const Mat4x4& mat, double d, Color color) const
@@ -36,7 +37,7 @@ void Region::drawLineString(const Mat4x4& mat, double d, Color color) const
 	for (auto& p : ls)
 		p += (p0 - p).normalized() * Min(t / 2.0, (p0 - p).length());
 
-	ls.drawCatmullRomClosed(t, m_color);
+	ls.drawCatmullRomClosed(t, color);
 }
 
 bool Region::mouseOver(const Mat4x4& mat) const
@@ -57,9 +58,13 @@ bool Region::mouseOver(const Mat4x4& mat) const
 void Region::draw(const Mat4x4& mat) const
 {
 	auto t = Sqrt(getArea(mat));
+	auto color = m_terrainAsset->m_color;
 
-	draw(mat, t / 10.0, m_color);
-	draw(mat, t / 5.0, (g_planetManagerPtr->m_mouseOverRegion == shared_from_this() ? ColorF(Palette::Red) : ColorF(m_color)).lerp(Palette::Black, 0.5));
+	if(g_planetManagerPtr->m_destroy >= 0)
+		color = color.lerp(Palette::Red, g_planetManagerPtr->m_destroy);
+
+	draw(mat, t / 10.0, color);
+	draw(mat, t / 5.0, (g_planetManagerPtr->m_mouseOverRegion == shared_from_this() ? ColorF(Palette::Red) : ColorF(color)).lerp(Palette::Black, 0.4));
 }
 
 double Region::getArea(const Mat4x4& mat) const
