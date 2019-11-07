@@ -6,7 +6,7 @@ void Viewer::UpdateAllViewers()
 {
 	// Viewerのリセット
 	{
-		auto viewers = GetRootViewer()->getAllChildViewers();
+		const auto viewers = GetRootViewer()->getAllChildViewers();
 		g_mouseoveredViewer = nullptr;
 		for (auto it = viewers.begin(); it < viewers.end(); ++it)
 		{
@@ -26,12 +26,6 @@ void Viewer::UpdateAllViewers()
 
 			RectF((*it)->m_viewerRect.size).draw((*it)->m_backgroundColor);
 
-			if (!(*it)->m_isAlreadyInited)
-			{
-				(*it)->init();
-				(*it)->m_isAlreadyInited = true;
-			}
-
 			(*it)->update();
 
 			(*it)->m_transformer.reset();
@@ -44,10 +38,10 @@ void Viewer::UpdateAllViewers()
 	// destroyされたViewerの削除
 	for (;;)
 	{
-		auto viewers = GetRootViewer()->getAllChildViewers();
+		const auto viewers = GetRootViewer()->getAllChildViewers();
 		bool flag = true;
 
-		for (auto& v : viewers)
+		for (const auto& v : viewers)
 		{
 			if (v->m_childViewers.isEmpty() && v->m_isDestroyed)
 			{
@@ -58,6 +52,20 @@ void Viewer::UpdateAllViewers()
 		}
 
 		if (flag) break;
+	}
+
+	// 新規追加されたViewerの更新
+	for (;;)
+	{
+		const auto viewers = GetRootViewer()->getAllChildViewers();
+		for (const auto& v : viewers)
+		{
+			if (!v->m_isAlreadyInited)
+			{
+				v->init();
+				v->m_isAlreadyInited = true;
+			}
+		}
 	}
 }
 
