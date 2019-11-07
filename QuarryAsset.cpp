@@ -10,7 +10,13 @@ shared_ptr<FacilityState> QuarryAsset::makeState()
 
 String QuarryAsset::getBuildText() const
 {
-	return FacilityAsset::getBuildText();
+	String result;
+
+	result += Format(m_export->getName(), U"を採掘する工場\n");
+
+	result += FacilityAsset::getBuildText();
+
+	return result;
 }
 
 void QuarryAsset::load(const JSONValue& json)

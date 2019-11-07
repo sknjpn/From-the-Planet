@@ -1,17 +1,17 @@
 ﻿#include "FacilityAsset.h"
 #include "ItemAsset.h"
 
+void FacilityAsset::onDrawPopup() const
+{
+}
+
 String FacilityAsset::getBuildText() const
 {
-	String result = U"必要資源\r";
+	String result = U"必要資源\n";
 
 	for (const auto& m : m_material.getItemList())
 	{
-		result += U" ";
-		result += m.first->getName();
-		result += U" ";
-		result += m.second;
-		result += U"個\r";
+		result += Format(U" ", m.first->getName(), U" ", m.second, U"個\n");
 	}
 
 	return result;

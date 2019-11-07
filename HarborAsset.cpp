@@ -18,5 +18,11 @@ bool HarborAsset::canConstructAt(const shared_ptr<Region>& region) const
 
 String HarborAsset::getBuildText() const
 {
-	return FacilityAsset::getBuildText();
+	String result;
+
+	result += Format(U"臨海にのみ建設でき、他の港と海路を構築できる\n");
+
+	result += FacilityAsset::getBuildText();
+
+	return result;
 }

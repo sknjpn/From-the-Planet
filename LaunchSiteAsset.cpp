@@ -8,5 +8,11 @@ shared_ptr<FacilityState> LaunchSiteAsset::makeState()
 
 String LaunchSiteAsset::getBuildText() const
 {
-	return FacilityAsset::getBuildText();
+	String result;
+
+	result += Format(U"完成すると宇宙へとロケットを飛ばし惑星から脱出できる\n");
+
+	result += FacilityAsset::getBuildText();
+
+	return result;
 }

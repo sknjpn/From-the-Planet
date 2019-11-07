@@ -10,7 +10,16 @@ shared_ptr<FacilityState> FactoryAsset::makeState()
 
 String FactoryAsset::getBuildText() const
 {
-	return FacilityAsset::getBuildText();
+	String result;
+
+	for (const auto& i : m_import.getItemList())
+		result += Format(U" ", i.first->getName(), U"を", i.second, U"個\n");
+
+	result += Format(U"を使って", m_export->getName(), U"を作る工場\n");
+
+	result += FacilityAsset::getBuildText();
+
+	return result;
 }
 
 void FactoryAsset::load(const JSONValue& json)
