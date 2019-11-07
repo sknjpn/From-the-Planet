@@ -301,7 +301,8 @@ void PlanetManager::drawRegions(const BasicCamera3D& camera)
 
 	if (MouseL.up()) m_selectedRegion = nullptr;
 
-	for (const auto& r : m_regions)
+	auto rs = m_regions.sorted_by([&camera](const auto& r1, const auto& r2) { return camera.getEyePosition().distanceFromSq(r1->getPosition()) > camera.getEyePosition().distanceFromSq(r2->getPosition()); });
+	for (const auto& r : rs)
 	{
 		if (canSee(camera, r->m_position))
 			if (r->draw(mat)) mouseoverRegion = r;
