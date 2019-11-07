@@ -63,17 +63,17 @@ int Storage::numItem(const shared_ptr<ItemAsset>& model) const
 	else return (*it).second;
 }
 
-void Storage::load_this(const ptree& pt)
+void Storage::load(const JSONValue& json)
 {
+	Model::load(json);
+
 	// items
-	for (auto m : pt.get_child("items"))
+	for (auto m : json.arrayView())
 	{
-		auto name = m.second.get<string>("name");
+		auto name = m[U"name"].getString();
 
 		const auto& model = g_assetManagerPtr->getAsset<ItemAsset>(name);
 
-		emplace_back(model, m.second.get<int>("size"));
+		emplace_back(model, m[U"size"].get<int>());
 	}
-
-	Model::load_this(pt);
 }

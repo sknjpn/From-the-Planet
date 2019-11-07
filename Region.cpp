@@ -5,10 +5,6 @@
 
 bool Region::draw(const Mat4x4& mat)
 {
-	m_color = m_height > 0.0 ? Palette::Green : Palette::Royalblue;
-	if (m_height > 0.3) m_color = Palette::Gray;
-	if (m_height > 0.5) m_color = Palette::White;
-
 	auto d = 4.0;
 	Vec3 h = getCenter() - m_position;
 	double area = 0.0;
@@ -34,7 +30,7 @@ bool Region::draw(const Mat4x4& mat)
 		ls.emplace_back(a1);
 	}
 
-	auto t =Sqrt( area) / 10.0;
+	auto t = Sqrt(area) / 10.0;
 	for (auto& p : ls)
 		p += (center - p).normalized() * Min(t / 2.0, (center - p).length());
 
@@ -64,12 +60,91 @@ void Region::makeFacilityState(const shared_ptr<FacilityAsset>& facilityAsset)
 	m_facilityState = facilityAsset->makeState();
 }
 
+Array<shared_ptr<Road>> Region::getRouteTo(const shared_ptr<Region> to) const
+{
+	if (shared_from_this() == to) return Array<shared_ptr<Road>>();
+
+	Array<shared_ptr<Region>> list;
+	for (const auto& r : to->m_roads)
+	{
+		if (r->getTo() != to)
+		{
+			list.emplace_back(r->getTo());
+			r->getTo()->m_cost = r->getLength();
+			r->getTo()->m_from = to;
+		}
+	}
+
+	for (int i = 0; i < list.size(); ++i)
+	{
+		auto l = list[i];
+		for (const auto& r : l->m_roads)
+		{
+			auto t = r->getTo();
+			if (t != l && t != to)
+			{
+				if (!t->m_from || t->m_cost > l->m_cost + r->getLength())
+				{
+					list.emplace_back(t);
+					t->m_from = l;
+					t->m_cost = l->m_cost + r->getLength();
+				}
+			}
+		}
+	}
+
+	if (m_from)
+	{
+		Array<shared_ptr<Road>> result;
+		result.emplace_back(getRoad(m_from));
+		for (;;)
+		{
+			if (!result.back()->getTo()->m_from) break;
+
+			result.emplace_back(result.back()->getTo()->getRoad(result.back()->getTo()->m_from));
+		}
+
+		for (int i = 0; i < list.size(); ++i)
+		{
+			auto l = list[i];
+
+			l->m_cost = 0;
+			l->m_from = nullptr;
+		}
+
+		return result;
+	}
+	else
+	{
+		for (int i = 0; i < list.size(); ++i)
+		{
+			auto l = list[i];
+
+			l->m_cost = 0;
+			l->m_from = nullptr;
+		}
+
+		return Array<shared_ptr<Road>>();
+	}
+}
+
 void Region::makeRoad(const shared_ptr<Region>& to)
 {
-	m_roads.emplace_back(MakeShared<Road>(shared_from_this(), to));
+	auto road = MakeShared<Road>(shared_from_this(), to);
+	g_planetManagerPtr->m_roads.emplace_back(road);
+	m_roads.emplace_back(road);
+	to->m_roads.emplace_back(road);
 }
 
 bool Region::hasRoad(const shared_ptr<Region>& to) const
 {
 	return m_roads.any([&to](const auto& r) { return to == r->getTo(); });
+}
+
+shared_ptr<Road> Region::getRoad(const shared_ptr<Region>& to) const
+{
+	for (const auto& r : m_roads)
+		if (r->getTo() == to) return r;
+
+	return nullptr;
 }

@@ -1,7 +1,10 @@
-﻿#include "stdafx.h"
-#include "ItemAsset.h"
+﻿#include "ItemAsset.h"
 
-void ItemAsset::load_this(const ptree& pt)
+void ItemAsset::load(const JSONValue& json)
 {
-	m_texture = Texture(U"asset/models/items/" +  Unicode::Widen(pt.get<string>("texture")));
+	Asset::load(json);
+
+	Image image(U"asset/models/items/" + json[U"texture"].getString());
+	for (auto& p : image) p = p == Palette::White ? Color(0, 0) : p;
+	m_texture = Texture(image);
 }

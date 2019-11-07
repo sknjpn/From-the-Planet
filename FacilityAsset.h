@@ -2,21 +2,26 @@
 
 #include "Asset.h"
 #include "Mesh.h"
+#include "Storage.h"
 
 class FacilityState;
 
-class FacilityAsset :
-	public Asset
+class FacilityAsset
+	: public Asset
 {
-	Array<Mesh>		m_meshes;
+	friend class FacilityState;
+
+	Array<Mesh>	m_meshes;
+	Storage		m_material;
+	FilePath	m_audio;
 
 public:
 	virtual shared_ptr<FacilityState>	makeState() = 0;
 
 	const Array<Mesh>& getMeshes() const { return m_meshes; }
+	const FilePath& getAudioPath() const { return m_audio; }
 
 	// JSON
-	void	load_this(const ptree& pt);
-	void	load(const ptree& pt) override { load_this(pt); }
+	void	load(const JSONValue& json) override;
 };
 

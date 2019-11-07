@@ -241,9 +241,13 @@
     <ClCompile Include="FactoryState.cpp" />
     <ClCompile Include="GetCircumcenter.cpp" />
     <ClCompile Include="ItemAsset.cpp" />
+    <ClCompile Include="LaunchSiteAsset.cpp" />
+    <ClCompile Include="LaunchSiteState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="NaturalResourceAsset.cpp" />
+    <ClCompile Include="PlanetHealthViewer.cpp" />
     <ClCompile Include="PlanetManager.cpp" />
     <ClCompile Include="PlanetViewer.cpp" />
     <ClCompile Include="QuarryAsset.cpp" />
@@ -257,6 +261,7 @@
     <ClCompile Include="Storage.cpp" />
     <ClCompile Include="SystemManager.cpp" />
     <ClCompile Include="Translate.cpp" />
+    <ClCompile Include="TruckState.cpp" />
     <ClCompile Include="ViewerManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -270,8 +275,12 @@
     <ClInclude Include="FactoryState.h" />
     <ClInclude Include="GetCircumcenter.h" />
     <ClInclude Include="ItemAsset.h" />
+    <ClInclude Include="LaunchSiteAsset.h" />
+    <ClInclude Include="LaunchSiteState.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="NaturalResourceAsset.h" />
+    <ClInclude Include="PlanetHealthViewer.h" />
     <ClInclude Include="PlanetManager.h" />
     <ClInclude Include="PlanetViewer.h" />
     <ClInclude Include="QuarryAsset.h" />
@@ -282,6 +291,7 @@
     <ClInclude Include="Storage.h" />
     <ClInclude Include="SystemManager.h" />
     <ClInclude Include="Translate.h" />
+    <ClInclude Include="TruckState.h" />
     <ClInclude Include="Viewer.h" />
     <ClInclude Include="ViewerManager.h" />
   </ItemGroup>

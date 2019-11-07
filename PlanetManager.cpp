@@ -4,15 +4,22 @@
 #include "Road.h"
 #include "FacilityAsset.h"
 #include "FacilityState.h"
+#include "TruckState.h"
+#include "AssetManager.h"
+#include "ItemAsset.h"
+#include "ViewerManager.h"
+#include "FacilitiesListViewer.h"
 
 unique_ptr<PlanetManager> g_planetManagerPtr;
 
 const shared_ptr<FacilityState>& PlanetManager::makeFacility(const shared_ptr<FacilityAsset> facilityAsset, const shared_ptr<Region> region)
 {
 	auto& state = m_facilityStates.emplace_back(facilityAsset->makeState());
-
 	state->m_region = region;
 	state->m_facilityAsset = facilityAsset;
+	state->m_audio = Audio(facilityAsset->getAudioPath());
+
+	region->m_facilityState = state;
 
 	return state;
 }
@@ -252,6 +259,29 @@ void PlanetManager::loadRegions(const FilePath& path)
 	generateTerrain();
 }
 
+void PlanetManager::update()
+{
+	if (m_destroy >= 0.0)
+	{
+		if (m_destroy < 1.0) m_destroy += 0.01;
+		for (auto& r : m_regions)
+			r->m_color = r->m_color.lerp(Palette::Red, 0.1);
+	}
+	else
+	{
+		for (const auto& fs : m_facilityStates)
+			fs->update();
+	}
+}
+
+void PlanetManager::destroy()
+{
+	g_viewerManagerPtr->deleteViewer<FacilitiesListViewer>();
+	m_audio = Audio(U"asset/models/facilities/sound/magic-quake2.mp3");
+	m_audio.playOneShot(0.5, 1.0);
+	m_destroy = 0.0;
+}
+
 void PlanetManager::drawRegions(const BasicCamera3D& camera)
 {
 	auto mat = camera.getMat4x4();
@@ -284,11 +314,21 @@ void PlanetManager::drawRoads(const BasicCamera3D& camera)
 {
 	for (const auto& r : m_roads)
 		if (canSee(camera, (r->getTo()->m_position + r->getFr()->m_position) / 2.0)) r->draw(camera);
+
+	for (const auto& ts : m_truckStates)
+		ts->update();
+
+	m_truckStates.remove_if([](const auto& ts) { return ts->m_route.isEmpty(); });
+
+	for (const auto& ts : m_truckStates)
+		if (canSee(camera, ts->getPosition())) ts->draw(camera);
 }
 
 void PlanetManager::drawFacilities(const BasicCamera3D& camera)
 {
-	for (const auto& fs : m_facilityStates)
+	auto fss = m_facilityStates.sorted_by([&camera](const auto& fs1, const auto& fs2) { return camera.getEyePosition().distanceFromSq(fs1->getPosition()) > camera.getEyePosition().distanceFromSq(fs2->getPosition()); });
+
+	for (const auto& fs : fss)
 		if (canSee(camera, fs->m_region.lock()->m_position)) fs->draw(camera);
 }
 

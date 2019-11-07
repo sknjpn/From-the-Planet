@@ -19,5 +19,6 @@ public:
 	// get
 	const shared_ptr<Region>& getFr() const { return m_fr; }
 	const shared_ptr<Region>& getTo() const { return m_to; }
+	double	getLength() const;
 };
 

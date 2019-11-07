@@ -24,6 +24,8 @@ public:
 	int		numItem(const shared_ptr<ItemAsset>& model) const;
 
 	// JSON
-	void	load_this(const ptree& pt);
-	void	load(const ptree& pt) override { load_this(pt); }
+	void	load(const JSONValue& json) override;
+
+	void	clear() { Array<pair<shared_ptr<ItemAsset>, int>>::clear(); }
+	bool	isEmpty()const { return Array<pair<shared_ptr<ItemAsset>, int>>::isEmpty(); }
 };

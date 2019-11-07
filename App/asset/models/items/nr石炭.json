@@ -1,0 +1,7 @@
+{
+    "name": "石炭",
+    "type": "NaturalResourceAsset",
+    "texture": "texture/coal.png",
+    "amount": 1000.0,
+    "numSite": 10
+}

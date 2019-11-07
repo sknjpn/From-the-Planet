@@ -1,11 +1,17 @@
 ﻿#include "FacilityAsset.h"
 
-void FacilityAsset::load_this(const ptree& pt)
+void FacilityAsset::load(const JSONValue& json)
 {
-	for (auto j1 : pt.get_child("meshes"))
+	Asset::load(json);
+
+	for (auto j : json[U"meshes"].arrayView())
 	{
 		auto& m = m_meshes.emplace_back();
-	
-		m.load(j1.second);
+
+		m.load(j);
 	}
+
+	m_material.load(json[U"material"]);
+
+	m_audio = FileSystem::ParentPath(getFilepath()) + json[U"sound"].getString();
 }

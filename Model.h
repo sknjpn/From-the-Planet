@@ -2,12 +2,6 @@
 
 #include "Viewer.h"
 
-#include <boost/property_tree/json_parser.hpp>
-using namespace boost::property_tree;
-
-#include <boost/filesystem/operations.hpp>
-using namespace boost::filesystem;
-
 class Model
 	: public enable_shared_from_this<Model>
 {
@@ -17,6 +11,5 @@ public:
 	virtual void	makeViewer() {}
 
 	// JSON
-	void	load_this(const ptree& pt);
-	virtual void	load(const ptree& pt) { load_this(pt); }
+	virtual void	load(const JSONValue& json) {}
 };

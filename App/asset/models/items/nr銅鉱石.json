@@ -1,0 +1,7 @@
+{
+    "name": "銅鉱石",
+    "type": "NaturalResourceAsset",
+    "texture": "texture/copper-ore.png",
+    "amount": 180.0,
+    "numSite": 3
+}

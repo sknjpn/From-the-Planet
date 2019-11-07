@@ -10,7 +10,7 @@ class FacilitiesListViewer :
 public:
 	FacilitiesListViewer()
 	{
-		setDrawRect(Scene::Size().x - 170, 40, 130, 200);
+		setDrawRect(Scene::Size().x - 170, 40, 130, 600);
 	}
 	
 	void	update() override;

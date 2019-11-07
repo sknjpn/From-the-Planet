@@ -5,59 +5,30 @@ unique_ptr<AssetManager>	g_assetManagerPtr;
 
 void AssetManager::init()
 {
-
-	Array<string> filepaths;
-
-	recursive_directory_iterator end;
-	for (recursive_directory_iterator it(boost::filesystem::path("asset/models")); it != end; ++it)
-		if (!is_directory(*it) && it->path().extension() == ".json") filepaths.emplace_back((*it).path().string());
-
-	for (const auto& filepath : filepaths)
+	auto dc = FileSystem::DirectoryContents(U"asset/models", true);
+	for (const auto& c : dc)
 	{
-		ptree pt;
+		if (FileSystem::IsDirectory(c) || FileSystem::Extension(c) != U"json") continue;
 
-		read_json(filepath, pt);
-
-		if (auto type = pt.get_optional<string>("type"))
+		JSONReader json(c);
+		if (auto type = json[U"type"].getOpt<String>())
 		{
-			auto a = makeAsset(*type);
-			a->setName(pt.get<string>("name"));
-			a->setFilepath(filepath);
+			auto a = makeAsset(type.value());
+			a->setName(json[U"name"].getString());
+			a->setFilepath(c);
 		}
 	}
 
 	for (const auto& m : m_assets)
 	{
-		Logger << Unicode::Widen(m->getName());
-		ptree pt;
+		Logger << m->getName();
 
-		read_json(m->getFilepath(), pt);
-
-		try
-		{
-			m->load(pt);
-		}
-		catch (boost::property_tree::ptree_bad_path & e)
-		{
-			LOG_ERROR(U"JSONアセットの読み込みに問題が発生しました");
-			LOG_ERROR(U" What:" + Unicode::Widen(string(e.what())));
-			LOG_ERROR(U" Asset:" + Unicode::Widen(pt.get<string>("type")));
-			LOG_ERROR(U" Filepath:" + Unicode::Widen(m->getFilepath()));
-
-			System::Exit();
-		}
-		catch (Error & e)
-		{
-			LOG_ERROR(U" What:" + e.what());
-			LOG_ERROR(U" Asset:" + Unicode::Widen(pt.get<string>("type")));
-			LOG_ERROR(U" Filepath:" + Unicode::Widen(m->getFilepath()));
-
-			System::Exit();
-		}
+		JSONReader json(m->getFilepath());
+		m->load(json);
 	}
 }
 
-shared_ptr<Asset> AssetManager::getAsset(const string& name) const
+shared_ptr<Asset> AssetManager::getAsset(const String& name) const
 {
 	for (auto it = m_assets.begin(); it != m_assets.end(); ++it)
 		if ((*it)->getName() == name) return dynamic_pointer_cast<Asset>(*it);

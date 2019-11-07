@@ -19,6 +19,10 @@ class Region
 	Array<shared_ptr<Road>>		m_roads;
 	shared_ptr<FacilityState>	m_facilityState;
 
+	// for 探索
+	shared_ptr<Region>	m_from;
+	double	m_cost = 0.0;
+
 public:
 	// returns isMouseover
 	bool	draw(const Mat4x4& mat);
@@ -39,7 +43,10 @@ public:
 	void	makeFacilityState(const shared_ptr<FacilityAsset>& facilityAsset);
 	const shared_ptr<FacilityState>& getFacilityState() const { return m_facilityState; }
 
+	Array<shared_ptr<Road>>	getRouteTo(const shared_ptr<Region> to) const;
+
 	// road
 	void	makeRoad(const shared_ptr<Region>& to);
 	bool	hasRoad(const shared_ptr<Region>& to) const;
+	shared_ptr<Road>	getRoad(const shared_ptr<Region>& to) const;
 };

@@ -8,8 +8,10 @@ class ItemAsset :
 	Texture	m_texture;
 
 public:
+	// Get
+	const Texture& getTexture() const { return m_texture; }
+
 	// JSON
-	void	load_this(const ptree& pt);
-	void	load(const ptree& pt) override { load_this(pt); }
+	void	load(const JSONValue& json) override;
 };
 

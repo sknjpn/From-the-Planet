@@ -1,0 +1,7 @@
+{
+    "name": "石",
+    "type": "NaturalResourceAsset",
+    "texture": "texture/stone.png",
+    "amount": 2000.0,
+    "numSite": 20
+}

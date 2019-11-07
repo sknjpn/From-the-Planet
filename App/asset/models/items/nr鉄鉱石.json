@@ -1,0 +1,7 @@
+{
+    "name": "鉄鉱石",
+    "type": "NaturalResourceAsset",
+    "texture": "texture/iron-ore.png",
+    "amount": 1000.0,
+    "numSite": 5
+}

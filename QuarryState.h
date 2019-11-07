@@ -6,4 +6,5 @@ class QuarryState
 	: public FacilityState
 {
 public:
+	void	update() override;
 };

@@ -6,5 +6,6 @@ class FactoryState
 	: public FacilityState
 {
 public:
-	
+	void	update() override;
+	void	onConstructed() override;
 };

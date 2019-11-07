@@ -1,6 +1,10 @@
 {
-    "name": "Quarry",
+    "name": "採石場",
     "type": "QuarryAsset",
+    "sound": "sound/sword-clash1.mp3",
+    "material":[],
+    "import": [],
+    "export": "石",
     "meshes": [
         {
             "vertices": [
@@ -27,8 +31,8 @@
                 "(2, 6)",
                 "(3, 7)"
             ],
-            "color": "(255, 255, 255)",
-            "thickness": 2
+            "color": "(128, 128, 128)",
+            "thickness": 4
         }
     ]
 }

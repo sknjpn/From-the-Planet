@@ -1,11 +1,8 @@
 ﻿#include "Asset.h"
 
-void Asset::setFilepath(const string& filepath)
+void Asset::load(const JSONValue& json)
 {
-	m_filepath = filepath;
-}
+	Model::load(json);
 
-void Asset::load_this(const ptree& pt)
-{
-	m_name = pt.get<string>("name");
+	m_name = json[U"name"].get<String>();
 }

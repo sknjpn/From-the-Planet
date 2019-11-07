@@ -20,11 +20,13 @@ public:
 
 	void	drawFill(const Mat4x4& mat) const;
 	void	draw(const Mat4x4& mat) const;
+	void	drawBlack(const Mat4x4& mat) const;
+	void	draw(const Mat4x4& mat, const Color& color) const;
 
 	void	moveBy(const Vec3& delta) { m_vertices.each([&delta](auto& v) { v.moveBy(delta); }); }
 	void	moveBy(double x, double y, double z) { moveBy(Vec3(x, y, z)); }
 
 	// JSON
-	void	load(const ptree& pt) override;
+	void	load(const JSONValue& json) override;
 };
 

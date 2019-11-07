@@ -432,6 +432,17 @@
     <ClCompile Include="FacilitiesListViewer.cpp">
       <Filter>Program Files</Filter>
     </ClCompile>
+    <ClCompile Include="LaunchSiteAsset.cpp">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClCompile>
+    <ClCompile Include="LaunchSiteState.cpp">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClCompile>
+    <ClCompile Include="NaturalResourceAsset.cpp">
+      <Filter>Program Files\Planet\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="TruckState.cpp" />
+    <ClCompile Include="PlanetHealthViewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Region.h">
@@ -506,5 +517,16 @@
     <ClInclude Include="FacilitiesListViewer.h">
       <Filter>Program Files</Filter>
     </ClInclude>
+    <ClInclude Include="LaunchSiteAsset.h">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClInclude>
+    <ClInclude Include="LaunchSiteState.h">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClInclude>
+    <ClInclude Include="NaturalResourceAsset.h">
+      <Filter>Program Files\Planet\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="TruckState.h" />
+    <ClInclude Include="PlanetHealthViewer.h" />
   </ItemGroup>
 </Project>
