@@ -55,7 +55,6 @@ void Viewer::UpdateAllViewers()
 	}
 
 	// 新規追加されたViewerの更新
-	for (;;)
 	{
 		const auto viewers = GetRootViewer()->getAllChildViewers();
 		for (const auto& v : viewers)
