@@ -259,10 +259,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Storage.cpp" />
-    <ClCompile Include="SystemManager.cpp" />
     <ClCompile Include="Translate.cpp" />
     <ClCompile Include="TruckState.cpp" />
-    <ClCompile Include="ViewerManager.cpp" />
+    <ClCompile Include="Viewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asset.h" />
@@ -289,11 +288,9 @@
     <ClInclude Include="Road.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Storage.h" />
-    <ClInclude Include="SystemManager.h" />
     <ClInclude Include="Translate.h" />
     <ClInclude Include="TruckState.h" />
     <ClInclude Include="Viewer.h" />
-    <ClInclude Include="ViewerManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

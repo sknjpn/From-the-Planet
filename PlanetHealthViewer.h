@@ -7,16 +7,12 @@ class PlanetHealthViewer
 {
 public:
 
-	double m_health = 1.0;
-
 	PlanetHealthViewer()
 	{
-		setDrawRect(Rect(1400, 100).setCenter(Scene::Center().x, 60));
+		setViewerRect(Rect(1400, 100).setCenter(Scene::Center().x, 60));
 	}
 
 	void update() override;
-
-	void addDamage(double value);
 
 	ColorF GetBarColor(double rate)
 	{

@@ -6,14 +6,13 @@
 #include "AssetManager.h"
 #include "FactoryAsset.h"
 #include "QuarryAsset.h"
-#include "ViewerManager.h"
 #include "FacilitiesListViewer.h"
 #include "PlanetHealthViewer.h"
 
 void PlanetViewer::init()
 {
-	g_viewerManagerPtr->makeViewer<FacilitiesListViewer>();
-	g_viewerManagerPtr->makeViewer<PlanetHealthViewer>();
+	addChildViewer<FacilitiesListViewer>();
+	addChildViewer<PlanetHealthViewer>();
 
 	g_planetManagerPtr->loadRegions(U"asset/regions.json");
 	//g_planetManagerPtr->generateRegions(2048);
@@ -23,9 +22,6 @@ void PlanetViewer::init()
 
 void PlanetViewer::update()
 {
-
-	auto phv = g_viewerManagerPtr->getViewer<PlanetHealthViewer>();
-
 	m_radius *= (1.00 - 0.05 * Mouse::Wheel());
 	m_radius = Clamp<double>(m_radius, 150, 500);
 
@@ -41,7 +37,7 @@ void PlanetViewer::update()
 	g_planetManagerPtr->drawFacilities(m_camera);
 
 	// 建物設置
-	if (auto flv = g_viewerManagerPtr->getViewer<FacilitiesListViewer>())
+	if (auto flv = getChildViewer<FacilitiesListViewer>())
 	{
 		if (flv->getSelectedIndex() >= 0)
 		{
@@ -49,10 +45,10 @@ void PlanetViewer::update()
 			{
 				if (MouseL.down() && !r->getFacilityState() && r->getHeight() > 0)
 				{
-					size_t index = g_viewerManagerPtr->getViewer<FacilitiesListViewer>()->getSelectedIndex();
+					size_t index = flv->getSelectedIndex();
 					g_planetManagerPtr->makeFacility(g_assetManagerPtr->getAssets<FacilityAsset>()[index], r);
 
-					phv->addDamage(0.1);
+					g_planetManagerPtr->addDamage(0.1);
 
 					m_fCont.playOneShot(0.5);
 					// update
@@ -74,13 +70,15 @@ void PlanetViewer::update()
 					r2->makeRoad(r1);
 					g_planetManagerPtr->m_selectedRegion = g_planetManagerPtr->m_mouseOverRegion;
 					m_rCont.playOneShot(0.5);
-					phv->addDamage(0.01);
+					g_planetManagerPtr->addDamage(0.01);
 
 					// update
 					for (const auto& fs : g_planetManagerPtr->m_facilityStates) fs->updateConnected();
 				}
 			}
 		}
+
+		if (g_planetManagerPtr->m_destroy >= 0) flv->destroy();
 	}
 
 	{

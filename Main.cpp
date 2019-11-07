@@ -1,6 +1,6 @@
-﻿#include "SystemManager.h"
-#include "ViewerManager.h"
-#include "PlanetViewer.h"
+﻿#include "PlanetViewer.h"
+#include "AssetManager.h"
+#include "PlanetManager.h"
 
 void Main()
 {
@@ -8,9 +8,11 @@ void Main()
 	//Window::SetFullscreen(true);
 	Window::Maximize();
 	Window::SetTitle(U"From the Planet");
-	g_systemManagerPtr = MakeUnique<SystemManager>();
-	g_viewerManagerPtr->makeViewer<PlanetViewer>();
 
-	while (System::Update())
-		g_systemManagerPtr->update();
+	g_assetManagerPtr = MakeUnique<AssetManager>();
+	g_planetManagerPtr = MakeUnique<PlanetManager>();
+	g_assetManagerPtr->init();
+
+	Viewer::GetRootViewer()->addChildViewer<PlanetViewer>();
+	Viewer::Run();
 }

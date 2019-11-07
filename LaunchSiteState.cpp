@@ -1,11 +1,9 @@
 ﻿#include "LaunchSiteState.h"
-#include "PlanetHealthViewer.h"
-#include "ViewerManager.h"
 #include "PlanetManager.h"
 
 void LaunchSiteState::onConstructed()
 {
-	g_viewerManagerPtr->getViewer<PlanetHealthViewer>()->addDamage(1.5);
+	g_planetManagerPtr->addDamage(1.5);
 
 	m_audio.playOneShot(0.5, 1.0);
 

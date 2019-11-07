@@ -7,7 +7,6 @@
 #include "TruckState.h"
 #include "AssetManager.h"
 #include "ItemAsset.h"
-#include "ViewerManager.h"
 #include "FacilitiesListViewer.h"
 
 unique_ptr<PlanetManager> g_planetManagerPtr;
@@ -261,6 +260,9 @@ void PlanetManager::loadRegions(const FilePath& path)
 
 void PlanetManager::update()
 {
+	if (m_health > 0)
+		m_health = Min(1.0, m_health + 0.0015);
+
 	if (m_destroy >= 0.0)
 	{
 		if (m_destroy < 1.0) m_destroy += 0.01;
@@ -276,10 +278,20 @@ void PlanetManager::update()
 
 void PlanetManager::destroy()
 {
-	g_viewerManagerPtr->deleteViewer<FacilitiesListViewer>();
 	m_audio = Audio(U"asset/models/facilities/sound/magic-quake2.mp3");
 	m_audio.playOneShot(0.5, 1.0);
 	m_destroy = 0.0;
+}
+
+void PlanetManager::addDamage(double value)
+{
+	if (m_health > 0)
+	{
+		m_health -= value;
+
+		if (m_health < 0)
+			g_planetManagerPtr->destroy();
+	}
 }
 
 void PlanetManager::drawRegions(const BasicCamera3D& camera)
