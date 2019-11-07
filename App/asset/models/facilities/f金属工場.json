@@ -1,16 +1,17 @@
 ﻿{
   "name": "金属工場",
   "type": "FactoryAsset",
+  "constructionDamage": 0.2,
   "sound": "sound/sword-clash2.mp3",
   "material": [
-      {
-          "name": "石",
-          "size": 10
-      },
-      {
-          "name": "鉄",
-          "size": 10
-      }
+    {
+      "name": "石",
+      "size": 10
+    },
+    {
+      "name": "鉄",
+      "size": 10
+    }
   ],
   "import": [
     {

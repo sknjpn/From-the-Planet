@@ -49,8 +49,6 @@ void PlanetViewer::update()
 				{
 					g_planetManagerPtr->makeFacility(flv->m_selectedFacilityAsset, r);
 
-					g_planetManagerPtr->addDamage(0.1);
-
 					m_fCont.playOneShot(0.5);
 					// update
 					for (const auto& fs : g_planetManagerPtr->m_facilityStates) fs->updateConnected();
@@ -71,7 +69,7 @@ void PlanetViewer::update()
 					r2->getRoad(r1)->setRoadAsset(flv->m_selectedRoadAsset);
 					g_planetManagerPtr->m_selectedRegion = g_planetManagerPtr->m_mouseOverRegion;
 					m_rCont.playOneShot(0.5);
-					g_planetManagerPtr->addDamage(0.01);
+					g_planetManagerPtr->addDamage(flv->m_selectedRoadAsset->getConstructinDamage());
 
 					// update
 					for (const auto& fs : g_planetManagerPtr->m_facilityStates) fs->updateConnected();

@@ -1,6 +1,7 @@
 ﻿{
   "name": "製鉄所",
   "type": "FactoryAsset",
+  "constructionDamage": 0.2,
   "sound": "sound/sword-clash4.mp3",
   "material": [
       {

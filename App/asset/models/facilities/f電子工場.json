@@ -1,6 +1,7 @@
 ﻿{
   "name": "電子工場",
   "type": "FactoryAsset",
+  "constructionDamage": 0.2,
   "sound": "sound/gun-gird1.mp3",
   "material": [
       {

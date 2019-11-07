@@ -15,6 +15,7 @@ class FacilityAsset
 	Array<Mesh>	m_meshes;
 	Storage		m_material;
 	FilePath	m_audio;
+	double		m_constructinDamage;
 
 public:
 	virtual shared_ptr<FacilityState>	makeState() = 0;

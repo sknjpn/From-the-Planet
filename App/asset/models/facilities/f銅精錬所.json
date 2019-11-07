@@ -1,6 +1,7 @@
 ﻿{
   "name": "銅精錬所",
   "type": "FactoryAsset",
+  "constructionDamage": 0.2,
   "sound": "sound/sword-clash2.mp3",
   "material": [
     {

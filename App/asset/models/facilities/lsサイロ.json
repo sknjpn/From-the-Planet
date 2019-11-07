@@ -1,6 +1,7 @@
 ﻿{
     "name": "サイロ",
     "type": "LaunchSiteAsset",
+    "constructionDamage": 0.5,
     "sound": "sound/cannon2.mp3",
     "material": [
         {

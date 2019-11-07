@@ -76,6 +76,8 @@ void FacilityState::onInit()
 {
 	// 必要なものの登録
 	m_need = m_facilityAsset->m_material;
+
+	g_planetManagerPtr->addDamage(m_facilityAsset->m_constructinDamage);
 }
 
 void FacilityState::updateConnected()

@@ -1,6 +1,7 @@
 {
     "name": "採石場",
     "type": "QuarryAsset",
+    "constructionDamage": 0.2,
     "sound": "sound/sword-clash1.mp3",
     "material":[],
     "import": [],

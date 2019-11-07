@@ -1,6 +1,7 @@
 ﻿{
     "name": "炭鉱",
     "type": "QuarryAsset",
+    "constructionDamage": 0.2,
     "sound": "sound/cannon2.mp3",
     "material": [
         {
