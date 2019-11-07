@@ -1,11 +1,13 @@
 ﻿#pragma once
 
 class Region;
+class RoadAsset;
 
 class Road
 {
 	shared_ptr<Region> m_fr;
 	shared_ptr<Region> m_to;
+	shared_ptr<RoadAsset>	m_roadAsset;
 
 public:
 	Road() {}

@@ -254,6 +254,7 @@
     <ClCompile Include="QuarryState.cpp" />
     <ClCompile Include="Region.cpp" />
     <ClCompile Include="Road.cpp" />
+    <ClCompile Include="RoadAsset.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -287,6 +288,7 @@
     <ClInclude Include="QuarryState.h" />
     <ClInclude Include="Region.h" />
     <ClInclude Include="Road.h" />
+    <ClInclude Include="RoadAsset.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Storage.h" />
     <ClInclude Include="TerrainAsset.h" />

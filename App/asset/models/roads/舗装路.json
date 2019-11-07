@@ -1,0 +1,7 @@
+﻿{
+    "name":"舗装路",
+    "type":"RoadAsset",
+    "speed": 5.0,
+    "colorInside":"(64, 64, 64)",
+    "colorOutside":"(255, 255, 255)"
+}

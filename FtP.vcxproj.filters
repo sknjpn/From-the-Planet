@@ -441,6 +441,7 @@
       <Filter>Program Files</Filter>
     </ClCompile>
     <ClCompile Include="TerrainAsset.cpp" />
+    <ClCompile Include="RoadAsset.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Region.h">
@@ -521,5 +522,6 @@
     <ClInclude Include="TruckState.h" />
     <ClInclude Include="PlanetHealthViewer.h" />
     <ClInclude Include="TerrainAsset.h" />
+    <ClInclude Include="RoadAsset.h" />
   </ItemGroup>
 </Project>
