@@ -3,6 +3,7 @@
 class PlanetManager;
 class FacilityAsset;
 class FacilityState;
+class TerrainAsset;
 class Road;
 
 class Region
@@ -12,27 +13,27 @@ class Region
 
 	Vec3		m_position;
 	Array<Vec3>	m_polygon;
-	Color		m_color;
-	double		m_height;
 	weak_ptr<PlanetManager>	m_planet;
 	Array<weak_ptr<Region>>		m_connecteds;
 	Array<shared_ptr<Road>>		m_roads;
+	shared_ptr<TerrainAsset>	m_terrainAsset;
 	shared_ptr<FacilityState>	m_facilityState;
 
 	// for 探索
 	shared_ptr<Region>	m_from;
 	double	m_cost = 0.0;
 
-public:
-	// returns isMouseover
-	bool	draw(const Mat4x4& mat);
-	void	setFacilityState(const shared_ptr<FacilityState> facilityState) { m_facilityState = facilityState; }
+	void	draw(const Mat4x4& mat, double d, Color color) const;
+	void	drawLineString(const Mat4x4& mat, double d, Color color) const;
 
-	Vec3	getCenter() const { return m_position + m_position * m_height * 0.1; }
+public:
+	bool	mouseOver(const Mat4x4& mat) const;
+	void	draw(const Mat4x4& mat) const;
+	void	setFacilityState(const shared_ptr<FacilityState> facilityState) { m_facilityState = facilityState; }
+	double	getArea(const Mat4x4& mat) const;
 
 	// get
 	const Vec3& getPosition() const { return m_position; }
-	double	getHeight() const { return m_height; }
 
 	// connection
 	void	connect(const shared_ptr<Region>& to);

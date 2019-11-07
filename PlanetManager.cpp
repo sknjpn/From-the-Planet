@@ -7,6 +7,7 @@
 #include "TruckState.h"
 #include "AssetManager.h"
 #include "ItemAsset.h"
+#include "TerrainAsset.h"
 #include "FacilitiesListViewer.h"
 
 unique_ptr<PlanetManager> g_planetManagerPtr;
@@ -170,9 +171,9 @@ void PlanetManager::makeChips()
 						if (kdtree.knnSearch(3, GetCircumcenter(positions)).all([this, r1, r2, r3](auto index) { return m_regions[index] == r1 || m_regions[index] == r2.lock() || m_regions[index] == r3.lock(); }))
 						{
 							auto& t = m_chips.emplace_back(MakeShared<Chip>(r1, r2.lock(), r3.lock()));
-							r1->m_polygon.emplace_back(t->m_center);
-							r2.lock()->m_polygon.emplace_back(t->m_center);
-							r3.lock()->m_polygon.emplace_back(t->m_center);
+							r1->m_polygon.emplace_back(t->m_circumcenter);
+							r2.lock()->m_polygon.emplace_back(t->m_circumcenter);
+							r3.lock()->m_polygon.emplace_back(t->m_circumcenter);
 						}
 					}
 				}
@@ -212,17 +213,55 @@ void PlanetManager::makeChips()
 	}
 }
 
-void PlanetManager::generateTerrain()
+void PlanetManager::setTerrains()
 {
 	PerlinNoise noise(Random(INT_MAX));
 
-	for (auto& r : m_regions)
+	for (const auto& r : m_regions)
 	{
-		r->m_height = Max(Abs(noise.octaveNoise(r->getPosition() * 0.01, 5)) - 0.2, 0.0);
+		auto height = Abs(noise.octaveNoise(r->getPosition() * 0.01, 5)) - 0.2;
 
-		r->m_color = r->m_height > 0.0 ? Palette::Green : Palette::Royalblue;
-		if (r->m_height > 0.3) r->m_color = Palette::Gray;
-		if (r->m_height > 0.5) r->m_color = Palette::White;
+		if (height > 0.5)
+		{
+			r->m_terrainAsset = g_assetManagerPtr->getAsset<TerrainAsset>(U"氷河");
+		}
+		else if (height > 0.3)
+		{
+			r->m_terrainAsset = g_assetManagerPtr->getAsset<TerrainAsset>(U"岩地");
+		}
+		else if (height > 0.0)
+		{
+			if (RandomBool(0.95)) r->m_terrainAsset = g_assetManagerPtr->getAsset<TerrainAsset>(U"草原");
+			else r->m_terrainAsset = g_assetManagerPtr->getAsset<TerrainAsset>(U"砂漠");
+		}
+		else
+		{
+			r->m_terrainAsset = g_assetManagerPtr->getAsset<TerrainAsset>(U"海洋");
+		}
+	}
+
+	{
+		auto t1 = g_assetManagerPtr->getAsset<TerrainAsset>(U"海洋");
+		auto t2 = g_assetManagerPtr->getAsset<TerrainAsset>(U"近海");
+		for (const auto& r1 : m_regions)
+			if (r1->m_terrainAsset != t1 && r1->m_terrainAsset != t2)
+				for (const auto& r2 : r1->m_connecteds)
+					if (r2.lock()->m_terrainAsset == t1) r2.lock()->m_terrainAsset = t2;
+	}
+
+	{
+		auto t1 = g_assetManagerPtr->getAsset<TerrainAsset>(U"草原");
+		auto t2 = g_assetManagerPtr->getAsset<TerrainAsset>(U"砂漠");
+		for (int i = 0; i < 5; ++i)
+		{
+			for (const auto& r1 : m_regions)
+				if (r1->m_terrainAsset == t2)
+					for (const auto& r2 : r1->m_connecteds)
+						if (RandomBool(0.1) && r2.lock()->m_terrainAsset == t1) r2.lock()->m_terrainAsset = nullptr;
+
+			for (const auto& r1 : m_regions)
+				if (!r1->m_terrainAsset) r1->m_terrainAsset = t2;
+		}
 	}
 }
 
@@ -255,7 +294,7 @@ void PlanetManager::loadRegions(const FilePath& path)
 
 	connectRegions();
 	makeChips();
-	generateTerrain();
+	setTerrains();
 }
 
 void PlanetManager::update()
@@ -266,8 +305,6 @@ void PlanetManager::update()
 	if (m_destroy >= 0.0)
 	{
 		if (m_destroy < 1.0) m_destroy += 0.01;
-		for (auto& r : m_regions)
-			r->m_color = r->m_color.lerp(Palette::Red, 0.1);
 	}
 	else
 	{
@@ -301,10 +338,15 @@ void PlanetManager::drawRegions(const BasicCamera3D& camera)
 
 	if (MouseL.up()) m_selectedRegion = nullptr;
 
-	for (const auto& r : m_regions)
+	auto rs = m_regions.sorted_by([&camera](const auto& r1, const auto& r2) { return camera.getEyePosition().distanceFromSq(r1->getPosition()) > camera.getEyePosition().distanceFromSq(r2->getPosition()); });
+	for (const auto& r : rs)
 	{
 		if (canSee(camera, r->m_position))
-			if (r->draw(mat)) mouseoverRegion = r;
+		{
+			r->draw(mat);
+
+			if (r->mouseOver(mat)) mouseoverRegion = r;
+		}
 	}
 
 	m_mouseOverRegion = mouseoverRegion;

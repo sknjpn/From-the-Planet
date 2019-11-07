@@ -36,7 +36,7 @@ public:
 	void	connectRegions();
 	void	makeChips();
 
-	void	generateTerrain();
+	void	setTerrains();
 
 	void	saveRegions(const FilePath& path);
 	void	loadRegions(const FilePath& path);

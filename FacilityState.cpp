@@ -15,7 +15,7 @@ void FacilityState::draw(const BasicCamera3D& camera)
 	auto k = EaseOutQuart(m_constructionProgress);
 	auto s = (9.0 + Sin(m_progress * Math::TwoPi)) / 10.0;
 	Mat4x4 mat = Mat4x4::Scaling(scale / s, scale * k * s * s * (1.0 - g_planetManagerPtr->m_destroy), scale / s)
-		* Mat4x4::Translation(0, float(m_region.lock()->getCenter().length()), 0)
+		* Mat4x4::Translation(0, float(m_region.lock()->getPosition().length()), 0)
 		* Mat4x4::RotationZ(-f) * Mat4x4::RotationY(t)
 		* camera.getMat4x4();
 
@@ -47,7 +47,7 @@ void FacilityState::update()
 
 Vec3 FacilityState::getPosition() const
 {
-	return m_region.lock()->getCenter();
+	return m_region.lock()->getPosition();
 }
 
 void FacilityState::exportItem()

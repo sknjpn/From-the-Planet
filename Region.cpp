@@ -1,44 +1,86 @@
 ﻿#include "Region.h"
 #include "PlanetManager.h"
 #include "FacilityAsset.h"
+#include "TerrainAsset.h"
 #include "Road.h"
 
-bool Region::draw(const Mat4x4& mat)
+void Region::draw(const Mat4x4& mat, double d, Color color) const
 {
-	auto d = 4.0;
-	Vec3 h = getCenter() - m_position;
-	double area = 0.0;
+	const Vec2 p0 = TranslateWorldToScreen(mat, m_position);
 
-	Vec2 center = TranslateWorldToScreen(mat, m_position + h);
+	for (int i = 0; i < m_polygon.size(); ++i)
+	{
+		const Vec2 p1 = TranslateWorldToScreen(mat, m_polygon[i]);
+		const Vec2 p2 = i == m_polygon.size() - 1 ? TranslateWorldToScreen(mat, m_polygon[0]) : TranslateWorldToScreen(mat, m_polygon[i + 1]);
+		const Vec2 a1 = p1 + (p0 - p1).normalized() * Min(d, (p0 - p1).length());
+		const Vec2 a2 = p2 + (p0 - p2).normalized() * Min(d, (p0 - p2).length());
+
+		Triangle(p0, a1, a2).draw(color);
+	}
+}
+
+void Region::drawLineString(const Mat4x4& mat, double d, Color color) const
+{
+	const Vec2 p0 = TranslateWorldToScreen(mat, m_position);
 
 	LineString ls;
 
-	bool mouseover = false;
 	for (int i = 0; i < m_polygon.size(); ++i)
 	{
-		Vec2 p0 = center;
-		Vec2 p1 = TranslateWorldToScreen(mat, m_polygon[i] + h);
-		Vec2 p2 = i == m_polygon.size() - 1 ? TranslateWorldToScreen(mat, m_polygon[0] + h) : TranslateWorldToScreen(mat, m_polygon[i + 1] + h);
-		Vec2 a1 = p1 + (p0 - p1).normalized() * Min(d, (p0 - p1).length());
-		Vec2 a2 = p2 + (p0 - p2).normalized() * Min(d, (p0 - p2).length());
-
-		auto triangle = Triangle(p0, a1, a2);
-		triangle.draw(g_planetManagerPtr->m_mouseOverRegion == shared_from_this() ? ColorF(Palette::Red) : ColorF(m_color, 0.5));
-		if (triangle.mouseOver()) mouseover = true;
-		area += triangle.area();
+		const Vec2 p1 = TranslateWorldToScreen(mat, m_polygon[i]);
+		const Vec2 a1 = p1 + (p0 - p1).normalized() * Min(d, (p0 - p1).length());
 
 		ls.emplace_back(a1);
 	}
 
-	auto t = Sqrt(area) / 10.0;
+	auto t = Sqrt(getArea(mat)) / 10.0;
 	for (auto& p : ls)
-		p += (center - p).normalized() * Min(t / 2.0, (center - p).length());
+		p += (p0 - p).normalized() * Min(t / 2.0, (p0 - p).length());
 
-	ls.drawCatmullRomClosed(t, m_color);
+	ls.drawCatmullRomClosed(t, color);
+}
 
-	//for (auto& c : m_connecteds) Line(center, (TranslateWorldToScreen(mat, c.lock()->m_position) + center) / 2.0).stretched(-2).drawArrow(2.0, Vec2(10.0, 10.0), Palette::White);
+bool Region::mouseOver(const Mat4x4& mat) const
+{
+	const Vec2 p0 = TranslateWorldToScreen(mat, m_position);
 
-	return mouseover;
+	for (int i = 0; i < m_polygon.size(); ++i)
+	{
+		const Vec2 p1 = TranslateWorldToScreen(mat, m_polygon[i]);
+		const Vec2 p2 = i == m_polygon.size() - 1 ? TranslateWorldToScreen(mat, m_polygon[0]) : TranslateWorldToScreen(mat, m_polygon[i + 1]);
+
+		if (Triangle(p0, p1, p2).mouseOver()) return true;
+	}
+
+	return false;
+}
+
+void Region::draw(const Mat4x4& mat) const
+{
+	auto t = Sqrt(getArea(mat));
+	auto color = m_terrainAsset->m_color;
+
+	if(g_planetManagerPtr->m_destroy >= 0)
+		color = color.lerp(Palette::Red, g_planetManagerPtr->m_destroy);
+
+	draw(mat, t / 10.0, color);
+	draw(mat, t / 5.0, (g_planetManagerPtr->m_mouseOverRegion == shared_from_this() ? ColorF(Palette::Red) : ColorF(color)).lerp(Palette::Black, 0.4));
+}
+
+double Region::getArea(const Mat4x4& mat) const
+{
+	const Vec2 p0 = TranslateWorldToScreen(mat, m_position);
+
+	double area = 0.0;
+
+	for (int i = 0; i < m_polygon.size(); ++i)
+	{
+		const Vec2 p1 = TranslateWorldToScreen(mat, m_polygon[i]);
+		const Vec2 p2 = i == m_polygon.size() - 1 ? TranslateWorldToScreen(mat, m_polygon[0]) : TranslateWorldToScreen(mat, m_polygon[i + 1]);
+		area += Triangle(p0, p1, p2).area();
+	}
+
+	return area;
 }
 
 void Region::connect(const shared_ptr<Region>& to)
