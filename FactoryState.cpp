@@ -17,7 +17,7 @@ void FactoryState::update()
 			m_storage -= asset->m_import;
 			m_need += asset->m_import;
 
-			g_viewerManagerPtr->getViewer<PlanetHealthViewer>()->addDamage(0.01);
+			g_planetManagerPtr->addDamage(0.01);
 
 			m_audio.playOneShot(m_volume, 1.0);
 		}

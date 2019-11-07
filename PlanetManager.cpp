@@ -275,7 +275,6 @@ void PlanetManager::update()
 
 void PlanetManager::destroy()
 {
-	g_viewerManagerPtr->deleteViewer<FacilitiesListViewer>();
 	m_audio = Audio(U"asset/models/facilities/sound/magic-quake2.mp3");
 	m_audio.playOneShot(0.5, 1.0);
 	m_destroy = 0.0;
