@@ -17,17 +17,17 @@ void FacilityConstructionPopup::update()
 		static Font font(20, Typeface::Heavy);
 
 		font(m_facilityAsset->getName()).draw();
-		moveDrawPos(0, 20);
+		moveDrawPos(0, 30);
 	}
 
 	// テキスト
 	{
-		static Font font(18, Typeface::Bold);
+		static Font font(16, Typeface::Bold);
 
-		moveDrawPos(5, 0);
+		moveDrawPos(10, 0);
 
 		font(m_facilityAsset->getBuildText()).draw();
 
-		moveDrawPos(-5, 0);
+		moveDrawPos(-10, 0);
 	}
 }
