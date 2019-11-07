@@ -5,6 +5,7 @@ class Viewer
 {
 	friend class ViewerManager;
 
+	bool	m_isAlreadyInited = false;
 	bool	m_isRoot = false;
 	bool	m_isDestroyed = false;
 	Vec2	m_drawPos = Vec2::Zero();
@@ -58,7 +59,6 @@ public:
 
 		m_childViewers.emplace_back(cv);
 		cv->m_parentViewer = shared_from_this();
-		cv->init();
 
 		return cv;
 	}

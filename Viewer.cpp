@@ -26,6 +26,11 @@ void Viewer::UpdateAllViewers()
 
 			RectF((*it)->m_viewerRect.size).draw((*it)->m_backgroundColor);
 
+			if ((*it)->m_isAlreadyInited)
+			{
+				(*it)->init();
+				(*it)->m_isAlreadyInited = true;
+			}
 			(*it)->update();
 
 			(*it)->m_transformer.reset();
