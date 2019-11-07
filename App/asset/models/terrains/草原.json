@@ -1,0 +1,6 @@
+﻿{
+    "name": "草原",
+    "type": "TerrainAsset",
+    "color": "(65, 105, 225)",
+    "buildAvailable": true
+}
