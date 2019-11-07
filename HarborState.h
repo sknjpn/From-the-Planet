@@ -5,4 +5,7 @@
 class HarborState :
 	public FacilityState
 {
+public:
+
+	void	onInit() override;
 };

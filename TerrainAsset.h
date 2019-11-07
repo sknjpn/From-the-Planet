@@ -8,6 +8,7 @@ class TerrainAsset :
 public:
 	Color	m_color;
 	bool	m_buildAvailable;
+	bool	m_isSea;
 
 	// JSON
 	void	load(const JSONValue& json) override;

@@ -35,6 +35,7 @@ public:
 	// get
 	const Vec3& getPosition() const { return m_position; }
 	const shared_ptr<TerrainAsset>& getTerrainAsset() const { return m_terrainAsset; }
+	const Array<weak_ptr<Region>>& getConnecteds() const { return m_connecteds; }
 
 	// connection
 	void	connect(const shared_ptr<Region>& to);
@@ -46,6 +47,7 @@ public:
 	const shared_ptr<FacilityState>& getFacilityState() const { return m_facilityState; }
 
 	Array<shared_ptr<Road>>	getRouteTo(const shared_ptr<Region> to) const;
+	Array<shared_ptr<Road>>	getRouteToWithSea(const shared_ptr<Region> to) const;
 
 	// road
 	shared_ptr<Road>	getRoad(const shared_ptr<Region>& to) const;

@@ -2,5 +2,6 @@
     "name": "草原",
     "type": "TerrainAsset",
     "color": "(34, 177, 76)",
+    "isSea": false,
     "buildAvailable": true
 }

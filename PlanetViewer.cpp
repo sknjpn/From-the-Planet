@@ -43,11 +43,11 @@ void PlanetViewer::update()
 	{
 		if (flv->getSelectedIndex() >= 0)
 		{
+			size_t index = flv->getSelectedIndex();
 			if (auto r = g_planetManagerPtr->m_mouseOverRegion)
 			{
-				if (MouseL.down() && !r->getFacilityState() && r->getTerrainAsset()->m_buildAvailable)
+				if (MouseL.down() && !r->getFacilityState() && r->getTerrainAsset()->m_buildAvailable && g_assetManagerPtr->getAssets<FacilityAsset>()[index]->canConstructAt(r))
 				{
-					size_t index = flv->getSelectedIndex();
 					g_planetManagerPtr->makeFacility(g_assetManagerPtr->getAssets<FacilityAsset>()[index], r);
 
 					g_planetManagerPtr->addDamage(0.1);

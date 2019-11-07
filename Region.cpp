@@ -1,6 +1,8 @@
 ﻿#include "Region.h"
 #include "PlanetManager.h"
 #include "FacilityAsset.h"
+#include "HarborAsset.h"
+#include "FacilityState.h"
 #include "TerrainAsset.h"
 #include "Road.h"
 
@@ -60,7 +62,7 @@ void Region::draw(const Mat4x4& mat) const
 	auto t = Sqrt(getArea(mat));
 	auto color = m_terrainAsset->m_color;
 
-	if(g_planetManagerPtr->m_destroy >= 0)
+	if (g_planetManagerPtr->m_destroy >= 0)
 		color = color.lerp(Palette::Red, g_planetManagerPtr->m_destroy);
 
 	draw(mat, t / 10.0, color);
@@ -107,15 +109,7 @@ Array<shared_ptr<Road>> Region::getRouteTo(const shared_ptr<Region> to) const
 	if (shared_from_this() == to) return Array<shared_ptr<Road>>();
 
 	Array<shared_ptr<Region>> list;
-	for (const auto& r : to->m_roads)
-	{
-		if (r->getTo() != to)
-		{
-			list.emplace_back(r->getTo());
-			r->getTo()->m_cost = r->getCost();
-			r->getTo()->m_from = to;
-		}
-	}
+	list.emplace_back(to);
 
 	for (int i = 0; i < list.size(); ++i)
 	{
@@ -123,8 +117,75 @@ Array<shared_ptr<Road>> Region::getRouteTo(const shared_ptr<Region> to) const
 		for (const auto& r : l->m_roads)
 		{
 			auto t = r->getTo();
-			if (t != l && t != to)
+			if (t != to)
 			{
+				if (l->getTerrainAsset()->m_isSea && !t->getTerrainAsset()->m_isSea && (!t->m_facilityState || !dynamic_pointer_cast<HarborAsset>(t->m_facilityState->m_facilityAsset))) continue;
+				if (t->getTerrainAsset()->m_isSea && !l->getTerrainAsset()->m_isSea && (!l->m_facilityState || !dynamic_pointer_cast<HarborAsset>(l->m_facilityState->m_facilityAsset))) continue;
+
+				if (!t->m_from || t->m_cost > l->m_cost + r->getCost())
+				{
+					list.emplace_back(t);
+					t->m_from = l;
+					t->m_cost = l->m_cost + r->getCost();
+				}
+			}
+		}
+	}
+
+	if (m_from)
+	{
+		Array<shared_ptr<Road>> result;
+		result.emplace_back(getRoad(m_from));
+		for (;;)
+		{
+			if (!result.back()->getTo()->m_from) break;
+
+			result.emplace_back(result.back()->getTo()->getRoad(result.back()->getTo()->m_from));
+		}
+
+		for (int i = 0; i < list.size(); ++i)
+		{
+			auto l = list[i];
+
+			l->m_cost = 0;
+			l->m_from = nullptr;
+		}
+
+		return result;
+	}
+	else
+	{
+		for (int i = 0; i < list.size(); ++i)
+		{
+			auto l = list[i];
+
+			l->m_cost = 0;
+			l->m_from = nullptr;
+		}
+
+		return Array<shared_ptr<Road>>();
+	}
+}
+
+Array<shared_ptr<Road>> Region::getRouteToWithSea(const shared_ptr<Region> to) const
+{
+	if (shared_from_this() == to) return Array<shared_ptr<Road>>();
+
+	Array<shared_ptr<Region>> list;
+	list.emplace_back(to);
+
+	for (int i = 0; i < list.size(); ++i)
+	{
+		auto l = list[i];
+		for (const auto& r : l->m_roads)
+		{
+			auto t = r->getTo();
+			if (t != to)
+			{
+				if (l->getTerrainAsset()->m_isSea && !t->getTerrainAsset()->m_isSea && (!t->m_facilityState || !dynamic_pointer_cast<HarborAsset>(t->m_facilityState->m_facilityAsset))) continue;
+				if (t->getTerrainAsset()->m_isSea && !l->getTerrainAsset()->m_isSea && (!l->m_facilityState || !dynamic_pointer_cast<HarborAsset>(l->m_facilityState->m_facilityAsset))) continue;
+				if (!t->getTerrainAsset()->m_isSea && !l->getTerrainAsset()->m_isSea) continue;
+
 				if (!t->m_from || t->m_cost > l->m_cost + r->getCost())
 				{
 					list.emplace_back(t);

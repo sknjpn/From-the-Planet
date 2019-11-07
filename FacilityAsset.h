@@ -5,6 +5,7 @@
 #include "Storage.h"
 
 class FacilityState;
+class Region;
 
 class FacilityAsset
 	: public Asset
@@ -17,6 +18,7 @@ class FacilityAsset
 
 public:
 	virtual shared_ptr<FacilityState>	makeState() = 0;
+	virtual bool canConstructAt(const shared_ptr<Region>& region) const { return true; }
 
 	const Array<Mesh>& getMeshes() const { return m_meshes; }
 	const FilePath& getAudioPath() const { return m_audio; }
