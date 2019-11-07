@@ -2,12 +2,16 @@
 
 #include "Viewer.h"
 
+class FacilityAsset;
+class RoadAsset;
+
 class FacilitiesListViewer :
 	public Viewer
 {
-	int		m_selectedIndex = -1;
-
 public:
+	shared_ptr<FacilityAsset>	m_selectedFacilityAsset;
+	shared_ptr<RoadAsset>		m_selectedRoadAsset;
+
 	FacilitiesListViewer()
 	{
 		setViewerRect(Scene::Size().x - 170, 40, 130, 600);
@@ -15,7 +19,4 @@ public:
 	
 	void	update() override;
 	void	init() override;
-
-	int		getSelectedIndex() const { return m_selectedIndex; }
-	void	resetSelectedIndex() { m_selectedIndex = 0; }
 };

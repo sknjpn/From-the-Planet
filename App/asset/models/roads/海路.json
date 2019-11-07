@@ -1,7 +1,7 @@
 ﻿{
     "name":"海路",
     "type":"RoadAsset",
-    "speed": 5.0,
+    "speed": 10.0,
     "colorInside":"(255, 255, 255, 64)",
     "colorOutside":"(0, 0, 0, 0)"
 }

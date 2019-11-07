@@ -1,6 +1,7 @@
 ﻿#include "FacilitiesListViewer.h"
 #include "AssetManager.h"
 #include "FacilityAsset.h"
+#include "RoadAsset.h"
 
 void FacilitiesListViewer::update()
 {
@@ -8,14 +9,21 @@ void FacilitiesListViewer::update()
 
 	static Font font(20, Typeface::Bold);
 
+	auto rs = g_assetManagerPtr->getAssets<RoadAsset>();
+	for (const auto& fa : rs)
 	{
-		auto f = font(U"道路");
+		if (fa->getName() == U"海路") continue;
+		auto f = font(fa->getName());
 		auto r = Rect(120, 40);
 
-		if (r.leftClicked()) m_selectedIndex = -2;
+		if (r.leftClicked())
+		{
+			m_selectedRoadAsset = fa;
+			m_selectedFacilityAsset = nullptr;
+		}
 
-		auto color = Palette::Gray;
-		if (m_selectedIndex == -2) r.draw(color.lerp(Palette::White, 0.75)).drawFrame(2.0, ColorF(1.0, 1.0));
+		auto color = fa->m_colorInside;
+		if (m_selectedRoadAsset == fa) r.draw(color.lerp(Palette::White, 0.75)).drawFrame(2.0, ColorF(1.0, 1.0));
 		else r.draw(color.lerp(Palette::White, r.mouseOver() ? 0.5 : 0.25)).drawFrame(2.0, ColorF(1.0, 1.0));
 
 		for (auto p : step(Size(-5, -5), Size(10, 10)))
@@ -26,16 +34,19 @@ void FacilitiesListViewer::update()
 	}
 
 	auto fas = g_assetManagerPtr->getAssets<FacilityAsset>();
-	for (int i = 0; i < fas.size(); ++i)
+	for (const auto& fa : fas)
 	{
-		auto& fa = fas[i];
 		auto f = font(fa->getName());
 		auto r = Rect(120, 40);
 
-		if (r.leftClicked()) m_selectedIndex = i; 
+		if (r.leftClicked())
+		{
+			m_selectedRoadAsset = nullptr;
+			m_selectedFacilityAsset = fa;
+		}
 
 		auto color = fa->getMeshes().front().m_color;
-		if (m_selectedIndex == i) r.draw(color.lerp(Palette::White, 0.75)).drawFrame(2.0, ColorF(1.0, 1.0));
+		if (m_selectedFacilityAsset == fa) r.draw(color.lerp(Palette::White, 0.75)).drawFrame(2.0, ColorF(1.0, 1.0));
 		else r.draw(color.lerp(Palette::White, r.mouseOver() ? 0.5 : 0.25)).drawFrame(2.0, ColorF(1.0, 1.0));
 
 		for (auto p : step(Size(-5, -5), Size(10, 10)))

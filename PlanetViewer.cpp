@@ -41,14 +41,13 @@ void PlanetViewer::update()
 	// 建物設置
 	if (auto flv = getChildViewer<FacilitiesListViewer>())
 	{
-		if (flv->getSelectedIndex() >= 0)
+		if (flv->m_selectedFacilityAsset)
 		{
-			size_t index = flv->getSelectedIndex();
 			if (auto r = g_planetManagerPtr->m_mouseOverRegion)
 			{
-				if (MouseL.down() && !r->getFacilityState() && r->getTerrainAsset()->m_buildAvailable && g_assetManagerPtr->getAssets<FacilityAsset>()[index]->canConstructAt(r))
+				if (MouseL.down() && !r->getFacilityState() && r->getTerrainAsset()->m_buildAvailable && flv->m_selectedFacilityAsset->canConstructAt(r))
 				{
-					g_planetManagerPtr->makeFacility(g_assetManagerPtr->getAssets<FacilityAsset>()[index], r);
+					g_planetManagerPtr->makeFacility(flv->m_selectedFacilityAsset, r);
 
 					g_planetManagerPtr->addDamage(0.1);
 
@@ -60,7 +59,7 @@ void PlanetViewer::update()
 		}
 
 		// 道路敷設
-		if (flv->getSelectedIndex() == -2)
+		if (flv->m_selectedRoadAsset)
 		{
 			auto r1 = g_planetManagerPtr->m_mouseOverRegion;
 			auto r2 = g_planetManagerPtr->m_selectedRegion;
@@ -68,8 +67,8 @@ void PlanetViewer::update()
 			{
 				if(!r1->getRoad(r2)->getRoadAsset())
 				{
-					r1->getRoad(r2)->setRoadAsset(g_assetManagerPtr->getAsset<RoadAsset>(U"砂利道"));
-					r2->getRoad(r1)->setRoadAsset(g_assetManagerPtr->getAsset<RoadAsset>(U"砂利道"));
+					r1->getRoad(r2)->setRoadAsset(flv->m_selectedRoadAsset);
+					r2->getRoad(r1)->setRoadAsset(flv->m_selectedRoadAsset);
 					g_planetManagerPtr->m_selectedRegion = g_planetManagerPtr->m_mouseOverRegion;
 					m_rCont.playOneShot(0.5);
 					g_planetManagerPtr->addDamage(0.01);
