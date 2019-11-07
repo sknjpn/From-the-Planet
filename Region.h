@@ -34,6 +34,7 @@ public:
 
 	// get
 	const Vec3& getPosition() const { return m_position; }
+	const shared_ptr<TerrainAsset>& getTerrainAsset() const { return m_terrainAsset; }
 
 	// connection
 	void	connect(const shared_ptr<Region>& to);

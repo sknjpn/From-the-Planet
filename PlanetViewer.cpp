@@ -8,6 +8,7 @@
 #include "QuarryAsset.h"
 #include "FacilitiesListViewer.h"
 #include "PlanetHealthViewer.h"
+#include "TerrainAsset.h"
 
 void PlanetViewer::init()
 {
@@ -43,7 +44,7 @@ void PlanetViewer::update()
 		{
 			if (auto r = g_planetManagerPtr->m_mouseOverRegion)
 			{
-				if (MouseL.down() && !r->getFacilityState())// && r->getHeight() > 0)
+				if (MouseL.down() && !r->getFacilityState() && r->getTerrainAsset()->m_buildAvailable)
 				{
 					size_t index = flv->getSelectedIndex();
 					g_planetManagerPtr->makeFacility(g_assetManagerPtr->getAssets<FacilityAsset>()[index], r);
@@ -62,7 +63,7 @@ void PlanetViewer::update()
 		{
 			auto r1 = g_planetManagerPtr->m_mouseOverRegion;
 			auto r2 = g_planetManagerPtr->m_selectedRegion;
-			if (r1 && r2 && r1 != r2 && r1->hasConnection(r2))// && r1->getHeight() > 0 && r2->getHeight() > 0)
+			if (r1 && r2 && r1 != r2 && r1->hasConnection(r2) && r1->getTerrainAsset()->m_buildAvailable && r2->getTerrainAsset()->m_buildAvailable)
 			{
 				if (!g_planetManagerPtr->m_roads.any([&r1, &r2](const auto& r) { return (r->getFr() == r1 && r->getTo() == r2) || (r->getFr() == r1 && r->getTo() == r2); }))
 				{
