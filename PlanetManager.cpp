@@ -170,9 +170,9 @@ void PlanetManager::makeChips()
 						if (kdtree.knnSearch(3, GetCircumcenter(positions)).all([this, r1, r2, r3](auto index) { return m_regions[index] == r1 || m_regions[index] == r2.lock() || m_regions[index] == r3.lock(); }))
 						{
 							auto& t = m_chips.emplace_back(MakeShared<Chip>(r1, r2.lock(), r3.lock()));
-							r1->m_polygon.emplace_back(t->m_center);
-							r2.lock()->m_polygon.emplace_back(t->m_center);
-							r3.lock()->m_polygon.emplace_back(t->m_center);
+							r1->m_polygon.emplace_back(t->m_circumcenter);
+							r2.lock()->m_polygon.emplace_back(t->m_circumcenter);
+							r3.lock()->m_polygon.emplace_back(t->m_circumcenter);
 						}
 					}
 				}
@@ -218,11 +218,11 @@ void PlanetManager::generateTerrain()
 
 	for (auto& r : m_regions)
 	{
-		r->m_height = Max(Abs(noise.octaveNoise(r->getPosition() * 0.01, 5)) - 0.2, 0.0);
+		auto height = Max(Abs(noise.octaveNoise(r->getPosition() * 0.01, 5)) - 0.2, 0.0);
 
-		r->m_color = r->m_height > 0.0 ? Palette::Green : Palette::Royalblue;
-		if (r->m_height > 0.3) r->m_color = Palette::Gray;
-		if (r->m_height > 0.5) r->m_color = Palette::White;
+		r->m_color = height > 0.0 ? Palette::Green : Palette::Royalblue;
+		if (height > 0.3) r->m_color = Palette::Gray;
+		if (height > 0.5) r->m_color = Palette::White;
 	}
 }
 
@@ -305,7 +305,11 @@ void PlanetManager::drawRegions(const BasicCamera3D& camera)
 	for (const auto& r : rs)
 	{
 		if (canSee(camera, r->m_position))
-			if (r->draw(mat)) mouseoverRegion = r;
+		{
+			r->draw(mat);
+
+			if (r->mouseOver(mat)) mouseoverRegion = r;
+		}
 	}
 
 	m_mouseOverRegion = mouseoverRegion;

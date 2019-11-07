@@ -22,10 +22,14 @@ class Region
 	shared_ptr<Region>	m_from;
 	double	m_cost = 0.0;
 
+	void	draw(const Mat4x4& mat, double d, Color color) const;
+	void	drawLineString(const Mat4x4& mat, double d, Color color) const;
+
 public:
-	// returns isMouseover
-	bool	draw(const Mat4x4& mat);
+	bool	mouseOver(const Mat4x4& mat) const;
+	void	draw(const Mat4x4& mat) const;
 	void	setFacilityState(const shared_ptr<FacilityState> facilityState) { m_facilityState = facilityState; }
+	double	getArea(const Mat4x4& mat) const;
 
 	// get
 	const Vec3& getPosition() const { return m_position; }

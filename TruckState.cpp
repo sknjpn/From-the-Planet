@@ -11,7 +11,7 @@ void TruckState::update()
 	const auto& fr = cr->getFr();
 	const auto& to = cr->getTo();
 
-	if ((m_progress += 0.2 / fr->getCenter().distanceFrom(to->getCenter())) > 1.0)
+	if ((m_progress += 0.2 / fr->getPosition().distanceFrom(to->getPosition())) > 1.0)
 	{
 		m_progress = 0.0;
 		m_route.pop_front();
@@ -63,5 +63,5 @@ Vec3 TruckState::getPosition() const
 	const auto& cr = getCurrentRoad();
 	const auto& fr = cr->getFr();
 	const auto& to = cr->getTo();
-	return fr->getCenter().lerp(to->getCenter(), m_progress);
+	return fr->getPosition().lerp(to->getPosition(), m_progress);
 }
