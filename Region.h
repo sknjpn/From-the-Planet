@@ -13,7 +13,6 @@ class Region
 	Vec3		m_position;
 	Array<Vec3>	m_polygon;
 	Color		m_color;
-	double		m_height;
 	weak_ptr<PlanetManager>	m_planet;
 	Array<weak_ptr<Region>>		m_connecteds;
 	Array<shared_ptr<Road>>		m_roads;
@@ -28,11 +27,8 @@ public:
 	bool	draw(const Mat4x4& mat);
 	void	setFacilityState(const shared_ptr<FacilityState> facilityState) { m_facilityState = facilityState; }
 
-	Vec3	getCenter() const { return m_position + m_position * m_height * 0.1; }
-
 	// get
 	const Vec3& getPosition() const { return m_position; }
-	double	getHeight() const { return m_height; }
 
 	// connection
 	void	connect(const shared_ptr<Region>& to);
