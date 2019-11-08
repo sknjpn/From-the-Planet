@@ -450,6 +450,7 @@
     </ClCompile>
     <ClCompile Include="Popup.cpp" />
     <ClCompile Include="FacilityConstructionPopup.cpp" />
+    <ClCompile Include="FacilityCostViewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Region.h">
@@ -539,5 +540,6 @@
     </ClInclude>
     <ClInclude Include="Popup.h" />
     <ClInclude Include="FacilityConstructionPopup.h" />
+    <ClInclude Include="FacilityCostViewer.h" />
   </ItemGroup>
 </Project>

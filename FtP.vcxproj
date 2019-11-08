@@ -237,6 +237,7 @@
     <ClCompile Include="FacilitiesListViewer.cpp" />
     <ClCompile Include="FacilityAsset.cpp" />
     <ClCompile Include="FacilityConstructionPopup.cpp" />
+    <ClCompile Include="FacilityCostViewer.cpp" />
     <ClCompile Include="FacilityState.cpp" />
     <ClCompile Include="FactoryAsset.cpp" />
     <ClCompile Include="FactoryState.cpp" />
@@ -276,6 +277,7 @@
     <ClInclude Include="FacilitiesListViewer.h" />
     <ClInclude Include="FacilityAsset.h" />
     <ClInclude Include="FacilityConstructionPopup.h" />
+    <ClInclude Include="FacilityCostViewer.h" />
     <ClInclude Include="FacilityState.h" />
     <ClInclude Include="FactoryAsset.h" />
     <ClInclude Include="FactoryState.h" />
