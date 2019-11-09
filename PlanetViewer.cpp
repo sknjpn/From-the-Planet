@@ -36,49 +36,109 @@ void PlanetViewer::update()
 	g_planetManagerPtr->update();
 	g_planetManagerPtr->drawRegions(m_camera);
 	if (g_planetManagerPtr->m_destroy < 0) g_planetManagerPtr->drawRoads(m_camera);
-	g_planetManagerPtr->drawFacilities(m_camera);
 
-	// 建物設置
+	if (auto phv = getChildViewer<PlanetHealthViewer>()) phv->setExpectedDecrease(0.0);
+
 	if (auto flv = getChildViewer<FacilitiesListViewer>())
 	{
-		if (flv->m_selectedFacilityAsset)
-		{
-			if (auto r = g_planetManagerPtr->m_mouseOverRegion)
-			{
-				if (MouseL.down() && !r->getFacilityState() && r->getTerrainAsset()->m_buildAvailable && flv->m_selectedFacilityAsset->canConstructAt(r))
-				{
-					g_planetManagerPtr->makeFacility(flv->m_selectedFacilityAsset, r);
+		const auto mr = g_planetManagerPtr->m_mouseOverRegion;
+		const auto sr = g_planetManagerPtr->m_selectedRegion;
+		const Vec2 mrp = mr ? TranslateWorldToScreen(m_camera.getMat4x4(), mr->getPosition()) : Vec2::Zero();
+		const Vec2 srp = sr ? TranslateWorldToScreen(m_camera.getMat4x4(), sr->getPosition()) : Vec2::Zero();
 
-					m_fCont.playOneShot(0.5);
+		if (mr && (flv->m_selectedFacilityAsset || flv->m_selectedRoadAsset))
+		{
+			for (double th = 0; th < Math::TwoPi; th += 0.1)
+				Line(mrp.movedBy(0, -48), mrp).movedBy(Vec2::Right(3).rotated(th)).drawArrow(12, Vec2(20, 20), Palette::Black);
+		}
+
+		// 建物設置
+		if (flv->m_selectedFacilityAsset && mr)
+		{
+			if (!mr->getFacilityState() && mr->getTerrainAsset()->m_buildAvailable && flv->m_selectedFacilityAsset->canConstructAt(mr))
+			{
+				Line(mrp.movedBy(0, -48), mrp).drawArrow(12, Vec2(20, 20), Palette::Green);
+
+				getChildViewer<PlanetHealthViewer>()->setExpectedDecrease(flv->m_selectedFacilityAsset->getConstructinDamage());
+
+				if (MouseL.down())
+				{
+					g_planetManagerPtr->makeFacility(flv->m_selectedFacilityAsset, mr);
+
+					m_fCont.playOneShot(0.5 * masterVolume);
+
 					// update
 					for (const auto& fs : g_planetManagerPtr->m_facilityStates) fs->updateConnected();
 				}
 			}
+			else Line(mrp.movedBy(0, -48), mrp).drawArrow(12, Vec2(20, 20), Palette::Red);
 		}
 
 		// 道路敷設
-		if (flv->m_selectedRoadAsset)
+		if (flv->m_selectedRoadAsset && mr)
 		{
-			auto r1 = g_planetManagerPtr->m_mouseOverRegion;
-			auto r2 = g_planetManagerPtr->m_selectedRegion;
-			if (r1 && r2 && r1 != r2 && r1->hasConnection(r2) && r1->getTerrainAsset()->m_buildAvailable && r2->getTerrainAsset()->m_buildAvailable)
+			if (sr)
 			{
-				if(!r1->getRoad(r2)->getRoadAsset())
-				{
-					r1->getRoad(r2)->setRoadAsset(flv->m_selectedRoadAsset);
-					r2->getRoad(r1)->setRoadAsset(flv->m_selectedRoadAsset);
-					g_planetManagerPtr->m_selectedRegion = g_planetManagerPtr->m_mouseOverRegion;
-					m_rCont.playOneShot(0.5);
-					g_planetManagerPtr->addDamage(flv->m_selectedRoadAsset->getConstructinDamage());
+				const auto func = [](const shared_ptr<Road>& r) { return !r->getFr()->getTerrainAsset()->m_isSea && !r->getTo()->getTerrainAsset()->m_isSea; };
+				g_planetManagerPtr->bakeCostMap(sr, func);
+				const auto route = g_planetManagerPtr->getRoute(mr, sr);
 
-					// update
-					for (const auto& fs : g_planetManagerPtr->m_facilityStates) fs->updateConnected();
+				for (double th = 0; th < Math::TwoPi; th += 0.1)
+					Line(srp.movedBy(0, -48), srp).movedBy(Vec2::Right(3).rotated(th)).drawArrow(12, Vec2(20, 20), Palette::Black);
+
+				if (route)
+				{
+					double damage = 0.0;
+					for (const auto& road : route)
+					{
+						if (road->getRoadAsset() != flv->m_selectedRoadAsset)
+							damage += flv->m_selectedRoadAsset->getConstructinDamage();
+
+						auto p0 = road->getFr()->getPosition();
+						auto p1 = road->getTo()->getPosition();
+						auto c = (p0 + p1) / 2.0;
+						auto d = (p1 - p0).cross(p1).normalized() * 1.5;
+						Mesh(Array<Vec3>({ p0 + d, p0 - d, p1 - d, p1 + d }), ColorF(1.0, 0.5), 4.0).drawFill(m_camera.getMat4x4());
+					}
+
+					Line(mrp.movedBy(0, -48), mrp).drawArrow(12, Vec2(20, 20), Palette::Green);
+					Line(srp.movedBy(0, -48), srp).drawArrow(12, Vec2(20, 20), Palette::Green);
+
+					getChildViewer<PlanetHealthViewer>()->setExpectedDecrease(damage);
+
+					if (MouseL.up())
+					{
+						for (const auto& r : route)
+						{
+							r->setRoadAsset(flv->m_selectedRoadAsset);
+							r->getOppositeRoad()->setRoadAsset(flv->m_selectedRoadAsset);
+						}
+						m_rCont.playOneShot(0.5 * masterVolume);
+						g_planetManagerPtr->addDamage(damage);
+
+						// update
+						for (const auto& fs : g_planetManagerPtr->m_facilityStates) fs->updateConnected();
+					}
 				}
+				else
+				{
+					Line(mrp.movedBy(0, -48), mrp).drawArrow(12, Vec2(20, 20), Palette::Red);
+					Line(srp.movedBy(0, -48), srp).drawArrow(12, Vec2(20, 20), Palette::Red);
+				}
+			}
+			else
+			{
+				if (mr->getTerrainAsset()->m_buildAvailable) Line(mrp.movedBy(0, -48), mrp).drawArrow(12, Vec2(20, 20), Palette::Green);
+				else Line(mrp.movedBy(0, -48), mrp).drawArrow(12, Vec2(20, 20), Palette::Red);
 			}
 		}
 
 		if (g_planetManagerPtr->m_destroy >= 0) flv->destroy();
 	}
+
+	g_planetManagerPtr->updateMouseOver(m_camera);
+
+	g_planetManagerPtr->drawFacilities(m_camera);
 
 	{
 		static Font font(80, Typeface::Bold);

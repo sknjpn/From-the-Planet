@@ -24,6 +24,8 @@ public:
 	const shared_ptr<RoadAsset>& getRoadAsset() const { return m_roadAsset; }
 	double	getLength() const;
 
+	shared_ptr<Road> getOppositeRoad() const;
+
 	double	getCost() const;
 };
 

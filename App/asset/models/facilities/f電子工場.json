@@ -5,23 +5,15 @@
   "sound": "sound/gun-gird1.mp3",
   "material": [
       {
-          "name": "銅",
-          "size": 3
-      },
-      {
           "name": "鉄",
-          "size": 7
+          "size": 20
       },
       {
-          "name": "機械部品",
-          "size": 3
+          "name": "ネジ",
+          "size": 5
       }
   ],
   "import": [
-    {
-      "name": "石炭",
-      "size": 1
-    },
     {
       "name": "銅",
       "size": 5
@@ -31,7 +23,7 @@
       "size": 5
     }
   ],
-  "export": "電子部品",
+  "export": "回路",
   "meshes": [
     {
       "vertices": [

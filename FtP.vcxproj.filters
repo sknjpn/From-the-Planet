@@ -449,8 +449,22 @@
       <Filter>Program Files\Planet\Facility</Filter>
     </ClCompile>
     <ClCompile Include="Popup.cpp" />
-    <ClCompile Include="FacilityConstructionPopup.cpp" />
-    <ClCompile Include="FacilityCostViewer.cpp" />
+    <ClCompile Include="FacilityDescPopup.cpp">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClCompile>
+    <ClCompile Include="FacilityConstructionPopup.cpp">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClCompile>
+    <ClCompile Include="FacilityCostViewer.cpp">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectedArrowViewer.cpp" />
+    <ClCompile Include="TitleViewer.cpp" />
+    <ClCompile Include="ClearViewer.cpp" />
+    <ClCompile Include="PlanetManager_CostMap.cpp">
+      <Filter>Program Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverViewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Region.h">
@@ -539,7 +553,18 @@
       <Filter>Program Files\Planet\Facility</Filter>
     </ClInclude>
     <ClInclude Include="Popup.h" />
-    <ClInclude Include="FacilityConstructionPopup.h" />
-    <ClInclude Include="FacilityCostViewer.h" />
+    <ClInclude Include="FacilityDescPopup.h">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClInclude>
+    <ClInclude Include="FacilityCostViewer.h">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClInclude>
+    <ClInclude Include="FacilityConstructionPopup.h">
+      <Filter>Program Files\Planet\Facility</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectedArrowViewer.h" />
+    <ClInclude Include="TitleViewer.h" />
+    <ClInclude Include="ClearViewer.h" />
+    <ClInclude Include="GameOverViewer.h" />
   </ItemGroup>
 </Project>

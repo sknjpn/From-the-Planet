@@ -322,7 +322,7 @@ void PlanetManager::update()
 void PlanetManager::destroy()
 {
 	m_audio = Audio(U"asset/models/facilities/sound/magic-quake2.mp3");
-	m_audio.playOneShot(0.5, 1.0);
+	m_audio.playOneShot(0.5 * masterVolume);
 	m_destroy = 0.0;
 }
 
@@ -337,26 +337,38 @@ void PlanetManager::addDamage(double value)
 	}
 }
 
+void PlanetManager::updateMouseOver(const BasicCamera3D& camera)
+{
+	auto mat = camera.getMat4x4();
+
+	// 見えるものを近い順に整理
+	const auto rs = m_regions
+		.removed_if([&camera, this](const auto& r) { return !canSee(camera, r->m_position); })
+		.sorted_by([&camera](const auto& r1, const auto& r2) { return camera.getEyePosition().distanceFromSq(r1->getPosition()) > camera.getEyePosition().distanceFromSq(r2->getPosition()); });
+
+	// MouseOver
+	m_mouseOverRegion = nullptr;
+	for (const auto& r : rs)
+		if (r->mouseOver(mat)) { m_mouseOverRegion = r; break; }
+	if (m_mouseOverRegion) m_mouseOverRegion->draw(mat, Sqrt(m_mouseOverRegion->getArea(mat)) / 5.0, ColorF(1.0, 0.1));
+
+	// Selected
+	if (MouseL.up()) m_selectedRegion = nullptr;
+	if (MouseL.down()) m_selectedRegion = m_mouseOverRegion;
+}
+
 void PlanetManager::drawRegions(const BasicCamera3D& camera)
 {
 	auto mat = camera.getMat4x4();
-	shared_ptr<Region> mouseoverRegion;
 
-	if (MouseL.up()) m_selectedRegion = nullptr;
+	// 見えるものを近い順に整理
+	const auto rs = m_regions
+		.removed_if([&camera, this](const auto& r) { return !canSee(camera, r->m_position); })
+		.sorted_by([&camera](const auto& r1, const auto& r2) { return camera.getEyePosition().distanceFromSq(r1->getPosition()) > camera.getEyePosition().distanceFromSq(r2->getPosition()); });
 
-	auto rs = m_regions.sorted_by([&camera](const auto& r1, const auto& r2) { return camera.getEyePosition().distanceFromSq(r1->getPosition()) > camera.getEyePosition().distanceFromSq(r2->getPosition()); });
+	// draw
 	for (const auto& r : rs)
-	{
-		if (canSee(camera, r->m_position))
-		{
-			r->draw(mat);
-
-			if (r->mouseOver(mat)) mouseoverRegion = r;
-		}
-	}
-
-	m_mouseOverRegion = mouseoverRegion;
-	if (MouseL.down()) m_selectedRegion = mouseoverRegion;
+		r->draw(mat);
 }
 
 void PlanetManager::drawChips(const BasicCamera3D& camera)

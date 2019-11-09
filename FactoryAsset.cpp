@@ -1,6 +1,7 @@
 ﻿#include "FactoryAsset.h"
 #include "FactoryState.h"
 #include "AssetManager.h"
+#include "FacilityDescPopup.h"
 #include "ItemAsset.h"
 
 shared_ptr<FacilityState> FactoryAsset::makeState()
@@ -8,18 +9,77 @@ shared_ptr<FacilityState> FactoryAsset::makeState()
 	return MakeShared<FactoryState>();
 }
 
-String FactoryAsset::getBuildText() const
+void FactoryAsset::initOnDescPopup(const shared_ptr<FacilityDescPopup>& popup) const
 {
-	String result;
+}
 
-	for (const auto& i : m_import.getItemList())
-		result += Format(U" ", i.first->getName(), U"を", i.second, U"個\n");
+void FactoryAsset::updateOnDescPopup(const shared_ptr<FacilityDescPopup>& popup) const
+{
+	popup->moveDrawPos(5, 5);
 
-	result += Format(U"を使って", m_export->getName(), U"を作る工場\n");
+	// タイトル
+	{
+		static Font font(20, Typeface::Bold);
 
-	result += FacilityAsset::getBuildText();
+		font(getName()).draw();
 
-	return result;
+		popup->moveDrawPos(0, 32);
+	}
+
+	// 説明
+	{
+		static Font font(16, Typeface::Bold);
+
+		{
+			auto f = font(U"資源を持ち込み、\n新たな資源を製作します");
+			f.draw();
+			popup->moveDrawPos(0, f.region().h + 8);
+		}
+
+		{
+			auto dp = popup->getDrawPos();
+
+			font(U"入力:").draw();
+			popup->moveDrawPos(40, 0);
+
+			for (const auto& item : m_import.getItemList())
+			{
+				// 画像表示
+				item.first->getTexture().resized(24, 24).draw();
+				popup->moveDrawPos(24, 0);
+
+				// 名前と個数表示
+				const auto f = font(item.first->getName(), U"x", item.second);
+				f.draw();
+				popup->moveDrawPos(f.region().w, 0);
+
+				// 幅取り
+				popup->moveDrawPos(8, 0);
+			}
+
+			popup->setDrawPos(dp.movedBy(0, 24));
+		}
+
+		{
+			auto dp = popup->getDrawPos();
+
+			font(U"出力:").draw();
+			popup->moveDrawPos(40, 0);
+
+			{
+				// 画像表示
+				m_export->getTexture().resized(24, 24).draw();
+				popup->moveDrawPos(24, 0);
+
+				// 名前と個数表示
+				const auto f = font(m_export->getName());
+				f.draw();
+				popup->moveDrawPos(f.boundingRect().w, 0);
+			}
+
+			popup->setDrawPos(dp.movedBy(0, 24));
+		}
+	}
 }
 
 void FactoryAsset::load(const JSONValue& json)

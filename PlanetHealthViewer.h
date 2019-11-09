@@ -5,6 +5,8 @@
 class PlanetHealthViewer
 	: public Viewer
 {
+	double	m_expectedDecrease = 0;
+
 public:
 
 	PlanetHealthViewer()
@@ -13,6 +15,8 @@ public:
 	}
 
 	void update() override;
+
+	void	setExpectedDecrease(double expectedDecrease) { m_expectedDecrease = expectedDecrease; }
 
 	ColorF GetBarColor(double rate)
 	{

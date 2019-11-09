@@ -2,6 +2,7 @@
 #include "HarborState.h"
 #include "Region.h"
 #include "TerrainAsset.h"
+#include "FacilityDescPopup.h"
 
 shared_ptr<FacilityState> HarborAsset::makeState()
 {
@@ -16,13 +17,36 @@ bool HarborAsset::canConstructAt(const shared_ptr<Region>& region) const
 	return false;
 }
 
-String HarborAsset::getBuildText() const
+void HarborAsset::initOnDescPopup(const shared_ptr<FacilityDescPopup>& popup) const
 {
-	String result;
+}
 
-	result += Format(U"臨海にのみ建設でき、他の港と海路を構築できる\n");
+void HarborAsset::updateOnDescPopup(const shared_ptr<FacilityDescPopup>& popup) const
+{
+	popup->moveDrawPos(5, 5);
 
-	result += FacilityAsset::getBuildText();
+	// タイトル
+	{
+		static Font font(20, Typeface::Bold);
+		font(getName()).draw();
 
-	return result;
+		popup->moveDrawPos(0, 32);
+	}
+
+	// 説明
+	{
+		static Font font(16, Typeface::Bold);
+
+		{
+			auto f = font(U"海路を利用して\n遠隔地に早く資源を届けます");
+			f.draw();
+			popup->moveDrawPos(0, f.region().h);
+		}
+
+		{
+			auto f = font(U"沿岸にのみ建設可");
+			f.draw(Vec2::Zero(), Palette::Red);
+			popup->moveDrawPos(0, f.region().h);
+		}
+	}
 }

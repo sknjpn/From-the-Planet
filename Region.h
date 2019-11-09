@@ -4,6 +4,7 @@ class PlanetManager;
 class FacilityAsset;
 class FacilityState;
 class TerrainAsset;
+class NaturalResourceAsset;
 class Road;
 
 class Region
@@ -18,24 +19,32 @@ class Region
 	Array<shared_ptr<Road>>		m_roads;
 	shared_ptr<TerrainAsset>	m_terrainAsset;
 	shared_ptr<FacilityState>	m_facilityState;
+	shared_ptr<NaturalResourceAsset>	m_naturalResourceAsset;
 
 	// for 探索
 	shared_ptr<Region>	m_from;
 	double	m_cost = 0.0;
 
-	void	draw(const Mat4x4& mat, double d, Color color) const;
 	void	drawLineString(const Mat4x4& mat, double d, Color color) const;
 
 public:
 	bool	mouseOver(const Mat4x4& mat) const;
 	void	draw(const Mat4x4& mat) const;
+	void	draw(const Mat4x4& mat, double d, Color color) const;
 	void	setFacilityState(const shared_ptr<FacilityState> facilityState) { m_facilityState = facilityState; }
 	double	getArea(const Mat4x4& mat) const;
+
+	void	setNaturalResourceAsset(const shared_ptr<NaturalResourceAsset>& naturalResourceAsset) { m_naturalResourceAsset = naturalResourceAsset; }
+
+	// Cost Map
+	const shared_ptr<Region>& getFrom() const { return m_from; }
+	double getCost() const { return m_cost; }
 
 	// get
 	const Vec3& getPosition() const { return m_position; }
 	const shared_ptr<TerrainAsset>& getTerrainAsset() const { return m_terrainAsset; }
 	const Array<weak_ptr<Region>>& getConnecteds() const { return m_connecteds; }
+	const shared_ptr<NaturalResourceAsset>& getNaturalResourceAsset() const { return m_naturalResourceAsset; }
 
 	// connection
 	void	connect(const shared_ptr<Region>& to);
@@ -45,9 +54,7 @@ public:
 	// facility
 	void	makeFacilityState(const shared_ptr<FacilityAsset>& facilityAsset);
 	const shared_ptr<FacilityState>& getFacilityState() const { return m_facilityState; }
-
-	Array<shared_ptr<Road>>	getRouteTo(const shared_ptr<Region> to) const;
-	Array<shared_ptr<Road>>	getRouteToWithSea(const shared_ptr<Region> to) const;
+	bool	hasHarbor() const;
 
 	// road
 	shared_ptr<Road>	getRoad(const shared_ptr<Region>& to) const;

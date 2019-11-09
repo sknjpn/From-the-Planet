@@ -2,7 +2,9 @@
 #include "FacilityAsset.h"
 #include "PlanetManager.h"
 #include "Region.h"
+#include "Road.h"
 #include "TruckState.h"
+#include "TerrainAsset.h"
 
 void FacilityState::draw(const BasicCamera3D& camera)
 {
@@ -38,7 +40,6 @@ void FacilityState::update()
 			m_constructionProgress = 1.0;
 
 			onConstructed();
-
 		}
 	}
 
@@ -59,13 +60,27 @@ void FacilityState::exportItem()
 		{
 			if (m_export.numItem(i.first) > 0)
 			{
+				// Itemのやり取り
 				fs->m_inTransit.addItem(i.first);
 				fs->m_need.pullItem(i.first);
 				m_export.pullItem(i.first);
+				
+				// インスタンス
 				auto& ts = g_planetManagerPtr->m_truckStates.emplace_back(MakeShared<TruckState>());
-				ts->m_route = m_region.lock()->getRouteTo(fs->m_region.lock());
 				ts->m_itemAsset = i.first;
 				ts->m_progress = 0.0;
+
+				// Cost Map
+				const auto func = [](const shared_ptr<Road>& r) { return
+					(r->getTo()->getTerrainAsset()->m_isSea && r->getFr()->hasHarbor()) ||
+					(r->getTo()->hasHarbor() && r->getTo()->getFacilityState()->m_isActive && r->getFr()->getTerrainAsset()->m_isSea) ||
+					(!r->getTo()->getTerrainAsset()->m_isSea && !r->getTo()->hasHarbor() && !r->getFr()->getTerrainAsset()->m_isSea) ||
+					(!r->getTo()->getTerrainAsset()->m_isSea && r->getTo()->hasHarbor() && r->getTo()->getFacilityState()->m_isActive && !r->getFr()->getTerrainAsset()->m_isSea) ||
+					(r->getTo()->getTerrainAsset()->m_isSea && r->getFr()->getTerrainAsset()->m_isSea);
+				};
+				g_planetManagerPtr->bakeCostMap(fs->m_region.lock(), func);
+				ts->m_route = g_planetManagerPtr->getRoute(m_region.lock(), fs->m_region.lock());
+
 				return;
 			}
 		}
@@ -84,9 +99,18 @@ void FacilityState::updateConnected()
 {
 	m_connected.clear();
 
-	for (const auto& fs : g_planetManagerPtr->m_facilityStates)
-		if (fs != shared_from_this() && !m_region.lock()->getRouteTo(fs->m_region.lock()).isEmpty())
-			m_connected.emplace_back(fs);
+	const auto func = [](const shared_ptr<Road>& r) { return
+		(r->getFr()->getTerrainAsset()->m_isSea && r->getTo()->hasHarbor()) ||
+		(r->getFr()->hasHarbor() && r->getFr()->getFacilityState()->m_isActive && r->getTo()->getTerrainAsset()->m_isSea) ||
+		(!r->getFr()->getTerrainAsset()->m_isSea && !r->getFr()->hasHarbor() && !r->getTo()->getTerrainAsset()->m_isSea) ||
+		(!r->getFr()->getTerrainAsset()->m_isSea && r->getFr()->hasHarbor() && r->getFr()->getFacilityState()->m_isActive && !r->getTo()->getTerrainAsset()->m_isSea) ||
+		(r->getFr()->getTerrainAsset()->m_isSea && r->getTo()->getTerrainAsset()->m_isSea);
+	};
 
-	m_connected.sort_by([this](const auto& fs1, const auto& fs2) {return fs1->getPosition().distanceFromSq(getPosition()) < fs2->getPosition().distanceFromSq(getPosition()); });
+	g_planetManagerPtr->bakeCostMap(m_region.lock(), func);
+
+	for (const auto& fs : g_planetManagerPtr->m_facilityStates)
+		if (fs->m_region.lock()->getFrom()) m_connected.emplace_back(fs);
+
+	m_connected.sort_by([this](const auto& fs1, const auto& fs2) {return fs1->m_region.lock()->getCost() < fs2->m_region.lock()->getCost(); });
 }

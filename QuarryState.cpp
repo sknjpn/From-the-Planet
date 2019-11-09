@@ -1,6 +1,8 @@
 ﻿#include "QuarryState.h"
 #include "QuarryAsset.h"
 #include "PlanetManager.h"
+#include "NaturalResourceAsset.h"
+#include "Region.h"
 
 void QuarryState::update()
 {
@@ -15,9 +17,29 @@ void QuarryState::update()
 			m_progress -= Random(0.9, 1.0);
 			m_export.addItem(asset->m_export);
 
-			g_planetManagerPtr->addDamage(0.004);
+			g_planetManagerPtr->addDamage(0.005);
 
-			m_audio.playOneShot(m_volume * 0.8, 1.0);
+			m_audio.playOneShot(masterVolume * 0.5);
 		}
 	}
+}
+
+void QuarryState::onInit()
+{
+	FacilityState::onInit();
+
+	Array<shared_ptr<Region>> regions;
+	regions.emplace_back(m_region);
+
+	for (int i = 0; i < regions.size(); ++i)
+	{
+		const auto region = regions[i];
+
+		for (const auto& r : region->getConnecteds())
+			if (r.lock()->getTerrainAsset() == m_region.lock()->getTerrainAsset() && !regions.any([r](const auto& it) { return r.lock() == it; }))
+				regions.emplace_back(r);
+	}
+
+	for (const auto& r : regions)
+		r->setNaturalResourceAsset(dynamic_pointer_cast<QuarryAsset>(m_facilityAsset)->m_export);
 }

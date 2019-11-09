@@ -24,7 +24,7 @@ public:
 		, m_rCont(U"asset/models/facilities/sound/punch-real1.mp3")
 	{
 		m_audio.setLoop(true);
-		m_audio.setVolume(0.5);
+		m_audio.setVolume(0.8);
 		m_audio.play();
 	}
 

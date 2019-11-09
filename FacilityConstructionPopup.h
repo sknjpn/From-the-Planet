@@ -12,6 +12,7 @@ class FacilityConstructionPopup :
 public:
 	FacilityConstructionPopup(const shared_ptr<FacilityAsset>& facilityAsset);
 
-	void	update();
+	void	update() override;
+	void	init() override;
 };
 

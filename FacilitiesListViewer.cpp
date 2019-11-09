@@ -3,6 +3,7 @@
 #include "FacilityAsset.h"
 #include "RoadAsset.h"
 #include "FacilityConstructionPopup.h"
+#include "SelectedArrowViewer.h"
 
 void FacilitiesListViewer::update()
 {
@@ -21,6 +22,10 @@ void FacilitiesListViewer::update()
 		{
 			m_selectedRoadAsset = fa;
 			m_selectedFacilityAsset = nullptr;
+
+			auto sav = getChildViewer<SelectedArrowViewer>();
+			if (!sav) sav = addChildViewer<SelectedArrowViewer>();
+			sav->setViewerPos(getViewerRect().pos + getDrawPos() - Vec2(48, 0));
 		}
 
 		auto color = fa->m_colorInside;
@@ -44,6 +49,10 @@ void FacilitiesListViewer::update()
 		{
 			m_selectedRoadAsset = nullptr;
 			m_selectedFacilityAsset = fa;
+
+			auto sav = getChildViewer<SelectedArrowViewer>();
+			if (!sav) sav = addChildViewer<SelectedArrowViewer>();
+			sav->setViewerPos(getViewerRect().pos + getDrawPos() - Vec2(48, 0));
 		}
 
 		if (r.contains(Cursor::PreviousPosF()))
@@ -63,7 +72,7 @@ void FacilitiesListViewer::update()
 			}
 		}
 
-		auto color = fa->getMeshes().front().m_color;
+		auto color = fa->getColor();
 		if (m_selectedFacilityAsset == fa) r.draw(color.lerp(Palette::White, 0.75)).drawFrame(2.0, ColorF(1.0, 1.0));
 		else r.draw(color.lerp(Palette::White, r.mouseOver() ? 0.5 : 0.25)).drawFrame(2.0, ColorF(1.0, 1.0));
 
@@ -73,6 +82,10 @@ void FacilitiesListViewer::update()
 
 		moveDrawPos(0, 48);
 	}
+
+	if (!m_selectedFacilityAsset && !m_selectedRoadAsset)
+		if (auto sav = getChildViewer<SelectedArrowViewer>())
+			sav->destroy();
 }
 
 void FacilitiesListViewer::init()

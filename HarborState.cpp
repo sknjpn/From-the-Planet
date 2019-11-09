@@ -10,15 +10,32 @@ void HarborState::onInit()
 {
 	FacilityState::onInit();
 
-	auto seaRoad = g_assetManagerPtr->getAsset<RoadAsset>(U"海路");
+	// Cost Map
+	const auto func = [](const shared_ptr<Road>& r) { return
+		(r->getFr()->getTerrainAsset()->m_isSea && r->getTo()->hasHarbor()) ||
+		(r->getFr()->hasHarbor() && r->getTo()->getTerrainAsset()->m_isSea) ||
+		(r->getFr()->getTerrainAsset()->m_isSea && r->getTo()->getTerrainAsset()->m_isSea);
+	};
+
+	g_planetManagerPtr->bakeCostMap(m_region.lock(), func);
+
+	const auto seaRoad = g_assetManagerPtr->getAsset<RoadAsset>(U"海路");
 	for (const auto& fs : g_planetManagerPtr->m_facilityStates)
 	{
-		if (shared_from_this() != fs && dynamic_pointer_cast<HarborState>(fs))
+		if (fs->m_region.lock()->getFrom() && dynamic_pointer_cast<HarborState>(fs))
 		{
-			const auto route1 = m_region.lock()->getRouteToWithSea(fs->m_region.lock());
-			const auto route2 = fs->m_region.lock()->getRouteToWithSea(m_region.lock());
-			for (const auto& r : route1) r->setRoadAsset(seaRoad);
-			for (const auto& r : route2) r->setRoadAsset(seaRoad);
+			const auto route = g_planetManagerPtr->getRoute(fs->m_region.lock(), m_region.lock());
+			for (const auto& r : route)
+			{
+				r->setRoadAsset(seaRoad);
+				r->getOppositeRoad()->setRoadAsset(seaRoad);
+			}
 		}
 	}
+}
+
+void HarborState::onConstructed()
+{
+	for (const auto& fs : g_planetManagerPtr->m_facilityStates)
+		fs->updateConnected();
 }

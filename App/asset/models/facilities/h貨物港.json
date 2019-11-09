@@ -1,12 +1,12 @@
 {
     "name": "貨物港",
     "type": "HarborAsset",
-    "constructionDamage": 0.5,
+    "constructionDamage": 0.4,
     "sound": "sound/sword-clash4.mp3",
     "material": [
         {
             "name": "石",
-            "size": 10
+            "size": 20
         }
     ],
     "meshes": [

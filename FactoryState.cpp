@@ -19,7 +19,7 @@ void FactoryState::update()
 
 			g_planetManagerPtr->addDamage(0.01);
 
-			m_audio.playOneShot(m_volume, 1.0);
+			m_audio.playOneShot(masterVolume * 0.75, 1.0);
 		}
 	}
 }

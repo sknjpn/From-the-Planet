@@ -234,13 +234,16 @@
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="AssetManager_MakeModel.cpp" />
     <ClCompile Include="Chip.cpp" />
+    <ClCompile Include="ClearViewer.cpp" />
     <ClCompile Include="FacilitiesListViewer.cpp" />
     <ClCompile Include="FacilityAsset.cpp" />
     <ClCompile Include="FacilityConstructionPopup.cpp" />
     <ClCompile Include="FacilityCostViewer.cpp" />
+    <ClCompile Include="FacilityDescPopup.cpp" />
     <ClCompile Include="FacilityState.cpp" />
     <ClCompile Include="FactoryAsset.cpp" />
     <ClCompile Include="FactoryState.cpp" />
+    <ClCompile Include="GameOverViewer.cpp" />
     <ClCompile Include="GetCircumcenter.cpp" />
     <ClCompile Include="HarborAsset.cpp" />
     <ClCompile Include="HarborState.cpp" />
@@ -253,6 +256,7 @@
     <ClCompile Include="NaturalResourceAsset.cpp" />
     <ClCompile Include="PlanetHealthViewer.cpp" />
     <ClCompile Include="PlanetManager.cpp" />
+    <ClCompile Include="PlanetManager_CostMap.cpp" />
     <ClCompile Include="PlanetViewer.cpp" />
     <ClCompile Include="Popup.cpp" />
     <ClCompile Include="QuarryAsset.cpp" />
@@ -260,12 +264,14 @@
     <ClCompile Include="Region.cpp" />
     <ClCompile Include="Road.cpp" />
     <ClCompile Include="RoadAsset.cpp" />
+    <ClCompile Include="SelectedArrowViewer.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Storage.cpp" />
     <ClCompile Include="TerrainAsset.cpp" />
+    <ClCompile Include="TitleViewer.cpp" />
     <ClCompile Include="Translate.cpp" />
     <ClCompile Include="TruckState.cpp" />
     <ClCompile Include="Viewer.cpp" />
@@ -274,13 +280,16 @@
     <ClInclude Include="Asset.h" />
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Chip.h" />
+    <ClInclude Include="ClearViewer.h" />
     <ClInclude Include="FacilitiesListViewer.h" />
     <ClInclude Include="FacilityAsset.h" />
     <ClInclude Include="FacilityConstructionPopup.h" />
     <ClInclude Include="FacilityCostViewer.h" />
+    <ClInclude Include="FacilityDescPopup.h" />
     <ClInclude Include="FacilityState.h" />
     <ClInclude Include="FactoryAsset.h" />
     <ClInclude Include="FactoryState.h" />
+    <ClInclude Include="GameOverViewer.h" />
     <ClInclude Include="GetCircumcenter.h" />
     <ClInclude Include="HarborAsset.h" />
     <ClInclude Include="HarborState.h" />
@@ -299,9 +308,11 @@
     <ClInclude Include="Region.h" />
     <ClInclude Include="Road.h" />
     <ClInclude Include="RoadAsset.h" />
+    <ClInclude Include="SelectedArrowViewer.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Storage.h" />
     <ClInclude Include="TerrainAsset.h" />
+    <ClInclude Include="TitleViewer.h" />
     <ClInclude Include="Translate.h" />
     <ClInclude Include="TruckState.h" />
     <ClInclude Include="Viewer.h" />

@@ -8,4 +8,5 @@ class HarborState :
 public:
 
 	void	onInit() override;
+	void	onConstructed() override;
 };

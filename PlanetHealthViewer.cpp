@@ -9,5 +9,6 @@ void PlanetHealthViewer::update()
 	auto size = getViewerSize();
 	RectF(size).draw(Palette::Black);
 	RectF(size.x * d, size.y).draw(GetBarColor(d));
+	RectF(size.x * (d - m_expectedDecrease), 0, size.x * m_expectedDecrease, size.y).draw(ColorF(0.0, 0.5));
 	RectF(size).drawFrame(5.0, 0.0, Palette::White);
 }

@@ -29,6 +29,19 @@ public:
 		, m_sw(true)
 	{}
 
+	void	reset()
+	{
+		m_regions.clear();
+		m_chips.clear();
+		m_facilityStates.clear();
+		m_truckStates.clear();
+		m_radius = 100.0;
+		m_destroy = -1;
+		m_health = 1.0;
+		m_mouseOverRegion = nullptr;
+		m_selectedRegion = nullptr;
+	}
+
 	const shared_ptr<FacilityState>& makeFacility(const shared_ptr<FacilityAsset> facilityAsset, const shared_ptr<Region> region);
 
 	void	generateRegions(size_t n);
@@ -44,10 +57,18 @@ public:
 	void	destroy();
 	void	addDamage(double value);
 
+	void	updateMouseOver(const BasicCamera3D& camera);
+
 	void	drawRegions(const BasicCamera3D& camera);
 	void	drawChips(const BasicCamera3D& camera);
 	void	drawRoads(const BasicCamera3D& camera);
 	void	drawFacilities(const BasicCamera3D& camera);
+
+	// Using CostMap
+	void	resetCostMap();
+	void	bakeCostMap(const shared_ptr<Region>& from, function<bool(const shared_ptr<Road>&)> func);
+	Array<shared_ptr<Road>>	getRoute(const shared_ptr<Region> from, const shared_ptr<Region> to) const;
+	double	getCost(const shared_ptr<Region> from, const shared_ptr<Region> to) const;
 	
 	bool	canSee(const BasicCamera3D& camera, const Vec3& position) const;
 };

@@ -10,7 +10,7 @@
     },
     {
       "name": "鉄",
-      "size": 10
+      "size": 15
     }
   ],
   "import": [
@@ -23,7 +23,7 @@
       "size": 3
     }
   ],
-  "export": "機械部品",
+  "export": "ネジ",
   "meshes": [
     {
       "vertices": [

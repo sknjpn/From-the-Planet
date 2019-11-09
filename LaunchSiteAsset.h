@@ -8,6 +8,7 @@ class LaunchSiteAsset :
 public:
 	shared_ptr<FacilityState>	makeState() override;
 
-	String getBuildText() const override;
+	void initOnDescPopup(const shared_ptr<FacilityDescPopup>& popup) const override;
+	void updateOnDescPopup(const shared_ptr<FacilityDescPopup>& popup) const override;
 };
 

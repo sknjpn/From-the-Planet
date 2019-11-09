@@ -26,6 +26,11 @@ double Road::getLength() const
 	return m_length;
 }
 
+shared_ptr<Road> Road::getOppositeRoad() const
+{
+	return m_to->getRoad(m_fr);
+}
+
 double Road::getCost() const
 {
 	if (m_roadAsset) return m_length / m_roadAsset->getSpeed();

@@ -1,18 +1,36 @@
 ﻿#include "LaunchSiteAsset.h"
 #include "LaunchSiteState.h"
+#include "FacilityDescPopup.h"
 
 shared_ptr<FacilityState> LaunchSiteAsset::makeState()
 {
 	return MakeShared<LaunchSiteState>();
 }
 
-String LaunchSiteAsset::getBuildText() const
+void LaunchSiteAsset::initOnDescPopup(const shared_ptr<FacilityDescPopup>& popup) const
 {
-	String result;
+}
 
-	result += Format(U"完成すると宇宙へとロケットを飛ばし惑星から脱出できる\n");
+void LaunchSiteAsset::updateOnDescPopup(const shared_ptr<FacilityDescPopup>& popup) const
+{
+	popup->moveDrawPos(5, 5);
 
-	result += FacilityAsset::getBuildText();
+	// タイトル
+	{
+		static Font font(20, Typeface::Bold);
+		font(getName()).draw();
 
-	return result;
+		popup->moveDrawPos(0, 32);
+	}
+
+	// 説明
+	{
+		static Font font(16, Typeface::Bold);
+
+		{
+			auto f = font(U"宇宙へと脱出するために\nロケットの発射をします");
+			f.draw();
+			popup->moveDrawPos(0, f.region().h + 8);
+		}
+	}
 }

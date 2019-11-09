@@ -6,4 +6,5 @@ void NaturalResourceAsset::load(const JSONValue& json)
 	
 	m_amount = json[U"amount"].get<double>();
 	m_numSite = json[U"numSite"].get<int>();
+	m_color = json[U"color"].get<Color>();
 }

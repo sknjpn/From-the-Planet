@@ -1,19 +1,19 @@
 {
     "name": "銅鉱山",
     "type": "QuarryAsset",
-    "constructionDamage": 0.2,
+    "constructionDamage": 0.1,
     "sound": "sound/cannon2.mp3",
     "material": [
         {
             "name": "石",
-            "size": 7
+            "size": 15
         },
         {
             "name": "鉄",
-            "size": 3
+            "size": 5
         },
         {
-            "name": "機械部品",
+            "name": "ネジ",
             "size": 1
         }
     ],
