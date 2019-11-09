@@ -9,6 +9,9 @@
 #include "ItemAsset.h"
 #include "TerrainAsset.h"
 #include "FacilitiesListViewer.h"
+#include "PlanetViewer.h"
+#include "GameOverViewer.h"
+#include "ClearViewer.h"
 
 unique_ptr<PlanetManager> g_planetManagerPtr;
 
@@ -305,17 +308,22 @@ void PlanetManager::loadRegions(const FilePath& path)
 
 void PlanetManager::update()
 {
-	if (m_health > 0)
-		m_health = Min(1.0, m_health + 0.0015);
+	if (!Viewer::GetRootViewer()
+		->getChildViewer<PlanetViewer>()
+		->hasChildViewer<ClearViewer>())
+	{
+		if (m_health > 0)
+			m_health = Min(1.0, m_health + 0.0015);
 
-	if (m_destroy >= 0.0)
-	{
-		if (m_destroy < 1.0) m_destroy += 0.01;
-	}
-	else
-	{
-		for (const auto& fs : m_facilityStates)
-			fs->update();
+		if (m_destroy >= 0.0)
+		{
+			if (m_destroy < 1.0) m_destroy += 0.01;
+		}
+		else
+		{
+			for (const auto& fs : m_facilityStates)
+				fs->update();
+		}
 	}
 }
 
@@ -324,6 +332,10 @@ void PlanetManager::destroy()
 	m_audio = Audio(U"asset/models/facilities/sound/magic-quake2.mp3");
 	m_audio.playOneShot(0.5 * masterVolume);
 	m_destroy = 0.0;
+
+		Viewer::GetRootViewer()
+			->getChildViewer<PlanetViewer>()
+			->addChildViewer<GameOverViewer>();
 }
 
 void PlanetManager::addDamage(double value)

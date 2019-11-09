@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include "ClearViewer.h"
 #include "Viewer.h"
 
 class TitleViewer :
@@ -18,11 +17,5 @@ public:
 	}
 
 	void	update() override;
-	void	init() override
-	{
-
-
-		addChildViewer<ClearViewer>();
-	}
 };
 

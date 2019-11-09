@@ -40,6 +40,7 @@ public:
 		m_health = 1.0;
 		m_mouseOverRegion = nullptr;
 		m_selectedRegion = nullptr;
+		m_sw.restart();
 	}
 
 	const shared_ptr<FacilityState>& makeFacility(const shared_ptr<FacilityAsset> facilityAsset, const shared_ptr<Region> region);
