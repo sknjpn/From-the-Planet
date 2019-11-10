@@ -3,7 +3,6 @@
 #include "FacilityAsset.h"
 #include "RoadAsset.h"
 #include "FacilityConstructionPopup.h"
-#include "SelectedArrowViewer.h"
 
 void FacilitiesListViewer::update()
 {

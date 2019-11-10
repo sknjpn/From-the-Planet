@@ -402,9 +402,6 @@
     <ClCompile Include="RoadAsset.cpp">
       <Filter>Program Files</Filter>
     </ClCompile>
-    <ClCompile Include="SelectedArrowViewer.cpp">
-      <Filter>Program Files</Filter>
-    </ClCompile>
     <ClCompile Include="TruckState.cpp">
       <Filter>Program Files</Filter>
     </ClCompile>
@@ -525,9 +522,6 @@
       <Filter>Program Files</Filter>
     </ClInclude>
     <ClInclude Include="RoadAsset.h">
-      <Filter>Program Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SelectedArrowViewer.h">
       <Filter>Program Files</Filter>
     </ClInclude>
     <ClInclude Include="Road.h">

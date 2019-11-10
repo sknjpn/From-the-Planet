@@ -264,7 +264,6 @@
     <ClCompile Include="Region.cpp" />
     <ClCompile Include="Road.cpp" />
     <ClCompile Include="RoadAsset.cpp" />
-    <ClCompile Include="SelectedArrowViewer.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SoundMixerViewer.cpp" />
@@ -311,7 +310,6 @@
     <ClInclude Include="Region.h" />
     <ClInclude Include="Road.h" />
     <ClInclude Include="RoadAsset.h" />
-    <ClInclude Include="SelectedArrowViewer.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SoundMixerViewer.h" />
