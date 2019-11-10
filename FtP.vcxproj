@@ -274,6 +274,8 @@
     <ClCompile Include="Storage.cpp" />
     <ClCompile Include="TerrainAsset.cpp" />
     <ClCompile Include="TitleViewer.cpp" />
+    <ClCompile Include="TownAsset.cpp" />
+    <ClCompile Include="TownState.cpp" />
     <ClCompile Include="Translate.cpp" />
     <ClCompile Include="TruckState.cpp" />
     <ClCompile Include="Viewer.cpp" />
@@ -317,6 +319,8 @@
     <ClInclude Include="Storage.h" />
     <ClInclude Include="TerrainAsset.h" />
     <ClInclude Include="TitleViewer.h" />
+    <ClInclude Include="TownAsset.h" />
+    <ClInclude Include="TownState.h" />
     <ClInclude Include="Translate.h" />
     <ClInclude Include="TruckState.h" />
     <ClInclude Include="Viewer.h" />

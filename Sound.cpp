@@ -1,2 +1,1 @@
-﻿#include "stdafx.h"
-#include "Sound.h"
+﻿#include "Sound.h"

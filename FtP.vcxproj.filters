@@ -462,9 +462,21 @@
     <ClCompile Include="Model.cpp">
       <Filter>Program Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sound.cpp" />
-    <ClCompile Include="SoundManager.cpp" />
-    <ClCompile Include="SoundMixerViewer.cpp" />
+    <ClCompile Include="Sound.cpp">
+      <Filter>Program Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Program Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundMixerViewer.cpp">
+      <Filter>Program Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TownAsset.cpp">
+      <Filter>Program Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TownState.cpp">
+      <Filter>Program Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Region.h">
@@ -581,8 +593,20 @@
     <ClInclude Include="Model.h">
       <Filter>Program Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sound.h" />
-    <ClInclude Include="SoundManager.h" />
-    <ClInclude Include="SoundMixerViewer.h" />
+    <ClInclude Include="Sound.h">
+      <Filter>Program Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Program Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundMixerViewer.h">
+      <Filter>Program Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TownAsset.h">
+      <Filter>Program Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TownState.h">
+      <Filter>Program Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

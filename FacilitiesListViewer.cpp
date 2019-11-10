@@ -4,6 +4,11 @@
 #include "RoadAsset.h"
 #include "FacilityConstructionPopup.h"
 
+#include "QuarryAsset.h"
+#include "FactoryAsset.h"
+#include "HarborAsset.h"
+#include "LaunchSiteAsset.h"
+
 void FacilitiesListViewer::update()
 {
 	setDrawPos(5, 5);
@@ -38,7 +43,12 @@ void FacilitiesListViewer::update()
 		moveDrawPos(0, 48);
 	}
 
-	auto fas = g_assetManagerPtr->getAssets<FacilityAsset>();
+	Array<shared_ptr<FacilityAsset>> fas;
+	for (const auto& fa : g_assetManagerPtr->getAssets<QuarryAsset>()) fas.emplace_back(fa);
+	for (const auto& fa : g_assetManagerPtr->getAssets<FactoryAsset>()) fas.emplace_back(fa);
+	for (const auto& fa : g_assetManagerPtr->getAssets<HarborAsset>()) fas.emplace_back(fa);
+	for (const auto& fa : g_assetManagerPtr->getAssets<LaunchSiteAsset>()) fas.emplace_back(fa);
+
 	for (const auto& fa : fas)
 	{
 		auto f = font(fa->getName());
