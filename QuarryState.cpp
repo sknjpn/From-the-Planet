@@ -2,6 +2,7 @@
 #include "QuarryAsset.h"
 #include "PlanetManager.h"
 #include "NaturalResourceAsset.h"
+#include "SoundManager.h"
 #include "Region.h"
 
 void QuarryState::update()
@@ -19,7 +20,7 @@ void QuarryState::update()
 
 			g_planetManagerPtr->addDamage(0.005);
 
-			m_audio.playOneShot(masterVolume * 0.5);
+			g_soundManagerPtr->playSoundEffect(dynamic_pointer_cast<QuarryAsset>(m_facilityAsset)->getSoundPath(), SoundType::Environment);
 		}
 	}
 }

@@ -6,5 +6,3 @@
 
 using namespace experimental;
 using namespace std;
-
-extern double masterVolume;

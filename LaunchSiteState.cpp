@@ -1,12 +1,14 @@
 ﻿#include "LaunchSiteState.h"
+#include "LaunchSiteAsset.h"
 #include "PlanetManager.h"
 #include "ClearViewer.h"
 #include "PlanetViewer.h"
 #include "FacilitiesListViewer.h"
+#include "SoundManager.h"
 
 void LaunchSiteState::onConstructed()
 {
-	m_audio.playOneShot(0.5 * masterVolume, 1.0);
+	g_soundManagerPtr->playSoundEffect(dynamic_pointer_cast<LaunchSiteAsset>(m_facilityAsset)->getSoundPath(), SoundType::Environment);
 
 	Viewer::GetRootViewer()
 		->getChildViewer<PlanetViewer>()

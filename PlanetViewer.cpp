@@ -10,9 +10,13 @@
 #include "PlanetHealthViewer.h"
 #include "TerrainAsset.h"
 #include "RoadAsset.h"
+#include "SoundManager.h"
 
 void PlanetViewer::init()
 {
+	m_camera = BasicCamera3D(Scene::Size(), m_fov, getEyePosition(), Vec3::Zero());
+	g_soundManagerPtr->playMusic(U"asset/星の胎動.mp3");
+
 	addChildViewer<FacilitiesListViewer>();
 	addChildViewer<PlanetHealthViewer>();
 
@@ -65,7 +69,7 @@ void PlanetViewer::update()
 				{
 					g_planetManagerPtr->makeFacility(flv->m_selectedFacilityAsset, mr);
 
-					m_fCont.playOneShot(0.5 * masterVolume);
+					g_soundManagerPtr->playSoundEffect(U"asset/models/facilities/sound/sword-clash2.mp3", SoundType::Environment);
 
 					// update
 					for (const auto& fs : g_planetManagerPtr->m_facilityStates) fs->updateConnected();
@@ -113,7 +117,7 @@ void PlanetViewer::update()
 							r->setRoadAsset(flv->m_selectedRoadAsset);
 							r->getOppositeRoad()->setRoadAsset(flv->m_selectedRoadAsset);
 						}
-						m_rCont.playOneShot(0.5 * masterVolume);
+						g_soundManagerPtr->playSoundEffect(U"asset/models/facilities/sound/punch-real1.mp3", SoundType::Environment);
 						g_planetManagerPtr->addDamage(damage);
 
 						// update

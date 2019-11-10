@@ -1,5 +1,11 @@
 ﻿#include "TitleViewer.h"
 #include "PlanetViewer.h"
+#include "SoundManager.h"
+
+TitleViewer::TitleViewer()
+{
+	g_soundManagerPtr->playMusic(U"asset/Devastates_stageselect.mp3");
+}
 
 void TitleViewer::update()
 {

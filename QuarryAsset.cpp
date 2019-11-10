@@ -78,4 +78,6 @@ void QuarryAsset::load(const JSONValue& json)
 	FacilityAsset::load(json);
 
 	m_export = g_assetManagerPtr->getAsset<NaturalResourceAsset>(json[U"export"].getString());
+
+	m_soundPath = FileSystem::ParentPath(getFilepath()) + json[U"sound"].getString();
 }

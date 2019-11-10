@@ -34,3 +34,10 @@ void LaunchSiteAsset::updateOnDescPopup(const shared_ptr<FacilityDescPopup>& pop
 		}
 	}
 }
+
+void LaunchSiteAsset::load(const JSONValue& json)
+{
+	FacilityAsset::load(json);
+
+	m_soundPath = FileSystem::ParentPath(getFilepath()) + json[U"sound"].getString();
+}

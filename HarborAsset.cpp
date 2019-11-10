@@ -50,3 +50,8 @@ void HarborAsset::updateOnDescPopup(const shared_ptr<FacilityDescPopup>& popup) 
 		}
 	}
 }
+
+void HarborAsset::load(const JSONValue& json)
+{
+	FacilityAsset::load(json);
+}

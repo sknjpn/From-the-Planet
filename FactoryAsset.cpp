@@ -88,4 +88,6 @@ void FactoryAsset::load(const JSONValue& json)
 
 	m_import.load(json[U"import"]);
 	m_export = g_assetManagerPtr->getAsset<ItemAsset>(json[U"export"].getString());
+
+	m_soundPath = FileSystem::ParentPath(getFilepath()) + json[U"sound"].getString();
 }

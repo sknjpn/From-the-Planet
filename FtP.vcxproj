@@ -265,6 +265,9 @@
     <ClCompile Include="Road.cpp" />
     <ClCompile Include="RoadAsset.cpp" />
     <ClCompile Include="SelectedArrowViewer.cpp" />
+    <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="SoundMixerViewer.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -309,6 +312,9 @@
     <ClInclude Include="Road.h" />
     <ClInclude Include="RoadAsset.h" />
     <ClInclude Include="SelectedArrowViewer.h" />
+    <ClInclude Include="Sound.h" />
+    <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="SoundMixerViewer.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Storage.h" />
     <ClInclude Include="TerrainAsset.h" />

@@ -30,6 +30,4 @@ void FacilityAsset::load(const JSONValue& json)
 
 	m_material.load(json[U"material"]);
 	m_constructinDamage = json[U"constructionDamage"].get<double>();
-
-	m_audio = FileSystem::ParentPath(getFilepath()) + json[U"sound"].getString();
 }

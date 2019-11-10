@@ -2,12 +2,11 @@
 
 #include "Viewer.h"
 
-class TitleViewer :
+class SoundMixerViewer :
 	public Viewer
 {
 public:
-	TitleViewer();
-
+	void	init() override;
 	void	update() override;
 };
 

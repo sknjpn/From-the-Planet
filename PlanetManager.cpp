@@ -12,6 +12,7 @@
 #include "PlanetViewer.h"
 #include "GameOverViewer.h"
 #include "ClearViewer.h"
+#include "SoundManager.h"
 
 unique_ptr<PlanetManager> g_planetManagerPtr;
 
@@ -20,7 +21,6 @@ const shared_ptr<FacilityState>& PlanetManager::makeFacility(const shared_ptr<Fa
 	auto& state = m_facilityStates.emplace_back(facilityAsset->makeState());
 	state->m_region = region;
 	state->m_facilityAsset = facilityAsset;
-	state->m_audio = Audio(facilityAsset->getAudioPath());
 
 	region->m_facilityState = state;
 
@@ -329,8 +329,7 @@ void PlanetManager::update()
 
 void PlanetManager::destroy()
 {
-	m_audio = Audio(U"asset/models/facilities/sound/magic-quake2.mp3");
-	m_audio.playOneShot(0.5 * masterVolume);
+	g_soundManagerPtr->playSoundEffect(U"asset/models/facilities/sound/magic-quake2.mp3", SoundType::Environment);
 	m_destroy = 0.0;
 
 		Viewer::GetRootViewer()

@@ -1,6 +1,8 @@
 ﻿#include "AssetManager.h"
 #include "PlanetManager.h"
+#include "SoundManager.h"
 #include "TitleViewer.h"
+#include "SoundMixerViewer.h"
 
 void Main()
 {
@@ -12,8 +14,10 @@ void Main()
 
 	g_assetManagerPtr = MakeUnique<AssetManager>();
 	g_planetManagerPtr = MakeUnique<PlanetManager>();
+	g_soundManagerPtr = MakeUnique<SoundManager>();
 	g_assetManagerPtr->init();
 
 	Viewer::GetRootViewer()->addChildViewer<TitleViewer>();
+	Viewer::GetRootViewer()->addChildViewer<SoundMixerViewer>();
 	Viewer::Run();
 }

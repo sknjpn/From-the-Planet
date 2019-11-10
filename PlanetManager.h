@@ -17,7 +17,6 @@ public:
 	double	m_radius = 100.0;
 	double	m_destroy = -1;
 	double	m_health = 1.0;
-	Audio	m_audio;
 
 	shared_ptr<Region>	m_mouseOverRegion;
 	shared_ptr<Region>	m_selectedRegion;
