@@ -71,7 +71,7 @@ class EasyViewer
 
 public:
 	EasyViewer() = default;
-	~EasyViewer() = default;
+	virtual ~EasyViewer() = default;
 	EasyViewer(const EasyViewer&) = delete;
 	EasyViewer& operator=(const EasyViewer&) = delete;
 	EasyViewer(EasyViewer&&) = delete;
