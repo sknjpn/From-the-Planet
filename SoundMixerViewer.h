@@ -1,9 +1,9 @@
 ﻿#pragma once
 
-#include "Viewer.h"
+#include "EasyViewer.h"
 
 class SoundMixerViewer :
-	public Viewer
+	public EasyViewer
 {
 public:
 	void	init() override;

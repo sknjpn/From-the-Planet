@@ -1,11 +1,11 @@
 ﻿#pragma once
 
-#include "Viewer.h"
+#include "EasyViewer.h"
 
 class FacilityAsset;
 
 class FacilityCostViewer :
-	public Viewer
+	public EasyViewer
 {
 	shared_ptr<FacilityAsset>	m_facilityAsset;
 

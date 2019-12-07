@@ -1,11 +1,11 @@
 ﻿#pragma once
 
-# include "Viewer.h"
+# include "EasyViewer.h"
 
 class PlanetManager;
 
 class PlanetViewer
-	: public Viewer
+	: public EasyViewer
 {
 	double m_fov = 45_deg;
 	double m_inclination = 0.0;

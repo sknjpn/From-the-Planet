@@ -2,6 +2,11 @@
 #include "PlanetViewer.h"
 #include "PlanetManager.h"
 
+void GameOverViewer::init()
+{
+	setViewerRectInLocal(Rect(1200, 132).setCenter(Scene::Center()));
+}
+
 void GameOverViewer::update()
 {
 	RectF(getViewerSize()).draw(ColorF(0.0, 0.75));
@@ -20,7 +25,7 @@ void GameOverViewer::update()
 	if (KeyEnter.down())
 	{
 		g_planetManagerPtr->reset();
-		Viewer::GetRootViewer()->getChildViewer<PlanetViewer>()->destroy();
-		Viewer::GetRootViewer()->addChildViewer<PlanetViewer>();
+		EasyViewer::GetRootViewer()->getChildViewer<PlanetViewer>()->destroy();
+		EasyViewer::GetRootViewer()->addChildViewer<PlanetViewer>();
 	}
 }

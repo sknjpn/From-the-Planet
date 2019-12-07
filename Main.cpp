@@ -17,7 +17,7 @@ void Main()
 	g_soundManagerPtr = MakeUnique<SoundManager>();
 	g_assetManagerPtr->init();
 
-	Viewer::GetRootViewer()->addChildViewer<TitleViewer>();
-	Viewer::GetRootViewer()->addChildViewer<SoundMixerViewer>();
-	Viewer::Run();
+	EasyViewer::GetRootViewer()->addChildViewer<TitleViewer>();
+	EasyViewer::GetRootViewer()->addChildViewer<SoundMixerViewer>();
+	EasyViewer::Run();
 }

@@ -38,8 +38,8 @@ void FacilityConstructionPopup::init()
 	Popup::init();
 
 	const auto fcv = addChildViewer<FacilityCostViewer>(m_facilityAsset);
-	fcv->setViewerPos(getViewerRect().pos.movedBy(0, 200 - 48));
+	fcv->setViewerPosInLocal(getViewerPosInLocal().movedBy(0, 200 - 48));
 
 	const auto fdp = addChildViewer<FacilityDescPopup>(m_facilityAsset);
-	fdp->setViewerRect(getViewerRect().pos, Vec2(300, 200 - 48));
+	fdp->setViewerRectInLocal(getViewerPosInLocal(), Vec2(300, 200 - 48));
 }

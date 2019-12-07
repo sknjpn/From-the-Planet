@@ -59,4 +59,6 @@ double PlanetManager::getCost(const shared_ptr<Region> from, const shared_ptr<Re
 	double sum = 0.0;
 	for (const auto& r : route)
 		sum += r->getCost();
+
+	return sum;
 }

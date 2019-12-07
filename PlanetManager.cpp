@@ -308,7 +308,7 @@ void PlanetManager::loadRegions(const FilePath& path)
 
 void PlanetManager::update()
 {
-	if (!Viewer::GetRootViewer()
+	if (!EasyViewer::GetRootViewer()
 		->getChildViewer<PlanetViewer>()
 		->hasChildViewer<ClearViewer>())
 	{
@@ -332,7 +332,7 @@ void PlanetManager::destroy()
 	g_soundManagerPtr->playSoundEffect(U"asset/models/facilities/sound/magic-quake2.mp3", SoundType::Environment);
 	m_destroy = 0.0;
 
-		Viewer::GetRootViewer()
+		EasyViewer::GetRootViewer()
 			->getChildViewer<PlanetViewer>()
 			->addChildViewer<GameOverViewer>();
 }

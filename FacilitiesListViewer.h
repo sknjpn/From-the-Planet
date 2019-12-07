@@ -1,15 +1,15 @@
 ﻿#pragma once
 
-#include "Viewer.h"
+#include "EasyViewer.h"
 
 class FacilityAsset;
 class RoadAsset;
 
 class FacilitiesListViewer :
-	public Viewer
+	public EasyViewer
 {
 	class SelectedArrowViewer :
-		public Viewer
+		public EasyViewer
 	{
 	public:
 		SelectedArrowViewer()
@@ -31,10 +31,8 @@ public:
 
 	FacilitiesListViewer()
 		: m_mouseOverTimer(false)
-	{
-		setViewerRect(Scene::Size().x - 170, 40, 130, 600);
-	}
-	
+	{}
+
 	void	update() override;
 	void	init() override;
 };

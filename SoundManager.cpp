@@ -27,6 +27,8 @@ double SoundManager::getVolume(SoundType soundType) const
 	case SoundType::UI: return m_masterVolume * m_uiVolume;
 	case SoundType::Environment: return m_masterVolume * m_environmentVolume;
 	}
+
+	throw Error(U"存在しない値が代入されています");
 }
 
 void SoundManager::playMusic(const FilePath& filePath)

@@ -1,16 +1,12 @@
 ﻿#pragma once
 
-#include "Viewer.h"
+#include "EasyViewer.h"
 
 class GameOverViewer
-	: public Viewer
+	: public EasyViewer
 {
 public:
-	GameOverViewer()
-	{
-		setViewerRect(Rect(1200, 132).setCenter(Scene::Center()));
-	}
-
+	void init() override;
 	void update() override;
 };
 

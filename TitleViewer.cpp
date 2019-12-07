@@ -29,7 +29,7 @@ void TitleViewer::update()
 	// 動作
 	if (KeyEnter.down())
 	{
-		Viewer::GetRootViewer()->addChildViewer<PlanetViewer>();
+		EasyViewer::GetRootViewer()->addChildViewer<PlanetViewer>();
 		destroy();
 	}
 }

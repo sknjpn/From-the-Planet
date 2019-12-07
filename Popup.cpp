@@ -9,7 +9,7 @@ Popup::Popup(const Vec2& viewerSize)
 
 void Popup::init()
 {
-	// Viewer Rectの設定
+	// EasyViewer Rectの設定
 	{
 		RectF rect(Cursor::PosF(), getViewerSize());
 
@@ -19,6 +19,6 @@ void Popup::init()
 		if (rect.br().x > Scene::Size().x) rect.moveBy(Scene::Size().x - rect.br().x, 0);
 		if (rect.br().y > Scene::Size().y) rect.moveBy(0, Scene::Size().y - rect.br().y);
 
-		setViewerRect(rect);
+		setViewerRectInLocal(rect);
 	}
 }

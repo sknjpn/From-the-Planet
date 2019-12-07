@@ -1,17 +1,16 @@
 ﻿#pragma once
 
-#include "Viewer.h"
+#include "EasyViewer.h"
 
 class PlanetHealthViewer
-	: public Viewer
+	: public EasyViewer
 {
 	double	m_expectedDecrease = 0;
 
 public:
-
-	PlanetHealthViewer()
+	void init() override
 	{
-		setViewerRect(Rect(1400, 100).setCenter(Scene::Center().x, 60));
+		setViewerRectInLocal(Rect(1400, 100).setCenter(Scene::Center().x, 60));
 	}
 
 	void update() override;

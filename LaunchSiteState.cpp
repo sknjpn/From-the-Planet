@@ -10,11 +10,11 @@ void LaunchSiteState::onConstructed()
 {
 	g_soundManagerPtr->playSoundEffect(dynamic_pointer_cast<LaunchSiteAsset>(m_facilityAsset)->getSoundPath(), SoundType::Environment);
 
-	Viewer::GetRootViewer()
+	EasyViewer::GetRootViewer()
 		->getChildViewer<PlanetViewer>()
 		->addChildViewer<ClearViewer>();
 
-	Viewer::GetRootViewer()
+	EasyViewer::GetRootViewer()
 		->getChildViewer<PlanetViewer>()
 		->getChildViewer<FacilitiesListViewer>()->destroy();
 

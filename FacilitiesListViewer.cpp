@@ -29,7 +29,7 @@ void FacilitiesListViewer::update()
 
 			auto sav = getChildViewer<SelectedArrowViewer>();
 			if (!sav) sav = addChildViewer<SelectedArrowViewer>();
-			sav->setViewerPos(getViewerRect().pos + getDrawPos() - Vec2(48, 0));
+			sav->setViewerPosInLocal(getViewerPosInLocal() + getDrawPos() - Vec2(48, 0));
 		}
 
 		auto color = fa->m_colorInside;
@@ -61,7 +61,7 @@ void FacilitiesListViewer::update()
 
 			auto sav = getChildViewer<SelectedArrowViewer>();
 			if (!sav) sav = addChildViewer<SelectedArrowViewer>();
-			sav->setViewerPos(getViewerRect().pos + getDrawPos() - Vec2(48, 0));
+			sav->setViewerPosInLocal(getViewerPosInLocal() + getDrawPos() - Vec2(48, 0));
 		}
 
 		if (r.contains(Cursor::PreviousPosF()))
@@ -99,5 +99,5 @@ void FacilitiesListViewer::update()
 
 void FacilitiesListViewer::init()
 {
-
+	setViewerRectInLocal(Scene::Size().x - 170, 40, 130, 600);
 }

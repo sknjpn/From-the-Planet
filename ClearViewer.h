@@ -1,14 +1,14 @@
 ﻿#pragma once
 
-#include "Viewer.h"
+#include "EasyViewer.h"
 
 class ClearViewer :
-	public Viewer
+	public EasyViewer
 {
 public:
 	ClearViewer()
 	{
-		setViewerRect(Rect(1200, 132).setCenter(Scene::Center()));
+		setViewerRectInLocal(Rect(1200, 132).setCenter(Scene::Center()));
 	}
 
 	void update() override;

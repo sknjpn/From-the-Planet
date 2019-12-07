@@ -1,9 +1,9 @@
 ﻿#pragma once
 
-#include "Viewer.h"
+#include "EasyViewer.h"
 
 class Popup
-	: public Viewer
+	: public EasyViewer
 {
 public:
 	Popup(const Vec2& viewerSize);

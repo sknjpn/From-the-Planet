@@ -20,7 +20,7 @@ void ClearViewer::update()
 	if (KeyEnter.down())
 	{
 		g_planetManagerPtr->reset();
-		Viewer::GetRootViewer()->getChildViewer<PlanetViewer>()->destroy();
-		Viewer::GetRootViewer()->addChildViewer<PlanetViewer>();
+		EasyViewer::GetRootViewer()->getChildViewer<PlanetViewer>()->destroy();
+		EasyViewer::GetRootViewer()->addChildViewer<PlanetViewer>();
 	}
 }
