@@ -3,6 +3,7 @@
 #include "SoundManager.h"
 #include "TitleViewer.h"
 #include "SoundMixerViewer.h"
+#include "PlanetViewer.h"
 
 void Main()
 {
@@ -17,7 +18,7 @@ void Main()
 	g_soundManagerPtr = MakeUnique<SoundManager>();
 	g_assetManagerPtr->init();
 
-	EasyViewer::GetRootViewer()->addChildViewer<TitleViewer>();
+	EasyViewer::GetRootViewer()->addChildViewer<PlanetViewer>();
 	EasyViewer::GetRootViewer()->addChildViewer<SoundMixerViewer>();
 	EasyViewer::Run();
 }

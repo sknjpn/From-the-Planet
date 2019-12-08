@@ -12,7 +12,7 @@ class FacilitiesListViewer :
 		public EasyViewer
 	{
 	public:
-		SelectedArrowViewer()
+		void	init() override
 		{
 			setViewerSize(40, 40);
 		}

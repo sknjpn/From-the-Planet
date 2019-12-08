@@ -99,5 +99,6 @@ void FacilitiesListViewer::update()
 
 void FacilitiesListViewer::init()
 {
+
 	setViewerRectInLocal(Scene::Size().x - 170, 40, 130, 600);
 }

@@ -12,6 +12,9 @@ class FacilityCostViewer :
 public:
 	FacilityCostViewer(const shared_ptr<FacilityAsset>& facilityAsset)
 		: m_facilityAsset(facilityAsset)
+	{}
+
+	void	init() override
 	{
 		setViewerSize(300, 48);
 	}

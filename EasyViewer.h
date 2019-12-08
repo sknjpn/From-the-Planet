@@ -58,10 +58,8 @@ class EasyViewer
 			cv->removeDeadViewer();
 
 		m_childViewers.remove_if([](const auto& cv) { return cv->m_isDestroyed; });
-
-		if (m_isDestroyed) m_parentViewer.reset();
 	}
-	
+
 	static std::shared_ptr<EasyViewer>& GetMouseoverViewer()
 	{
 		static std::shared_ptr<EasyViewer> mouseoverViewer = std::make_shared<EasyViewer>();
@@ -70,13 +68,8 @@ class EasyViewer
 	}
 
 public:
-	EasyViewer() = default;
 	virtual ~EasyViewer() = default;
-	EasyViewer(const EasyViewer&) = delete;
-	EasyViewer& operator=(const EasyViewer&) = delete;
-	EasyViewer(EasyViewer&&) = delete;
-	EasyViewer& operator=(EasyViewer&&) = delete;
-	
+
 	static std::shared_ptr<EasyViewer>& GetRootViewer()
 	{
 		static std::shared_ptr<EasyViewer> rootViewer = std::make_shared<EasyViewer>();
@@ -114,7 +107,7 @@ public:
 	template <typename T>
 	std::shared_ptr<T>	getParentViewer() const
 	{
-		if (dynamic_pointer_cast<T>(m_parentViewer) != nullptr) return dynamic_pointer_cast<T>(m_parentViewer);
+		if (dynamic_pointer_cast<T>(getParentViewer()) != nullptr) return dynamic_pointer_cast<T>(getParentViewer());
 
 		return nullptr;
 	}
@@ -255,13 +248,10 @@ public:
 
 		return false;
 	}
+
 	bool	isRoot() const { return GetRootViewer() == shared_from_this(); }
 	RectF	getViewerRectInWorld() const { return isRoot() ? RectF(Scene::Rect()) : RectF(getViewerPosInWorld(), m_viewerRectInLocal.size); }
-	Vec2	getViewerPosInWorld() const
-	{
-		if (isRoot()) return Vec2::Zero();
-		else return m_viewerRectInLocal.pos.movedBy(getParentViewer()->getViewerPosInWorld());
-	}
+	Vec2	getViewerPosInWorld() const { return isRoot() ? Vec2::Zero() : m_viewerRectInLocal.pos.movedBy(getParentViewer()->getViewerPosInWorld()); }
 	const RectF& getViewerRectInLocal() const { return m_viewerRectInLocal; }
 	const Vec2& getViewerPosInLocal() const { return m_viewerRectInLocal.pos; }
 	const Vec2& getViewerSize() const { return m_viewerRectInLocal.size; }

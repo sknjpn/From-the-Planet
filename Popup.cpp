@@ -1,14 +1,9 @@
 ﻿#include "Popup.h"
 
-Popup::Popup(const Vec2& viewerSize)
-{
-	setViewerSize(viewerSize);
-
-	setBackgroundColor(ColorF(0.2));
-}
-
 void Popup::init()
 {
+	setBackgroundColor(ColorF(0.2));
+
 	// EasyViewer Rectの設定
 	{
 		RectF rect(Cursor::PosF(), getViewerSize());

@@ -3,12 +3,6 @@
 #include "FacilityDescPopup.h"
 #include "FacilityAsset.h"
 
-FacilityConstructionPopup::FacilityConstructionPopup(const shared_ptr<FacilityAsset>& facilityAsset)
-	: Popup(Vec2(300, 200))
-	, m_facilityAsset(facilityAsset)
-{
-}
-
 void FacilityConstructionPopup::update()
 {
 	moveDrawPos(5, 5);
@@ -36,10 +30,11 @@ void FacilityConstructionPopup::update()
 void FacilityConstructionPopup::init()
 {
 	Popup::init();
+	setViewerSize(300, 200);
 
 	const auto fcv = addChildViewer<FacilityCostViewer>(m_facilityAsset);
-	fcv->setViewerPosInLocal(getViewerPosInLocal().movedBy(0, 200 - 48));
+	fcv->setViewerPosInLocal(0, 200 - 48);
 
 	const auto fdp = addChildViewer<FacilityDescPopup>(m_facilityAsset);
-	fdp->setViewerRectInLocal(getViewerPosInLocal(), Vec2(300, 200 - 48));
+	fdp->setViewerSize(Vec2(300, 200 - 48));
 }
