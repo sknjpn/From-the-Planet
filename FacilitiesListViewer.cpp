@@ -1,6 +1,13 @@
 ﻿#include "FacilitiesListViewer.h"
 #include "AssetManager.h"
 #include "FacilityAsset.h"
+#include "RoadAsset.h"
+#include "FacilityConstructionPopup.h"
+
+#include "QuarryAsset.h"
+#include "FactoryAsset.h"
+#include "HarborAsset.h"
+#include "LaunchSiteAsset.h"
 
 void FacilitiesListViewer::update()
 {
@@ -8,34 +15,25 @@ void FacilitiesListViewer::update()
 
 	static Font font(20, Typeface::Bold);
 
+	auto rs = g_assetManagerPtr->getAssets<RoadAsset>();
+	for (const auto& fa : rs)
 	{
-		auto f = font(U"道路");
-		auto r = Rect(120, 40);
-
-		if (r.leftClicked()) m_selectedIndex = -2;
-
-		auto color = Palette::Gray;
-		if (m_selectedIndex == -2) r.draw(color.lerp(Palette::White, 0.75)).drawFrame(2.0, ColorF(1.0, 1.0));
-		else r.draw(color.lerp(Palette::White, r.mouseOver() ? 0.5 : 0.25)).drawFrame(2.0, ColorF(1.0, 1.0));
-
-		for (auto p : step(Size(-5, -5), Size(10, 10)))
-			f.drawAt(r.center().movedBy(Vec2(p) / 5));
-		f.drawAt(r.center(), Palette::Black);
-
-		moveDrawPos(0, 48);
-	}
-
-	auto fas = g_assetManagerPtr->getAssets<FacilityAsset>();
-	for (int i = 0; i < fas.size(); ++i)
-	{
-		auto& fa = fas[i];
+		if (fa->getName() == U"海路") continue;
 		auto f = font(fa->getName());
 		auto r = Rect(120, 40);
 
-		if (r.leftClicked()) m_selectedIndex = i; 
+		if (r.leftClicked())
+		{
+			m_selectedRoadAsset = fa;
+			m_selectedFacilityAsset = nullptr;
 
-		auto color = fa->getMeshes().front().m_color;
-		if (m_selectedIndex == i) r.draw(color.lerp(Palette::White, 0.75)).drawFrame(2.0, ColorF(1.0, 1.0));
+			auto sav = getChildViewer<SelectedArrowViewer>();
+			if (!sav) sav = addChildViewer<SelectedArrowViewer>();
+			sav->setViewerPosInLocal(getViewerPosInLocal() + getDrawPos() - Vec2(48, 0));
+		}
+
+		auto color = fa->m_colorInside;
+		if (m_selectedRoadAsset == fa) r.draw(color.lerp(Palette::White, 0.75)).drawFrame(2.0, ColorF(1.0, 1.0));
 		else r.draw(color.lerp(Palette::White, r.mouseOver() ? 0.5 : 0.25)).drawFrame(2.0, ColorF(1.0, 1.0));
 
 		for (auto p : step(Size(-5, -5), Size(10, 10)))
@@ -44,9 +42,63 @@ void FacilitiesListViewer::update()
 
 		moveDrawPos(0, 48);
 	}
+
+	Array<shared_ptr<FacilityAsset>> fas;
+	for (const auto& fa : g_assetManagerPtr->getAssets<QuarryAsset>()) fas.emplace_back(fa);
+	for (const auto& fa : g_assetManagerPtr->getAssets<FactoryAsset>()) fas.emplace_back(fa);
+	for (const auto& fa : g_assetManagerPtr->getAssets<HarborAsset>()) fas.emplace_back(fa);
+	for (const auto& fa : g_assetManagerPtr->getAssets<LaunchSiteAsset>()) fas.emplace_back(fa);
+
+	for (const auto& fa : fas)
+	{
+		auto f = font(fa->getName());
+		auto r = Rect(120, 40);
+
+		if (r.leftClicked())
+		{
+			m_selectedRoadAsset = nullptr;
+			m_selectedFacilityAsset = fa;
+
+			auto sav = getChildViewer<SelectedArrowViewer>();
+			if (!sav) sav = addChildViewer<SelectedArrowViewer>();
+			sav->setViewerPosInLocal(getViewerPosInLocal() + getDrawPos() - Vec2(48, 0));
+		}
+
+		if (r.contains(Cursor::PreviousPosF()))
+		{
+			if (r.mouseOver())
+			{
+				if (!m_mouseOverTimer.isRunning()) m_mouseOverTimer.start();
+				if (m_mouseOverTimer.sF() > 0.5 && !hasChildViewer<FacilityConstructionPopup>())
+					addChildViewer<FacilityConstructionPopup>(fa);
+			}
+			else
+			{
+				m_mouseOverTimer.reset();
+
+				if (auto fcp = getChildViewer<FacilityConstructionPopup>())
+					fcp->destroy();
+			}
+		}
+
+		auto color = fa->getColor();
+		if (m_selectedFacilityAsset == fa) r.draw(color.lerp(Palette::White, 0.75)).drawFrame(2.0, ColorF(1.0, 1.0));
+		else r.draw(color.lerp(Palette::White, r.mouseOver() ? 0.5 : 0.25)).drawFrame(2.0, ColorF(1.0, 1.0));
+
+		for (auto p : step(Size(-5, -5), Size(10, 10)))
+			f.drawAt(r.center().movedBy(Vec2(p) / 5));
+		f.drawAt(r.center(), Palette::Black);
+
+		moveDrawPos(0, 48);
+	}
+
+	if (!m_selectedFacilityAsset && !m_selectedRoadAsset)
+		if (auto sav = getChildViewer<SelectedArrowViewer>())
+			sav->destroy();
 }
 
 void FacilitiesListViewer::init()
 {
 
+	setViewerRectInLocal(Scene::Size().x - 170, 40, 130, 600);
 }

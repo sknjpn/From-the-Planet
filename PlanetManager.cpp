@@ -9,6 +9,10 @@
 #include "ItemAsset.h"
 #include "TerrainAsset.h"
 #include "FacilitiesListViewer.h"
+#include "PlanetViewer.h"
+#include "GameOverViewer.h"
+#include "ClearViewer.h"
+#include "SoundManager.h"
 
 unique_ptr<PlanetManager> g_planetManagerPtr;
 
@@ -17,7 +21,6 @@ const shared_ptr<FacilityState>& PlanetManager::makeFacility(const shared_ptr<Fa
 	auto& state = m_facilityStates.emplace_back(facilityAsset->makeState());
 	state->m_region = region;
 	state->m_facilityAsset = facilityAsset;
-	state->m_audio = Audio(facilityAsset->getAudioPath());
 
 	region->m_facilityState = state;
 
@@ -294,30 +297,44 @@ void PlanetManager::loadRegions(const FilePath& path)
 
 	connectRegions();
 	makeChips();
+
+	// Roadの設定
+	for (const auto& r1 : m_regions)
+		for (const auto& r2 : r1->m_connecteds)
+			r1->m_roads.emplace_back(MakeShared<Road>(r1, r2.lock()));
+
 	setTerrains();
 }
 
 void PlanetManager::update()
 {
-	if (m_health > 0)
-		m_health = Min(1.0, m_health + 0.0015);
+	if (!EasyViewer::GetRootViewer()
+		->getChildViewer<PlanetViewer>()
+		->hasChildViewer<ClearViewer>())
+	{
+		if (m_health > 0)
+			m_health = Min(1.0, m_health + 0.0015);
 
-	if (m_destroy >= 0.0)
-	{
-		if (m_destroy < 1.0) m_destroy += 0.01;
-	}
-	else
-	{
-		for (const auto& fs : m_facilityStates)
-			fs->update();
+		if (m_destroy >= 0.0)
+		{
+			if (m_destroy < 1.0) m_destroy += 0.01;
+		}
+		else
+		{
+			for (const auto& fs : m_facilityStates)
+				fs->update();
+		}
 	}
 }
 
 void PlanetManager::destroy()
 {
-	m_audio = Audio(U"asset/models/facilities/sound/magic-quake2.mp3");
-	m_audio.playOneShot(0.5, 1.0);
+	g_soundManagerPtr->playSoundEffect(U"asset/models/facilities/sound/magic-quake2.mp3", SoundType::Environment);
 	m_destroy = 0.0;
+
+		EasyViewer::GetRootViewer()
+			->getChildViewer<PlanetViewer>()
+			->addChildViewer<GameOverViewer>();
 }
 
 void PlanetManager::addDamage(double value)
@@ -331,26 +348,38 @@ void PlanetManager::addDamage(double value)
 	}
 }
 
+void PlanetManager::updateMouseOver(const BasicCamera3D& camera)
+{
+	auto mat = camera.getMat4x4();
+
+	// 見えるものを近い順に整理
+	const auto rs = m_regions
+		.removed_if([&camera, this](const auto& r) { return !canSee(camera, r->m_position); })
+		.sorted_by([&camera](const auto& r1, const auto& r2) { return camera.getEyePosition().distanceFromSq(r1->getPosition()) > camera.getEyePosition().distanceFromSq(r2->getPosition()); });
+
+	// MouseOver
+	m_mouseOverRegion = nullptr;
+	for (const auto& r : rs)
+		if (r->mouseOver(mat)) { m_mouseOverRegion = r; break; }
+	if (m_mouseOverRegion) m_mouseOverRegion->draw(mat, Sqrt(m_mouseOverRegion->getArea(mat)) / 5.0, ColorF(1.0, 0.1));
+
+	// Selected
+	if (MouseL.up()) m_selectedRegion = nullptr;
+	if (MouseL.down()) m_selectedRegion = m_mouseOverRegion;
+}
+
 void PlanetManager::drawRegions(const BasicCamera3D& camera)
 {
 	auto mat = camera.getMat4x4();
-	shared_ptr<Region> mouseoverRegion;
 
-	if (MouseL.up()) m_selectedRegion = nullptr;
+	// 見えるものを近い順に整理
+	const auto rs = m_regions
+		.removed_if([&camera, this](const auto& r) { return !canSee(camera, r->m_position); })
+		.sorted_by([&camera](const auto& r1, const auto& r2) { return camera.getEyePosition().distanceFromSq(r1->getPosition()) > camera.getEyePosition().distanceFromSq(r2->getPosition()); });
 
-	auto rs = m_regions.sorted_by([&camera](const auto& r1, const auto& r2) { return camera.getEyePosition().distanceFromSq(r1->getPosition()) > camera.getEyePosition().distanceFromSq(r2->getPosition()); });
+	// draw
 	for (const auto& r : rs)
-	{
-		if (canSee(camera, r->m_position))
-		{
-			r->draw(mat);
-
-			if (r->mouseOver(mat)) mouseoverRegion = r;
-		}
-	}
-
-	m_mouseOverRegion = mouseoverRegion;
-	if (MouseL.down()) m_selectedRegion = mouseoverRegion;
+		r->draw(mat);
 }
 
 void PlanetManager::drawChips(const BasicCamera3D& camera)
@@ -366,8 +395,10 @@ void PlanetManager::drawChips(const BasicCamera3D& camera)
 
 void PlanetManager::drawRoads(const BasicCamera3D& camera)
 {
-	for (const auto& r : m_roads)
-		if (canSee(camera, (r->getTo()->m_position + r->getFr()->m_position) / 2.0)) r->draw(camera);
+	for (const auto& r : m_regions)
+		for (const auto& road : r->m_roads)
+			if (road->getRoadAsset() && canSee(camera, (road->getTo()->m_position + road->getFr()->m_position) / 2.0))
+				road->draw(camera);
 
 	for (const auto& ts : m_truckStates)
 		ts->update();

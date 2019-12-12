@@ -12,13 +12,11 @@ class PlanetManager
 public:
 	Array<shared_ptr<Region>>	m_regions;
 	Array<shared_ptr<Chip>>		m_chips;
-	Array<shared_ptr<Road>>		m_roads;
 	Array<shared_ptr<FacilityState>>	m_facilityStates;
 	Array<shared_ptr<TruckState>>		m_truckStates;
 	double	m_radius = 100.0;
 	double	m_destroy = -1;
 	double	m_health = 1.0;
-	Audio	m_audio;
 
 	shared_ptr<Region>	m_mouseOverRegion;
 	shared_ptr<Region>	m_selectedRegion;
@@ -29,6 +27,20 @@ public:
 		: m_radius(100.0)
 		, m_sw(true)
 	{}
+
+	void	reset()
+	{
+		m_regions.clear();
+		m_chips.clear();
+		m_facilityStates.clear();
+		m_truckStates.clear();
+		m_radius = 100.0;
+		m_destroy = -1;
+		m_health = 1.0;
+		m_mouseOverRegion = nullptr;
+		m_selectedRegion = nullptr;
+		m_sw.restart();
+	}
 
 	const shared_ptr<FacilityState>& makeFacility(const shared_ptr<FacilityAsset> facilityAsset, const shared_ptr<Region> region);
 
@@ -45,10 +57,18 @@ public:
 	void	destroy();
 	void	addDamage(double value);
 
+	void	updateMouseOver(const BasicCamera3D& camera);
+
 	void	drawRegions(const BasicCamera3D& camera);
 	void	drawChips(const BasicCamera3D& camera);
 	void	drawRoads(const BasicCamera3D& camera);
 	void	drawFacilities(const BasicCamera3D& camera);
+
+	// Using CostMap
+	void	resetCostMap();
+	void	bakeCostMap(const shared_ptr<Region>& from, function<bool(const shared_ptr<Road>&)> func);
+	Array<shared_ptr<Road>>	getRoute(const shared_ptr<Region> from, const shared_ptr<Region> to) const;
+	double	getCost(const shared_ptr<Region> from, const shared_ptr<Region> to) const;
 	
 	bool	canSee(const BasicCamera3D& camera, const Vec3& position) const;
 };

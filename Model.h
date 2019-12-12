@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Viewer.h"
+#include "EasyViewer.h"
 
 class Model
 	: public enable_shared_from_this<Model>

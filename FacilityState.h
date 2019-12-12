@@ -18,7 +18,6 @@ public:
 	Storage	m_inTransit;
 	bool	m_isActive = false;
 	bool	m_isInit = false;
-	Audio	m_audio;
 	double	m_volume;
 	Array<shared_ptr<FacilityState>>	m_connected;
 

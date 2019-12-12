@@ -1,4 +1,21 @@
 ﻿#include "FacilityAsset.h"
+#include "ItemAsset.h"
+
+void FacilityAsset::onDrawPopup() const
+{
+}
+
+String FacilityAsset::getBuildText() const
+{
+	String result = U"必要資源\n";
+
+	for (const auto& m : m_material.getItemList())
+	{
+		result += Format(U" ", m.first->getName(), U" ", m.second, U"個\n");
+	}
+
+	return result;
+}
 
 void FacilityAsset::load(const JSONValue& json)
 {
@@ -12,6 +29,5 @@ void FacilityAsset::load(const JSONValue& json)
 	}
 
 	m_material.load(json[U"material"]);
-
-	m_audio = FileSystem::ParentPath(getFilepath()) + json[U"sound"].getString();
+	m_constructinDamage = json[U"constructionDamage"].get<double>();
 }

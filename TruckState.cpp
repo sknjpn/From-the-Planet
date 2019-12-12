@@ -8,18 +8,16 @@
 void TruckState::update()
 {
 	const auto& cr = getCurrentRoad();
-	const auto& fr = cr->getFr();
-	const auto& to = cr->getTo();
 
-	if ((m_progress += 0.2 / fr->getPosition().distanceFrom(to->getPosition())) > 1.0)
+	if ((m_progress += 0.2 / cr->getCost()) > 1.0)
 	{
 		m_progress = 0.0;
 		m_route.pop_front();
 
 		if (m_route.isEmpty())
 		{
-			to->getFacilityState()->m_storage.addItem(m_itemAsset);
-			to->getFacilityState()->m_inTransit.pullItem(m_itemAsset);
+			cr->getTo()->getFacilityState()->m_storage.addItem(m_itemAsset);
+			cr->getTo()->getFacilityState()->m_inTransit.pullItem(m_itemAsset);
 		}
 	}
 }

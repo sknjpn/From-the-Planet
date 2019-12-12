@@ -7,4 +7,5 @@ class QuarryState
 {
 public:
 	void	update() override;
+	void	onInit() override;
 };

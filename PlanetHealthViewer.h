@@ -1,18 +1,21 @@
 ﻿#pragma once
 
-#include "Viewer.h"
+#include "EasyViewer.h"
 
 class PlanetHealthViewer
-	: public Viewer
+	: public EasyViewer
 {
-public:
+	double	m_expectedDecrease = 0;
 
-	PlanetHealthViewer()
+public:
+	void init() override
 	{
-		setViewerRect(Rect(1400, 100).setCenter(Scene::Center().x, 60));
+		setViewerRectInLocal(Rect(1400, 100).setCenter(Scene::Center().x, 60));
 	}
 
 	void update() override;
+
+	void	setExpectedDecrease(double expectedDecrease) { m_expectedDecrease = expectedDecrease; }
 
 	ColorF GetBarColor(double rate)
 	{

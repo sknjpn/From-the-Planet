@@ -1,19 +1,16 @@
 ﻿{
   "name": "銅精錬所",
   "type": "FactoryAsset",
+  "constructionDamage": 0.2,
   "sound": "sound/sword-clash2.mp3",
   "material": [
     {
       "name": "石",
-      "size": 4
+      "size": 20
     },
     {
       "name": "鉄",
-      "size": 6
-    },
-    {
-      "name": "機械部品",
-      "size": 2
+      "size": 5
     }
   ],
   "import": [

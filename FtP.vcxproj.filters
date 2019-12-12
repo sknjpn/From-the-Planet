@@ -80,26 +80,11 @@
     <Filter Include="Resource Files\example\config">
       <UniqueIdentifier>{89c12675-1e86-4726-8c52-108fd67b62e5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Program Files">
-      <UniqueIdentifier>{533b12cd-12ab-472d-a76d-ad077c565e30}</UniqueIdentifier>
+    <Filter Include="Resource Files\example\gui">
+      <UniqueIdentifier>{243acd54-757e-498e-81c4-c8164a884026}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Program Files\Function">
-      <UniqueIdentifier>{be033ec2-75b7-490e-99f5-1673b0b8432f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Program Files\3D Object">
-      <UniqueIdentifier>{394490cf-08fb-48a1-87bf-481efa9b7df4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Program Files\Planet">
-      <UniqueIdentifier>{b7af6493-6832-43d7-affe-e04808ac7888}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Program Files\Planet\Facility">
-      <UniqueIdentifier>{1b4eb5e8-bf9f-46b0-aee4-058165b38c68}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Program Files\Planet\Road">
-      <UniqueIdentifier>{0e189936-2965-488d-8da2-ce4bdf322242}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Program Files\Planet\Item">
-      <UniqueIdentifier>{a351f60b-86c8-42a1-9d70-72024bacaa4a}</UniqueIdentifier>
+    <Filter Include="Resource Files\example\font\LogoTypeGothic">
+      <UniqueIdentifier>{b3586a98-5569-49e1-b9d6-cd80cf76ce9d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -302,6 +287,12 @@
     <None Include="App\example\config\config.toml">
       <Filter>Resource Files\example\config</Filter>
     </None>
+    <None Include="App\example\gui\gui.toml">
+      <Filter>Resource Files\example\gui</Filter>
+    </None>
+    <None Include="App\example\font\LogoTypeGothic\LICENSE_E">
+      <Filter>Resource Files\example\font\LogoTypeGothic</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="App\engine\font\fontawesome\LICENSE.txt">
@@ -328,6 +319,9 @@
     <Text Include="App\example\test.txt">
       <Filter>Resource Files\example</Filter>
     </Text>
+    <Text Include="App\example\font\LogoTypeGothic\ReadMe_windows.txt">
+      <Filter>Resource Files\example\font\LogoTypeGothic</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Font Include="App\example\font\AnnyantRoman\AnnyantRoman.ttf">
@@ -338,6 +332,9 @@
     </Font>
     <Font Include="App\example\font\Pecita\Pecita.otf">
       <Filter>Resource Files\example\font\Pecita</Filter>
+    </Font>
+    <Font Include="App\example\font\LogoTypeGothic\LogoTypeGothic.otf">
+      <Filter>Resource Files\example\font\LogoTypeGothic</Filter>
     </Font>
   </ItemGroup>
   <ItemGroup>
@@ -357,169 +354,95 @@
     </Xml>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Region.cpp">
-      <Filter>Program Files</Filter>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Program Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Translate.cpp">
-      <Filter>Program Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Chip.cpp">
-      <Filter>Program Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GetCircumcenter.cpp">
-      <Filter>Program Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Program Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>Program Files\3D Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Program Files\3D Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Road.cpp">
-      <Filter>Program Files\Planet\Road</Filter>
-    </ClCompile>
-    <ClCompile Include="FactoryState.cpp">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClCompile>
-    <ClCompile Include="QuarryState.cpp">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClCompile>
-    <ClCompile Include="FacilityState.cpp">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClCompile>
-    <ClCompile Include="AssetManager.cpp">
-      <Filter>Program Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Asset.cpp">
-      <Filter>Program Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlanetViewer.cpp">
-      <Filter>Program Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AssetManager_MakeModel.cpp">
-      <Filter>Program Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FacilityAsset.cpp">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClCompile>
-    <ClCompile Include="FactoryAsset.cpp">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClCompile>
-    <ClCompile Include="QuarryAsset.cpp">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemAsset.cpp">
-      <Filter>Program Files\Planet\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Storage.cpp">
-      <Filter>Program Files\Planet\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="PlanetManager.cpp">
-      <Filter>Program Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FacilitiesListViewer.cpp">
-      <Filter>Program Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LaunchSiteAsset.cpp">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClCompile>
-    <ClCompile Include="LaunchSiteState.cpp">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClCompile>
-    <ClCompile Include="NaturalResourceAsset.cpp">
-      <Filter>Program Files\Planet\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="TruckState.cpp" />
-    <ClCompile Include="PlanetHealthViewer.cpp" />
-    <ClCompile Include="Viewer.cpp">
-      <Filter>Program Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TerrainAsset.cpp" />
+    <ClInclude Include="Chip.h" />
+    <ClInclude Include="ClearViewer.h" />
+    <ClInclude Include="FacilitiesListViewer.h" />
+    <ClInclude Include="FacilityAsset.h" />
+    <ClInclude Include="FacilityConstructionPopup.h" />
+    <ClInclude Include="FacilityCostViewer.h" />
+    <ClInclude Include="FacilityDescPopup.h" />
+    <ClInclude Include="FacilityState.h" />
+    <ClInclude Include="FactoryAsset.h" />
+    <ClInclude Include="FactoryState.h" />
+    <ClInclude Include="GameOverViewer.h" />
+    <ClInclude Include="GetCircumcenter.h" />
+    <ClInclude Include="HarborAsset.h" />
+    <ClInclude Include="HarborState.h" />
+    <ClInclude Include="ItemAsset.h" />
+    <ClInclude Include="LaunchSiteAsset.h" />
+    <ClInclude Include="LaunchSiteState.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="NaturalResourceAsset.h" />
+    <ClInclude Include="PlanetHealthViewer.h" />
+    <ClInclude Include="PlanetManager.h" />
+    <ClInclude Include="PlanetViewer.h" />
+    <ClInclude Include="Popup.h" />
+    <ClInclude Include="QuarryAsset.h" />
+    <ClInclude Include="QuarryState.h" />
+    <ClInclude Include="Region.h" />
+    <ClInclude Include="Road.h" />
+    <ClInclude Include="RoadAsset.h" />
+    <ClInclude Include="Sound.h" />
+    <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="SoundMixerViewer.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Storage.h" />
+    <ClInclude Include="TerrainAsset.h" />
+    <ClInclude Include="TitleViewer.h" />
+    <ClInclude Include="TownAsset.h" />
+    <ClInclude Include="TownState.h" />
+    <ClInclude Include="Translate.h" />
+    <ClInclude Include="TruckState.h" />
+    <ClInclude Include="Asset.h" />
+    <ClInclude Include="AssetManager.h" />
+    <ClInclude Include="EasyViewer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Region.h">
-      <Filter>Program Files</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Program Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Translate.h">
-      <Filter>Program Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Chip.h">
-      <Filter>Program Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GetCircumcenter.h">
-      <Filter>Program Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>Program Files\3D Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Program Files\3D Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Road.h">
-      <Filter>Program Files\Planet\Road</Filter>
-    </ClInclude>
-    <ClInclude Include="FactoryState.h">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClInclude>
-    <ClInclude Include="QuarryState.h">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClInclude>
-    <ClInclude Include="FacilityState.h">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClInclude>
-    <ClInclude Include="Asset.h">
-      <Filter>Program Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AssetManager.h">
-      <Filter>Program Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Viewer.h">
-      <Filter>Program Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlanetViewer.h">
-      <Filter>Program Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FacilityAsset.h">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClInclude>
-    <ClInclude Include="FactoryAsset.h">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClInclude>
-    <ClInclude Include="QuarryAsset.h">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemAsset.h">
-      <Filter>Program Files\Planet\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Storage.h">
-      <Filter>Program Files\Planet\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="PlanetManager.h">
-      <Filter>Program Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FacilitiesListViewer.h">
-      <Filter>Program Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LaunchSiteAsset.h">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClInclude>
-    <ClInclude Include="LaunchSiteState.h">
-      <Filter>Program Files\Planet\Facility</Filter>
-    </ClInclude>
-    <ClInclude Include="NaturalResourceAsset.h">
-      <Filter>Program Files\Planet\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="TruckState.h" />
-    <ClInclude Include="PlanetHealthViewer.h" />
-    <ClInclude Include="TerrainAsset.h" />
+    <ClCompile Include="Asset.cpp" />
+    <ClCompile Include="AssetManager.cpp" />
+    <ClCompile Include="AssetManager_MakeModel.cpp" />
+    <ClCompile Include="Chip.cpp" />
+    <ClCompile Include="ClearViewer.cpp" />
+    <ClCompile Include="FacilitiesListViewer.cpp" />
+    <ClCompile Include="FacilityAsset.cpp" />
+    <ClCompile Include="FacilityConstructionPopup.cpp" />
+    <ClCompile Include="FacilityCostViewer.cpp" />
+    <ClCompile Include="FacilityDescPopup.cpp" />
+    <ClCompile Include="FacilityState.cpp" />
+    <ClCompile Include="FactoryAsset.cpp" />
+    <ClCompile Include="FactoryState.cpp" />
+    <ClCompile Include="GameOverViewer.cpp" />
+    <ClCompile Include="GetCircumcenter.cpp" />
+    <ClCompile Include="HarborAsset.cpp" />
+    <ClCompile Include="HarborState.cpp" />
+    <ClCompile Include="ItemAsset.cpp" />
+    <ClCompile Include="LaunchSiteAsset.cpp" />
+    <ClCompile Include="LaunchSiteState.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="NaturalResourceAsset.cpp" />
+    <ClCompile Include="PlanetHealthViewer.cpp" />
+    <ClCompile Include="PlanetManager.cpp" />
+    <ClCompile Include="PlanetManager_CostMap.cpp" />
+    <ClCompile Include="PlanetViewer.cpp" />
+    <ClCompile Include="Popup.cpp" />
+    <ClCompile Include="QuarryAsset.cpp" />
+    <ClCompile Include="QuarryState.cpp" />
+    <ClCompile Include="Region.cpp" />
+    <ClCompile Include="Road.cpp" />
+    <ClCompile Include="RoadAsset.cpp" />
+    <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="SoundMixerViewer.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Storage.cpp" />
+    <ClCompile Include="TerrainAsset.cpp" />
+    <ClCompile Include="TitleViewer.cpp" />
+    <ClCompile Include="TownAsset.cpp" />
+    <ClCompile Include="TownState.cpp" />
+    <ClCompile Include="Translate.cpp" />
+    <ClCompile Include="TruckState.cpp" />
   </ItemGroup>
 </Project>

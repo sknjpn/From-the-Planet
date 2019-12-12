@@ -1,15 +1,16 @@
 ﻿{
     "name": "サイロ",
     "type": "LaunchSiteAsset",
+    "constructionDamage": 0.2,
     "sound": "sound/cannon2.mp3",
     "material": [
         {
-            "name": "電子部品",
-            "size": 5
+            "name": "回路",
+            "size": 10
         },
         {
-            "name": "機械部品",
-            "size": 5
+            "name": "ネジ",
+            "size": 10
         }
     ],
     "meshes": [

@@ -1,5 +1,5 @@
 {
-    "name": "電子部品",
+    "name": "回路",
     "type": "ItemAsset",
     "texture": "texture/electric-parts.png"
 }

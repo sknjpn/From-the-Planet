@@ -1,11 +1,12 @@
 ﻿{
     "name": "炭鉱",
     "type": "QuarryAsset",
+    "constructionDamage": 0.1,
     "sound": "sound/cannon2.mp3",
     "material": [
         {
             "name": "石",
-            "size": 10
+            "size": 15
         }
     ],
     "import": [],

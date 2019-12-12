@@ -1,0 +1,8 @@
+﻿{
+    "name":"砂利道",
+    "type":"RoadAsset",
+    "constructionDamage": 0.05,
+    "speed": 2.0,
+    "colorInside":"(192, 192, 192)",
+    "colorOutside":"(255, 255, 255)"
+}

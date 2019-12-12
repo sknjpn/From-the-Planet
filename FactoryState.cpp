@@ -1,6 +1,7 @@
 ﻿#include "FactoryState.h"
 #include "FactoryAsset.h"
 #include "PlanetManager.h"
+#include "SoundManager.h"
 
 void FactoryState::update()
 {
@@ -19,7 +20,7 @@ void FactoryState::update()
 
 			g_planetManagerPtr->addDamage(0.01);
 
-			m_audio.playOneShot(m_volume, 1.0);
+			g_soundManagerPtr->playSoundEffect(dynamic_pointer_cast<FactoryAsset>(m_facilityAsset)->getSoundPath(), SoundType::Environment);
 		}
 	}
 }

@@ -2,5 +2,6 @@
     "name": "岩地",
     "type": "TerrainAsset",
     "color": "(128, 128, 128)",
-    "buildAvailable": false
+    "isSea": false,
+    "buildAvailable": true
 }
